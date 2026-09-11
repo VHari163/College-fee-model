@@ -1,0 +1,3228 @@
+/*Login Page CSS Code*/
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    background: #f2f4f7;
+}
+
+.login-container {
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.login-box {
+    width: 400px;
+    background: white;
+    padding: 35px;
+    border-radius: 12px;
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.15);
+}
+
+.login-box h1 {
+    text-align: center;
+    margin-bottom: 10px;
+    font-size: 25px;
+}
+
+.login-box h2 {
+    text-align: center;
+    margin-bottom: 25px;
+    font-weight: normal;
+}
+
+.login-box label {
+    display: block;
+    margin-bottom: 6px;
+    margin-top: 15px;
+}
+
+.login-box input {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    font-size: 15px;
+}
+
+.login-box button {
+    width: 100%;
+    padding: 12px;
+    margin-top: 25px;
+    border: none;
+    border-radius: 6px;
+    background: #2563eb;
+    color: white;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+.login-box button:hover {
+    background: #1d4ed8;
+}
+
+.success {
+    margin-top: 15px;
+    text-align: center;
+    color: green;
+}
+
+.error {
+    margin-top: 15px;
+    text-align: center;
+    color: red;
+}
+
+/* ================================
+   DASHBOARD LAYOUT
+   ================================ */
+
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background: #f5f7fb;
+    color: #1f2937;
+}
+
+
+/* Sidebar */
+
+.sidebar {
+    position: fixed;
+    top: 0;
+    left: 0;
+
+    width: 250px;
+    height: 100vh;
+
+    background: #111827;
+    color: white;
+
+    display: flex;
+    flex-direction: column;
+
+    z-index: 1000;
+
+    transition: transform 0.3s ease;
+}
+
+.sidebar-header {
+    padding: 25px 22px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.sidebar-header h2 {
+    margin: 0;
+    font-size: 22px;
+}
+
+.sidebar-header p {
+    margin: 6px 0 0;
+    color: #9ca3af;
+    font-size: 13px;
+}
+
+
+/* Sidebar menu */
+
+.sidebar-menu {
+    padding: 20px 12px;
+}
+
+.menu-item {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+
+    padding: 13px 15px;
+    margin-bottom: 6px;
+
+    text-decoration: none;
+    color: #d1d5db;
+
+    border-radius: 8px;
+
+    transition: all 0.2s ease;
+}
+
+.menu-item:hover {
+    background: #1f2937;
+    color: white;
+}
+
+.menu-item.active {
+    background: #2563eb;
+    color: white;
+}
+
+.menu-icon {
+    width: 24px;
+    text-align: center;
+    font-size: 18px;
+}
+
+
+/* Sidebar footer */
+
+.sidebar-footer {
+    margin-top: auto;
+    padding: 15px 12px 25px;
+}
+
+.logout-button {
+    width: 100%;
+
+    border: none;
+    background: transparent;
+
+    color: #fca5a5;
+
+    display: flex;
+    align-items: center;
+    gap: 12px;
+
+    padding: 13px 15px;
+
+    border-radius: 8px;
+
+    cursor: pointer;
+    font-size: 15px;
+
+    text-align: left;
+}
+
+.logout-button:hover {
+    background: #1f2937;
+}
+
+
+/* Main wrapper */
+
+.main-wrapper {
+    margin-left: 250px;
+    min-height: 100vh;
+}
+
+
+/* Top navbar */
+
+.top-navbar {
+    height: 70px;
+
+    background: white;
+
+    border-bottom: 1px solid #e5e7eb;
+
+    display: flex;
+    align-items: center;
+
+    padding: 0 28px;
+
+    position: sticky;
+    top: 0;
+
+    z-index: 900;
+}
+
+.menu-button {
+    display: none;
+
+    border: none;
+    background: transparent;
+
+    font-size: 26px;
+    cursor: pointer;
+}
+
+.navbar-title {
+    font-size: 20px;
+    font-weight: 600;
+}
+
+.navbar-profile {
+    margin-left: auto;
+
+    padding: 8px 14px;
+
+    border-radius: 20px;
+
+    background: #eff6ff;
+    color: #2563eb;
+
+    font-size: 14px;
+}
+
+
+/* Dashboard content */
+
+.dashboard-content {
+    max-width: 1200px;
+
+    margin: 0 auto;
+
+    padding: 35px 30px;
+}
+
+
+/* Welcome */
+
+.welcome-section {
+    margin-bottom: 25px;
+}
+
+.welcome-section h1 {
+    margin: 0 0 8px;
+    font-size: 30px;
+}
+
+.welcome-section p {
+    margin: 0;
+    color: #6b7280;
+}
+
+
+/* Student card */
+
+.student-card {
+    background: white;
+
+    border-radius: 14px;
+
+    padding: 28px;
+
+    box-shadow: 0 4px 18px rgba(0, 0, 0, 0.06);
+
+    margin-bottom: 25px;
+}
+
+.section-title {
+    margin-bottom: 20px;
+}
+
+.section-title h2 {
+    margin: 0;
+    font-size: 20px;
+}
+
+
+/* Information grid */
+
+.student-info-grid {
+    display: grid;
+
+    grid-template-columns:
+        repeat(3, 1fr);
+
+    gap: 20px;
+}
+
+.info-item {
+    display: flex;
+    flex-direction: column;
+
+    gap: 5px;
+}
+
+.info-label {
+    font-size: 13px;
+    color: #6b7280;
+}
+
+.info-value {
+    font-size: 16px;
+    font-weight: 600;
+    color: #111827;
+}
+
+
+/* Quick action cards */
+
+.quick-actions {
+    display: grid;
+
+    grid-template-columns:
+        repeat(3, 1fr);
+
+    gap: 18px;
+}
+
+.action-card {
+    background: white;
+
+    border-radius: 14px;
+
+    padding: 22px;
+
+    text-decoration: none;
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 15px;
+
+    box-shadow: 0 4px 18px rgba(0, 0, 0, 0.06);
+
+    transition: transform 0.2s ease,
+                box-shadow 0.2s ease;
+}
+
+.action-card:hover {
+    transform: translateY(-3px);
+
+    box-shadow: 0 8px 22px rgba(0, 0, 0, 0.1);
+}
+
+.action-card h3 {
+    margin: 0 0 5px;
+
+    color: #111827;
+
+    font-size: 17px;
+}
+
+.action-card p {
+    margin: 0;
+
+    color: #6b7280;
+
+    font-size: 13px;
+}
+
+.action-icon {
+    width: 50px;
+    height: 50px;
+
+    border-radius: 12px;
+
+    background: #eff6ff;
+
+    color: #2563eb;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    font-size: 22px;
+
+    flex-shrink: 0;
+}
+
+
+/* Mobile overlay */
+
+.sidebar-overlay {
+    display: none;
+
+    position: fixed;
+    inset: 0;
+
+    background: rgba(0, 0, 0, 0.4);
+
+    z-index: 950;
+}
+
+/* ================================
+   DASHBOARD LAYOUT
+   ================================ */
+
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background: #f5f7fb;
+    color: #1f2937;
+}
+
+
+/* Sidebar */
+
+.sidebar {
+    position: fixed;
+    top: 0;
+    left: 0;
+
+    width: 250px;
+    height: 100vh;
+
+    background: #111827;
+    color: white;
+
+    display: flex;
+    flex-direction: column;
+
+    z-index: 1000;
+
+    transition: transform 0.3s ease;
+}
+
+.sidebar-header {
+    padding: 25px 22px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.sidebar-header h2 {
+    margin: 0;
+    font-size: 22px;
+}
+
+.sidebar-header p {
+    margin: 6px 0 0;
+    color: #9ca3af;
+    font-size: 13px;
+}
+
+
+/* Sidebar menu */
+
+.sidebar-menu {
+    padding: 20px 12px;
+}
+
+.menu-item {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+
+    padding: 13px 15px;
+    margin-bottom: 6px;
+
+    text-decoration: none;
+    color: #d1d5db;
+
+    border-radius: 8px;
+
+    transition: all 0.2s ease;
+}
+
+.menu-item:hover {
+    background: #1f2937;
+    color: white;
+}
+
+.menu-item.active {
+    background: #2563eb;
+    color: white;
+}
+
+.menu-icon {
+    width: 24px;
+    text-align: center;
+    font-size: 18px;
+}
+
+
+/* Sidebar footer */
+
+.sidebar-footer {
+    margin-top: auto;
+    padding: 15px 12px 25px;
+}
+
+.logout-button {
+    width: 100%;
+
+    border: none;
+    background: transparent;
+
+    color: #fca5a5;
+
+    display: flex;
+    align-items: center;
+    gap: 12px;
+
+    padding: 13px 15px;
+
+    border-radius: 8px;
+
+    cursor: pointer;
+    font-size: 15px;
+
+    text-align: left;
+}
+
+.logout-button:hover {
+    background: #1f2937;
+}
+
+
+/* Main wrapper */
+
+.main-wrapper {
+    margin-left: 250px;
+    min-height: 100vh;
+}
+
+
+/* Top navbar */
+
+.top-navbar {
+    height: 70px;
+
+    background: white;
+
+    border-bottom: 1px solid #e5e7eb;
+
+    display: flex;
+    align-items: center;
+
+    padding: 0 28px;
+
+    position: sticky;
+    top: 0;
+
+    z-index: 900;
+}
+
+.menu-button {
+    display: none;
+
+    border: none;
+    background: transparent;
+
+    font-size: 26px;
+    cursor: pointer;
+}
+
+.navbar-title {
+    font-size: 20px;
+    font-weight: 600;
+}
+
+.navbar-profile {
+    margin-left: auto;
+
+    padding: 8px 14px;
+
+    border-radius: 20px;
+
+    background: #eff6ff;
+    color: #2563eb;
+
+    font-size: 14px;
+}
+
+
+/* Dashboard content */
+
+.dashboard-content {
+    max-width: 1200px;
+
+    margin: 0 auto;
+
+    padding: 35px 30px;
+}
+
+
+/* Welcome */
+
+.welcome-section {
+    margin-bottom: 25px;
+}
+
+.welcome-section h1 {
+    margin: 0 0 8px;
+    font-size: 30px;
+}
+
+.welcome-section p {
+    margin: 0;
+    color: #6b7280;
+}
+
+
+/* Student card */
+
+.student-card {
+    background: white;
+
+    border-radius: 14px;
+
+    padding: 28px;
+
+    box-shadow: 0 4px 18px rgba(0, 0, 0, 0.06);
+
+    margin-bottom: 25px;
+}
+
+.section-title {
+    margin-bottom: 20px;
+}
+
+.section-title h2 {
+    margin: 0;
+    font-size: 20px;
+}
+
+
+/* Information grid */
+
+.student-info-grid {
+    display: grid;
+
+    grid-template-columns:
+        repeat(3, 1fr);
+
+    gap: 20px;
+}
+
+.info-item {
+    display: flex;
+    flex-direction: column;
+
+    gap: 5px;
+}
+
+.info-label {
+    font-size: 13px;
+    color: #6b7280;
+}
+
+.info-value {
+    font-size: 16px;
+    font-weight: 600;
+    color: #111827;
+}
+
+
+/* Quick action cards */
+
+.quick-actions {
+    display: grid;
+
+    grid-template-columns:
+        repeat(3, 1fr);
+
+    gap: 18px;
+}
+
+.action-card {
+    background: white;
+
+    border-radius: 14px;
+
+    padding: 22px;
+
+    text-decoration: none;
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 15px;
+
+    box-shadow: 0 4px 18px rgba(0, 0, 0, 0.06);
+
+    transition: transform 0.2s ease,
+                box-shadow 0.2s ease;
+}
+
+.action-card:hover {
+    transform: translateY(-3px);
+
+    box-shadow: 0 8px 22px rgba(0, 0, 0, 0.1);
+}
+
+.action-card h3 {
+    margin: 0 0 5px;
+
+    color: #111827;
+
+    font-size: 17px;
+}
+
+.action-card p {
+    margin: 0;
+
+    color: #6b7280;
+
+    font-size: 13px;
+}
+
+.action-icon {
+    width: 50px;
+    height: 50px;
+
+    border-radius: 12px;
+
+    background: #eff6ff;
+
+    color: #2563eb;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    font-size: 22px;
+
+    flex-shrink: 0;
+}
+
+
+/* Mobile overlay */
+
+.sidebar-overlay {
+    display: none;
+
+    position: fixed;
+    inset: 0;
+
+    background: rgba(0, 0, 0, 0.4);
+
+    z-index: 950;
+}
+
+
+/* ================================
+   RESPONSIVE
+   ================================ */
+
+@media (max-width: 900px) {
+
+    .sidebar {
+        transform: translateX(-100%);
+    }
+
+    .sidebar.open {
+        transform: translateX(0);
+    }
+
+    .main-wrapper {
+        margin-left: 0;
+    }
+
+    .menu-button {
+        display: block;
+        margin-right: 15px;
+    }
+
+    .sidebar-overlay.active {
+        display: block;
+    }
+
+    .student-info-grid {
+        grid-template-columns:
+            repeat(2, 1fr);
+    }
+
+    .quick-actions {
+        grid-template-columns: 1fr;
+    }
+}
+
+
+@media (max-width: 600px) {
+
+    .top-navbar {
+        padding: 0 15px;
+    }
+
+    .navbar-title {
+        font-size: 16px;
+    }
+
+    .navbar-profile {
+        display: none;
+    }
+
+    .dashboard-content {
+        padding: 25px 15px;
+    }
+
+    .welcome-section h1 {
+        font-size: 24px;
+    }
+
+    .student-info-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .student-card {
+        padding: 20px;
+    }
+}
+
+
+/* =========================
+   MY FEES PAGE
+========================= */
+
+.page-heading {
+    margin-bottom: 25px;
+}
+
+.page-heading h2 {
+    margin-bottom: 6px;
+}
+
+.page-heading p {
+    color: #666;
+}
+
+
+/* Fee Grid */
+
+.fees-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    gap: 20px;
+}
+
+
+/* Fee Card */
+
+.fee-card {
+    background: #ffffff;
+    border-radius: 14px;
+    padding: 22px;
+
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+
+    transition: transform 0.2s ease,
+                box-shadow 0.2s ease;
+}
+
+
+.fee-card:hover {
+
+    transform: translateY(-3px);
+
+    box-shadow:
+        0 8px 22px rgba(0, 0, 0, 0.12);
+
+}
+
+
+/* Header */
+
+.fee-card-header {
+
+    display: flex;
+
+    justify-content: space-between;
+
+    align-items: center;
+
+    margin-bottom: 20px;
+}
+
+
+.fee-card-header h3 {
+
+    margin: 0;
+
+    font-size: 20px;
+
+}
+
+
+/* Status */
+
+.fee-status {
+
+    padding: 6px 12px;
+
+    border-radius: 20px;
+
+    font-size: 12px;
+
+    font-weight: bold;
+
+}
+
+
+.fee-status.pending {
+
+    background: #fff3cd;
+
+    color: #856404;
+
+}
+
+
+/* Fee information */
+
+.fee-info {
+
+    margin-bottom: 20px;
+
+}
+
+
+.fee-info p {
+
+    margin: 10px 0;
+
+    color: #555;
+
+}
+
+
+/* Footer */
+
+.fee-card-footer {
+
+    display: flex;
+
+    justify-content: space-between;
+
+    align-items: center;
+
+    border-top: 1px solid #eee;
+
+    padding-top: 18px;
+
+}
+
+
+/* Amount */
+
+.fee-amount {
+
+    font-size: 24px;
+
+    font-weight: bold;
+
+}
+
+
+/* Pay button */
+
+.pay-btn {
+
+    border: none;
+
+    padding: 10px 18px;
+
+    border-radius: 8px;
+
+    cursor: pointer;
+
+    font-size: 14px;
+
+    font-weight: bold;
+
+    background: #2563eb;
+
+    color: white;
+}
+
+
+.pay-btn:hover {
+
+    opacity: 0.9;
+
+}
+
+
+/* No fees */
+
+.no-fees,
+.error-message {
+
+    background: white;
+
+    padding: 35px;
+
+    border-radius: 14px;
+
+    text-align: center;
+
+    box-shadow:
+        0 4px 15px rgba(0, 0, 0, 0.08);
+}
+
+
+.no-fees p,
+.error-message p {
+
+    color: #666;
+
+}
+
+
+/* Mobile */
+
+@media (max-width: 768px) {
+
+    .fees-grid {
+
+        grid-template-columns: 1fr;
+
+    }
+
+    .fee-card-footer {
+
+        flex-direction: column;
+
+        align-items: stretch;
+
+        gap: 15px;
+
+    }
+
+    .pay-btn {
+
+        width: 100%;
+
+    }
+
+}
+
+/* =========================================================
+   FEES PAGE - CLASS MATCHING FIX
+========================================================= */
+
+/* Main layout */
+.main-content {
+    margin-left: 250px;
+    min-height: 100vh;
+}
+
+/* Fees page navbar */
+.top-navbar {
+    height: 70px;
+    background: white;
+    border-bottom: 1px solid #e5e7eb;
+
+    display: flex;
+    align-items: center;
+
+    padding: 0 28px;
+
+    position: sticky;
+    top: 0;
+    z-index: 900;
+}
+
+/* Hamburger button */
+.menu-btn {
+    display: none;
+
+    border: none;
+    background: transparent;
+
+    font-size: 26px;
+    cursor: pointer;
+
+    padding: 5px;
+}
+
+/* Navbar title */
+.top-navbar h1 {
+    font-size: 20px;
+    font-weight: 600;
+    margin-left: 15px;
+}
+
+/* Student name */
+.student-name {
+    margin-left: auto;
+
+    padding: 8px 14px;
+
+    border-radius: 20px;
+
+    background: #eff6ff;
+    color: #2563eb;
+
+    font-size: 14px;
+}
+
+/* Fees page content */
+.content {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 35px 30px;
+}
+
+/* Sidebar navigation used by fees.html */
+.sidebar-nav {
+    padding: 20px 12px;
+
+    display: flex;
+    flex-direction: column;
+}
+
+.sidebar-nav a {
+    display: flex;
+    align-items: center;
+
+    width: 100%;
+
+    padding: 13px 15px;
+    margin-bottom: 6px;
+
+    text-decoration: none;
+    color: #d1d5db;
+
+    border-radius: 8px;
+
+    font-size: 15px;
+
+    transition: all 0.2s ease;
+}
+
+.sidebar-nav a:hover {
+    background: #1f2937;
+    color: white;
+}
+
+.sidebar-nav a.active {
+    background: #2563eb;
+    color: white;
+}
+
+
+/* =========================================================
+   MOBILE FEES PAGE
+========================================================= */
+
+@media (max-width: 900px) {
+
+    .sidebar {
+        transform: translateX(-100%);
+    }
+
+    .sidebar.open {
+        transform: translateX(0);
+    }
+
+    .main-content {
+        margin-left: 0;
+    }
+
+    .menu-btn {
+        display: block;
+    }
+
+    .overlay.show {
+        display: block;
+    }
+}
+
+@media (max-width: 600px) {
+
+    .top-navbar {
+        padding: 0 15px;
+    }
+
+    .top-navbar h1 {
+        font-size: 18px;
+    }
+
+    .content {
+        padding: 25px 15px;
+    }
+
+    .student-name {
+        font-size: 13px;
+    }
+}
+
+/* =========================================================
+   STEP 2 - PAYMENT SUMMARY
+========================================================= */
+
+.fee-summary {
+
+    display: grid;
+
+    grid-template-columns:
+        repeat(3, 1fr);
+
+    gap: 12px;
+
+    margin: 20px 0;
+
+}
+
+
+.summary-item {
+
+    background: #f8fafc;
+
+    border-radius: 10px;
+
+    padding: 14px;
+
+    display: flex;
+
+    flex-direction: column;
+
+    gap: 7px;
+
+}
+
+
+.summary-item span {
+
+    font-size: 12px;
+
+    color: #6b7280;
+
+}
+
+
+.summary-item strong {
+
+    font-size: 16px;
+
+    color: #111827;
+
+}
+
+
+.summary-item.remaining {
+
+    background: #eff6ff;
+
+}
+
+
+.summary-item.remaining strong {
+
+    color: #2563eb;
+
+}
+
+
+/* =========================================================
+   PAYMENT AREA
+========================================================= */
+
+.payment-area {
+
+    border-top:
+        1px solid #e5e7eb;
+
+    padding-top: 18px;
+
+    display: flex;
+
+    flex-direction: column;
+
+    gap: 9px;
+
+}
+
+
+.payment-area label {
+
+    font-size: 14px;
+
+    font-weight: 600;
+
+    color: #111827;
+
+}
+
+
+.payment-area input {
+
+    width: 100%;
+
+    padding: 12px 13px;
+
+    border:
+        1px solid #d1d5db;
+
+    border-radius: 8px;
+
+    font-size: 15px;
+
+    outline: none;
+
+}
+
+
+.payment-area input:focus {
+
+    border-color: #2563eb;
+
+    box-shadow:
+        0 0 0 3px
+        rgba(37, 99, 235, 0.10);
+
+}
+
+
+.payment-help {
+
+    color: #6b7280;
+
+    font-size: 12px;
+
+}
+
+
+/* =========================================================
+   PAYMENT BUTTON
+========================================================= */
+
+.pay-btn {
+
+    width: 100%;
+
+    margin-top: 5px;
+
+    padding: 12px;
+
+    border: none;
+
+    border-radius: 8px;
+
+    background: #2563eb;
+
+    color: white;
+
+    font-size: 14px;
+
+    font-weight: 600;
+
+    cursor: pointer;
+
+    transition: 0.2s ease;
+
+}
+
+
+.pay-btn:hover {
+
+    background: #1d4ed8;
+
+}
+
+
+.pay-btn:disabled {
+
+    background: #9ca3af;
+
+    cursor: not-allowed;
+
+}
+
+
+/* =========================================================
+   PAYMENT STATUS
+========================================================= */
+
+.fee-status.pending {
+
+    background: #fff4cc;
+
+    color: #946200;
+
+}
+
+
+.fee-status.partial {
+
+    background: #dbeafe;
+
+    color: #1d4ed8;
+
+}
+
+
+.fee-status.paid {
+
+    background: #dcfce7;
+
+    color: #166534;
+
+}
+
+
+/* =========================================================
+   FULLY PAID
+========================================================= */
+
+.fully-paid-message {
+
+    margin-top: 18px;
+
+    padding: 13px;
+
+    border-radius: 8px;
+
+    background: #f0fdf4;
+
+    color: #166534;
+
+    font-size: 14px;
+
+    font-weight: 600;
+
+    text-align: center;
+
+}
+
+
+/* =========================================================
+   LOADING
+========================================================= */
+
+.loading-message {
+
+    background: white;
+
+    padding: 30px;
+
+    border-radius: 14px;
+
+    text-align: center;
+
+    color: #6b7280;
+
+}
+
+
+/* =========================================================
+   MOBILE
+========================================================= */
+
+@media (max-width: 700px) {
+
+    .fee-summary {
+
+        grid-template-columns: 1fr;
+
+    }
+
+}
+
+/* =========================================================
+   FEE TYPE SELECTION
+========================================================= */
+
+.fee-selection-card {
+
+    background: white;
+
+    padding: 24px;
+
+    border-radius: 14px;
+
+    box-shadow:
+        0 4px 15px rgba(0, 0, 0, 0.07);
+
+    margin-bottom: 20px;
+
+}
+
+
+.fee-selection-card label {
+
+    display: block;
+
+    font-size: 14px;
+
+    font-weight: 600;
+
+    margin-bottom: 10px;
+
+    color: #111827;
+
+}
+
+
+.fee-selection-card select {
+
+    width: 100%;
+
+    padding: 13px 14px;
+
+    border:
+        1px solid #d1d5db;
+
+    border-radius: 8px;
+
+    background: white;
+
+    color: #111827;
+
+    font-size: 15px;
+
+    outline: none;
+
+    cursor: pointer;
+
+}
+
+
+.fee-selection-card select:focus {
+
+    border-color: #2563eb;
+
+    box-shadow:
+        0 0 0 3px
+        rgba(37, 99, 235, 0.10);
+
+}
+
+
+/* =========================================================
+   SELECTED FEE CARD
+========================================================= */
+
+.selected-fee-card {
+
+    background: white;
+
+    border-radius: 14px;
+
+    padding: 28px;
+
+    box-shadow:
+        0 4px 18px rgba(0, 0, 0, 0.07);
+
+}
+
+
+/* =========================================================
+   SELECTED FEE HEADER
+========================================================= */
+
+.selected-fee-header {
+
+    display: flex;
+
+    justify-content: space-between;
+
+    align-items: center;
+
+    margin-bottom: 25px;
+
+}
+
+
+.fee-label {
+
+    margin-bottom: 5px;
+
+    font-size: 12px;
+
+    color: #6b7280;
+
+    text-transform: uppercase;
+
+    letter-spacing: 0.5px;
+
+}
+
+
+.selected-fee-header h2 {
+
+    font-size: 24px;
+
+    color: #111827;
+
+}
+
+
+/* =========================================================
+   FEE INFORMATION
+========================================================= */
+
+.fee-information {
+
+    display: grid;
+
+    grid-template-columns:
+        repeat(2, 1fr);
+
+    gap: 15px;
+
+    margin-bottom: 20px;
+
+}
+
+
+.fee-info-item {
+
+    background: #f8fafc;
+
+    padding: 15px;
+
+    border-radius: 10px;
+
+}
+
+
+.fee-info-item span {
+
+    display: block;
+
+    color: #6b7280;
+
+    font-size: 12px;
+
+    margin-bottom: 6px;
+
+}
+
+
+.fee-info-item strong {
+
+    color: #111827;
+
+    font-size: 15px;
+
+}
+
+
+/* =========================================================
+   PAYMENT INPUT
+========================================================= */
+
+.payment-area small {
+
+    color: #6b7280;
+
+    font-size: 12px;
+
+}
+
+
+/* =========================================================
+   LOADING
+========================================================= */
+
+.fee-loading {
+
+    padding: 30px;
+
+    text-align: center;
+
+    color: #6b7280;
+
+}
+
+
+/* =========================================================
+   RESPONSIVE
+========================================================= */
+
+@media (max-width: 600px) {
+
+    .selected-fee-header {
+
+        align-items: flex-start;
+
+        gap: 15px;
+
+        flex-direction: column;
+
+    }
+
+    .fee-information {
+
+        grid-template-columns: 1fr;
+
+    }
+
+}
+
+/* =========================================================
+   PAYMENT RESULT ANIMATION
+========================================================= */
+
+.payment-notification {
+    position: fixed;
+
+    inset: 0;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    background: rgba(15, 23, 42, 0.45);
+
+    backdrop-filter: blur(5px);
+
+    z-index: 9999;
+
+    opacity: 0;
+
+    visibility: hidden;
+
+    transition:
+        opacity 0.35s ease,
+        visibility 0.35s ease;
+}
+
+
+/* Show */
+
+.payment-notification.show {
+
+    opacity: 1;
+
+    visibility: visible;
+}
+
+
+/* =========================================================
+   NOTIFICATION CARD
+========================================================= */
+
+.notification-card {
+
+    position: relative;
+
+    width: min(430px, calc(100% - 30px));
+
+    background: white;
+
+    border-radius: 22px;
+
+    padding: 38px 30px 30px;
+
+    text-align: center;
+
+    box-shadow:
+        0 25px 70px rgba(0, 0, 0, 0.25);
+
+    transform:
+        scale(0.65)
+        translateY(40px);
+
+    opacity: 0;
+}
+
+
+/* Opening animation */
+
+.payment-notification.show
+.notification-card {
+
+    animation:
+        successCardIn 0.55s
+        cubic-bezier(0.18, 0.89, 0.32, 1.28)
+        forwards;
+}
+
+
+@keyframes successCardIn {
+
+    0% {
+
+        transform:
+            scale(0.65)
+            translateY(40px);
+
+        opacity: 0;
+
+    }
+
+    60% {
+
+        transform:
+            scale(1.05)
+            translateY(-5px);
+
+        opacity: 1;
+
+    }
+
+    100% {
+
+        transform:
+            scale(1)
+            translateY(0);
+
+        opacity: 1;
+
+    }
+
+}
+
+
+/* =========================================================
+   SUCCESS ICON
+========================================================= */
+
+.notification-icon {
+
+    width: 78px;
+
+    height: 78px;
+
+    margin: 0 auto 20px;
+
+    border-radius: 50%;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    font-size: 40px;
+
+    font-weight: bold;
+
+    background: #dcfce7;
+
+    color: #16a34a;
+
+    border: 5px solid #bbf7d0;
+
+    transform: scale(0);
+
+    position: relative;
+}
+
+
+/* Animated check */
+
+.payment-notification.show
+.notification-icon {
+
+    animation:
+        checkPop 0.55s
+        0.18s
+        cubic-bezier(0.18, 0.89, 0.32, 1.28)
+        forwards;
+
+}
+
+
+@keyframes checkPop {
+
+    0% {
+
+        transform: scale(0);
+
+    }
+
+    60% {
+
+        transform: scale(1.18);
+
+    }
+
+    100% {
+
+        transform: scale(1);
+
+    }
+
+}
+
+
+/* =========================================================
+   TITLE
+========================================================= */
+
+.notification-card h2 {
+
+    margin: 0 0 10px;
+
+    font-size: 24px;
+
+    color: #111827;
+
+}
+
+
+/* =========================================================
+   MESSAGE
+========================================================= */
+
+.notification-card p {
+
+    margin: 0 auto;
+
+    max-width: 340px;
+
+    font-size: 15px;
+
+    line-height: 1.6;
+
+    color: #6b7280;
+
+}
+
+
+/* =========================================================
+   CLOSE
+========================================================= */
+
+.notification-close {
+
+    position: absolute;
+
+    top: 12px;
+
+    right: 15px;
+
+    width: 32px;
+
+    height: 32px;
+
+    border: none;
+
+    background: #f3f4f6;
+
+    border-radius: 50%;
+
+    color: #6b7280;
+
+    font-size: 21px;
+
+    line-height: 1;
+
+    cursor: pointer;
+
+    transition: 0.2s ease;
+
+}
+
+
+.notification-close:hover {
+
+    background: #e5e7eb;
+
+    color: #111827;
+
+}
+
+
+/* =========================================================
+   PROGRESS BAR
+========================================================= */
+
+.notification-progress {
+
+    width: 0;
+
+    height: 4px;
+
+    margin-top: 25px;
+
+    border-radius: 10px;
+
+    background: #22c55e;
+
+}
+
+
+/* Animate progress */
+
+.payment-notification.show
+.notification-progress {
+
+    animation:
+        notificationProgress 5s
+        linear
+        forwards;
+
+}
+
+
+@keyframes notificationProgress {
+
+    from {
+
+        width: 0;
+
+    }
+
+    to {
+
+        width: 100%;
+
+    }
+
+}
+
+
+/* =========================================================
+   ERROR VERSION
+========================================================= */
+
+.payment-notification.error
+.notification-icon {
+
+    background: #fee2e2;
+
+    color: #dc2626;
+
+    border-color: #fecaca;
+
+}
+
+
+.payment-notification.error
+.notification-progress {
+
+    background: #ef4444;
+
+}
+
+
+/* =========================================================
+   MOBILE
+========================================================= */
+
+@media (max-width: 500px) {
+
+    .notification-card {
+
+        padding:
+            34px 22px 25px;
+
+    }
+
+    .notification-icon {
+
+        width: 68px;
+
+        height: 68px;
+
+        font-size: 34px;
+
+    }
+
+    .notification-card h2 {
+
+        font-size: 21px;
+
+    }
+
+}
+/* =========================================================
+   ANIMATIONS
+========================================================= */
+
+@keyframes notificationBounce {
+
+    0% {
+        transform: translateX(450px);
+    }
+
+    60% {
+        transform: translateX(-10px);
+    }
+
+    80% {
+        transform: translateX(5px);
+    }
+
+    100% {
+        transform: translateX(0);
+    }
+}
+
+.payment-notification.show {
+    animation:
+        notificationBounce 0.5s ease;
+}
+
+
+/* Mobile */
+
+@media (max-width: 600px) {
+
+    .payment-notification {
+
+        left: 15px;
+        right: 15px;
+
+        top: 15px;
+
+        width: auto;
+
+    }
+
+}
+
+/* =========================================================
+   PAYMENT CONFIRMATION MODAL
+========================================================= */
+
+.payment-modal {
+    position: fixed;
+
+    inset: 0;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    background: rgba(15, 23, 42, 0.55);
+
+    backdrop-filter: blur(4px);
+
+    z-index: 10000;
+
+    opacity: 0;
+
+    visibility: hidden;
+
+    transition:
+        opacity 0.3s ease,
+        visibility 0.3s ease;
+}
+
+
+.payment-modal.show {
+    opacity: 1;
+
+    visibility: visible;
+}
+
+
+.payment-modal-content {
+    position: relative;
+
+    width: min(450px, calc(100% - 30px));
+
+    background: white;
+
+    border-radius: 20px;
+
+    padding: 30px;
+
+    text-align: center;
+
+    box-shadow:
+        0 20px 50px rgba(0, 0, 0, 0.25);
+
+    transform: scale(0.8) translateY(20px);
+
+    transition:
+        transform 0.35s ease;
+}
+
+
+.payment-modal.show
+.payment-modal-content {
+    transform: scale(1) translateY(0);
+
+    animation:
+        modalPop 0.4s ease;
+}
+
+
+@keyframes modalPop {
+
+    0% {
+        transform: scale(0.75) translateY(30px);
+    }
+
+    70% {
+        transform: scale(1.03) translateY(-4px);
+    }
+
+    100% {
+        transform: scale(1) translateY(0);
+    }
+}
+
+
+/* Modal close button */
+
+.payment-modal-close {
+    position: absolute;
+
+    top: 14px;
+    right: 16px;
+
+    border: none;
+
+    background: transparent;
+
+    font-size: 26px;
+
+    color: #9ca3af;
+
+    cursor: pointer;
+}
+
+
+.payment-modal-close:hover {
+    color: #111827;
+}
+
+
+/* Icon */
+
+.payment-modal-icon {
+    width: 62px;
+    height: 62px;
+
+    margin: 0 auto 18px;
+
+    border-radius: 50%;
+
+    background: #eff6ff;
+
+    color: #2563eb;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    font-size: 28px;
+
+    font-weight: bold;
+
+    animation:
+        iconPulse 1.5s infinite;
+}
+
+
+@keyframes iconPulse {
+
+    0% {
+        transform: scale(1);
+        box-shadow: 0 0 0 0 rgba(37, 99, 235, 0.25);
+    }
+
+    70% {
+        transform: scale(1.05);
+        box-shadow: 0 0 0 12px rgba(37, 99, 235, 0);
+    }
+
+    100% {
+        transform: scale(1);
+        box-shadow: 0 0 0 0 rgba(37, 99, 235, 0);
+    }
+}
+
+
+.payment-modal-content h2 {
+    margin-bottom: 6px;
+
+    color: #111827;
+
+    font-size: 24px;
+}
+
+
+.payment-modal-subtitle {
+    margin-bottom: 22px;
+
+    color: #6b7280;
+
+    font-size: 14px;
+}
+
+
+/* Details */
+
+.payment-modal-details {
+    background: #f8fafc;
+
+    border-radius: 12px;
+
+    padding: 8px 16px;
+
+    text-align: left;
+
+    margin-bottom: 24px;
+}
+
+
+.payment-detail-row {
+    display: flex;
+
+    justify-content: space-between;
+
+    gap: 20px;
+
+    padding: 13px 0;
+
+    border-bottom:
+        1px solid #e5e7eb;
+}
+
+
+.payment-detail-row:last-child {
+    border-bottom: none;
+}
+
+
+.payment-detail-row span {
+    color: #6b7280;
+
+    font-size: 14px;
+}
+
+
+.payment-detail-row strong {
+    color: #111827;
+
+    font-size: 14px;
+
+    text-align: right;
+}
+
+
+/* Buttons */
+
+.payment-modal-actions {
+    display: flex;
+
+    gap: 12px;
+}
+
+
+.payment-cancel-btn,
+.payment-confirm-btn {
+    flex: 1;
+
+    padding: 12px;
+
+    border-radius: 9px;
+
+    font-size: 14px;
+
+    font-weight: 600;
+
+    cursor: pointer;
+
+    transition: 0.2s ease;
+}
+
+
+.payment-cancel-btn {
+    border: 1px solid #d1d5db;
+
+    background: white;
+
+    color: #374151;
+}
+
+
+.payment-cancel-btn:hover {
+    background: #f3f4f6;
+}
+
+
+.payment-confirm-btn {
+    border: none;
+
+    background: #2563eb;
+
+    color: white;
+}
+
+
+.payment-confirm-btn:hover {
+    background: #1d4ed8;
+}
+
+
+/* Mobile */
+
+@media (max-width: 500px) {
+
+    .payment-modal-content {
+        padding: 25px 20px;
+    }
+
+    .payment-modal-actions {
+        flex-direction: column;
+    }
+
+}
+
+/* =========================================================
+   PAYMENT HISTORY
+========================================================= */
+
+.payment-summary {
+
+    display: grid;
+
+    grid-template-columns:
+        repeat(2, 1fr);
+
+    gap: 20px;
+
+    margin-bottom: 25px;
+
+}
+
+
+.summary-card {
+
+    background: white;
+
+    border: 1px solid #e5e7eb;
+
+    border-radius: 14px;
+
+    padding: 22px;
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 16px;
+
+    box-shadow:
+        0 4px 15px rgba(0,0,0,0.06);
+
+}
+
+
+.summary-icon {
+
+    width: 50px;
+
+    height: 50px;
+
+    border-radius: 12px;
+
+    background: #eff6ff;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    font-size: 23px;
+
+}
+
+
+.summary-card span {
+
+    display: block;
+
+    font-size: 13px;
+
+    color: #6b7280;
+
+    margin-bottom: 5px;
+
+}
+
+
+.summary-card strong {
+
+    display: block;
+
+    font-size: 22px;
+
+    color: #111827;
+
+}
+
+
+/* =========================================================
+   PAYMENT CARD
+========================================================= */
+
+.payments-card {
+
+    background: white;
+
+    border: 1px solid #e5e7eb;
+
+    border-radius: 14px;
+
+    box-shadow:
+        0 4px 15px rgba(0,0,0,0.06);
+
+    overflow: hidden;
+
+}
+
+
+.payments-card-header {
+
+    padding: 22px 25px;
+
+    border-bottom:
+        1px solid #e5e7eb;
+
+}
+
+
+.payments-card-header h3 {
+
+    font-size: 18px;
+
+    color: #111827;
+
+}
+
+
+/* =========================================================
+   PAYMENT ITEM
+========================================================= */
+
+.payment-history-item {
+
+    padding: 22px 25px;
+
+    border-bottom:
+        1px solid #e5e7eb;
+
+    transition:
+        background 0.2s ease;
+
+}
+
+
+.payment-history-item:last-child {
+
+    border-bottom: none;
+
+}
+
+
+.payment-history-item:hover {
+
+    background: #f9fafb;
+
+}
+
+
+.payment-main {
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 15px;
+
+    margin-bottom: 20px;
+
+}
+
+
+.payment-fee-icon {
+
+    width: 48px;
+
+    height: 48px;
+
+    border-radius: 12px;
+
+    background: #eff6ff;
+
+    color: #2563eb;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    font-size: 20px;
+
+    font-weight: 700;
+
+}
+
+
+.payment-info h3 {
+
+    margin: 0 0 5px;
+
+    font-size: 16px;
+
+    color: #111827;
+
+}
+
+
+.payment-info p {
+
+    margin: 0;
+
+    font-size: 13px;
+
+    color: #6b7280;
+
+}
+
+
+/* =========================================================
+   PAYMENT DETAILS
+========================================================= */
+
+.payment-details {
+
+    display: grid;
+
+    grid-template-columns:
+        repeat(4, 1fr);
+
+    gap: 20px;
+
+    padding-left: 63px;
+
+}
+
+
+.payment-detail span {
+
+    display: block;
+
+    font-size: 12px;
+
+    color: #6b7280;
+
+    margin-bottom: 5px;
+
+}
+
+
+.payment-detail strong {
+
+    font-size: 14px;
+
+    color: #111827;
+
+}
+
+
+.transaction-id {
+
+    font-family:
+        Consolas,
+        monospace;
+
+    font-size: 12px !important;
+
+}
+
+
+/* =========================================================
+   STATUS
+========================================================= */
+
+.status-badge {
+
+    display: inline-block;
+
+    padding: 6px 12px;
+
+    border-radius: 20px;
+
+    font-size: 11px;
+
+    font-weight: 700;
+
+}
+
+
+.status-badge.success {
+
+    background: #dcfce7;
+
+    color: #15803d;
+
+}
+
+
+.status-badge.failed {
+
+    background: #fee2e2;
+
+    color: #dc2626;
+
+}
+
+
+/* =========================================================
+   NO PAYMENTS
+========================================================= */
+
+.no-payments {
+
+    text-align: center;
+
+    padding: 60px 25px;
+
+}
+
+
+.no-payment-icon {
+
+    font-size: 45px;
+
+    margin-bottom: 15px;
+
+}
+
+
+.no-payments h3 {
+
+    margin-bottom: 8px;
+
+    color: #111827;
+
+}
+
+
+.no-payments p {
+
+    color: #6b7280;
+
+    margin-bottom: 20px;
+
+}
+
+
+.go-to-fees-btn {
+
+    display: inline-block;
+
+    background: #2563eb;
+
+    color: white;
+
+    text-decoration: none;
+
+    padding: 10px 18px;
+
+    border-radius: 8px;
+
+    font-size: 14px;
+
+    font-weight: 600;
+
+}
+
+
+/* =========================================================
+   LOADING
+========================================================= */
+
+.payment-loading {
+
+    text-align: center;
+
+    padding: 50px;
+
+    color: #6b7280;
+
+}
+
+
+/* =========================================================
+   ERROR
+========================================================= */
+
+.payment-error {
+
+    text-align: center;
+
+    padding: 50px;
+
+}
+
+
+.error-icon {
+
+    font-size: 40px;
+
+    margin-bottom: 15px;
+
+}
+
+
+.payment-error h3 {
+
+    margin-bottom: 8px;
+
+}
+
+
+.payment-error p {
+
+    color: #6b7280;
+
+}
+
+
+/* =========================================================
+   MOBILE
+========================================================= */
+
+@media (max-width: 768px) {
+
+    .payment-summary {
+
+        grid-template-columns: 1fr;
+
+    }
+
+
+    .payment-details {
+
+        grid-template-columns: 1fr 1fr;
+
+        padding-left: 0;
+
+    }
+
+}
+
+
+@media (max-width: 500px) {
+
+    .payment-details {
+
+        grid-template-columns: 1fr;
+
+    }
+
+
+    .payment-history-item {
+
+        padding: 18px;
+
+    }
+
+
+    .payments-card-header {
+
+        padding: 18px;
+
+    }
+
+}
+
+/* =========================================================
+   PAYMENT ACTIONS
+========================================================= */
+
+.payment-actions {
+    display: flex;
+
+    align-items: center;
+
+    justify-content: flex-end;
+
+    gap: 12px;
+
+}
+
+
+/* View Details button */
+
+.view-payment-btn {
+    border: 1px solid #2563eb;
+
+    background: white;
+
+    color: #2563eb;
+
+    padding: 7px 14px;
+
+    border-radius: 7px;
+
+    font-size: 12px;
+
+    font-weight: 600;
+
+    cursor: pointer;
+
+    transition:
+        background 0.2s ease,
+        color 0.2s ease,
+        transform 0.2s ease;
+}
+
+
+.view-payment-btn:hover {
+    background: #2563eb;
+
+    color: white;
+
+    transform: translateY(-1px);
+}
+
+
+/* Active */
+
+.view-payment-btn:active {
+    transform: translateY(0);
+}
+
+
+/* Payment actions responsive */
+
+@media (max-width: 700px) {
+
+    .payment-actions {
+        justify-content: flex-start;
+
+        margin-top: 15px;
+
+    }
+
+}
+
+/* =========================================================
+   PAYMENT RECEIPT
+========================================================= */
+
+.receipt-content {
+
+    background: white;
+
+    border-radius: 14px;
+
+}
+
+
+.receipt-header {
+
+    text-align: center;
+
+    padding-bottom: 20px;
+
+    border-bottom:
+        1px solid #e5e7eb;
+
+    margin-bottom: 20px;
+
+}
+
+
+.receipt-logo {
+
+    width: 55px;
+    height: 55px;
+
+    margin: 0 auto 10px;
+
+    border-radius: 50%;
+
+    background: #eff6ff;
+
+    color: #2563eb;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    font-size: 24px;
+
+    font-weight: bold;
+
+}
+
+
+.receipt-header h2 {
+
+    margin: 5px 0;
+
+    color: #111827;
+
+}
+
+
+.receipt-header p {
+
+    margin: 0;
+
+    color: #6b7280;
+
+}
+
+
+.receipt-success {
+
+    background: #dcfce7;
+
+    color: #166534;
+
+    text-align: center;
+
+    padding: 10px;
+
+    border-radius: 8px;
+
+    font-weight: 600;
+
+    margin-bottom: 22px;
+
+}
+
+
+.receipt-student,
+.receipt-payment {
+
+    margin-bottom: 22px;
+
+}
+
+
+.receipt-student h3,
+.receipt-payment h3 {
+
+    margin-bottom: 10px;
+
+    font-size: 16px;
+
+}
+
+
+.receipt-row {
+
+    display: flex;
+
+    justify-content: space-between;
+
+    gap: 20px;
+
+    padding: 10px 0;
+
+    border-bottom:
+        1px solid #f1f5f9;
+
+}
+
+
+.receipt-row span {
+
+    color: #6b7280;
+
+    font-size: 13px;
+
+}
+
+
+.receipt-row strong {
+
+    color: #111827;
+
+    font-size: 13px;
+
+    text-align: right;
+
+}
+
+
+.receipt-transaction {
+
+    font-family:
+        Consolas,
+        monospace;
+
+}
+
+
+.receipt-footer {
+
+    text-align: center;
+
+    padding-top: 18px;
+
+    border-top:
+        1px dashed #d1d5db;
+
+    color: #374151;
+
+}
+
+
+.receipt-footer small {
+
+    color: #6b7280;
+
+}
+
+
+.receipt-actions {
+
+    display: flex;
+
+    justify-content: flex-end;
+
+    gap: 10px;
+
+    margin-top: 20px;
+
+}
+
+
+.receipt-close-btn,
+.download-receipt-btn {
+
+    padding: 10px 16px;
+
+    border-radius: 8px;
+
+    font-size: 13px;
+
+    font-weight: 600;
+
+    cursor: pointer;
+
+}
+
+
+.receipt-close-btn {
+
+    background: white;
+
+    color: #374151;
+
+    border:
+        1px solid #d1d5db;
+
+}
+
+
+.download-receipt-btn {
+
+    background: #2563eb;
+
+    color: white;
+
+    border: none;
+
+}
+
+
+.download-receipt-btn:hover {
+
+    background: #1d4ed8;
+
+}
+
+
+@media (max-width: 600px) {
+
+    .receipt-actions {
+
+        flex-direction: column;
+
+    }
+
+    .receipt-close-btn,
+    .download-receipt-btn {
+
+        width: 100%;
+
+    }
+
+}

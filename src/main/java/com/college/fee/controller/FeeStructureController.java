@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -23,6 +24,7 @@ public class FeeStructureController {
 
     public FeeStructureController(
             FeeStructureService feeStructureService) {
+
         this.feeStructureService = feeStructureService;
     }
 
@@ -35,11 +37,12 @@ public class FeeStructureController {
         );
     }
 
-    @GetMapping
-    public ResponseEntity<List<FeeStructure>> getAllFeeStructures() {
+    @GetMapping("/course/{courseId}")
+    public ResponseEntity<List<FeeStructure>> getFeeStructuresByCourse(
+            @PathVariable Integer courseId) {
 
         return ResponseEntity.ok(
-                feeStructureService.getAllFeeStructures()
+                feeStructureService.getFeeStructuresByCourse(courseId)
         );
     }
 }

@@ -1,0 +1,488 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>Payment History - College Fee Management</title>
+
+    <link rel="stylesheet"
+          href="css/style.css">
+
+</head>
+
+
+<body>
+
+
+    <!-- =====================================================
+         SIDEBAR
+    ====================================================== -->
+
+    <aside class="sidebar" id="sidebar">
+
+        <div class="sidebar-header">
+
+            <h2>College Fee</h2>
+
+        </div>
+
+
+        <nav class="sidebar-nav">
+
+            <a href="dashboard.html">
+                🏠 Dashboard
+            </a>
+
+
+            <a href="fees.html">
+                💰 My Fees
+            </a>
+
+
+            <a href="payments.html"
+               class="active">
+                💳 Payment History
+            </a>
+
+
+            <a href="profile.html">
+                👤 My Profile
+            </a>
+
+
+            <a href="#"
+               id="logoutBtn">
+                🚪 Logout
+            </a>
+
+        </nav>
+
+    </aside>
+
+
+
+    <!-- =====================================================
+         MOBILE OVERLAY
+    ====================================================== -->
+
+    <div class="overlay"
+         id="overlay">
+    </div>
+
+
+
+    <!-- =====================================================
+         MAIN CONTENT
+    ====================================================== -->
+
+    <div class="main-content">
+
+
+        <!-- =================================================
+             TOP NAVBAR
+        ================================================== -->
+
+        <header class="top-navbar">
+
+
+            <button
+                class="menu-btn"
+                id="menuBtn">
+
+                ☰
+
+            </button>
+
+
+            <h1>
+                Payment History
+            </h1>
+
+
+            <div
+                class="student-name"
+                id="studentName">
+
+                Student
+
+            </div>
+
+
+        </header>
+
+
+
+        <!-- =================================================
+             PAGE CONTENT
+        ================================================== -->
+
+        <main class="content">
+
+
+            <!-- =================================================
+                 PAGE HEADING
+            ================================================== -->
+
+            <div class="page-heading">
+
+                <h2>
+                    My Payments
+                </h2>
+
+                <p>
+                    View all your fee payment transactions
+                </p>
+
+            </div>
+
+
+
+            <!-- =================================================
+                 PAYMENT SUMMARY
+            ================================================== -->
+
+            <div class="payment-summary">
+
+
+                <!-- Total Payments -->
+
+                <div class="summary-card">
+
+                    <div class="summary-icon">
+                        💳
+                    </div>
+
+
+                    <div>
+
+                        <span>
+                            Total Payments
+                        </span>
+
+
+                        <strong id="totalPayments">
+                            0
+                        </strong>
+
+                    </div>
+
+                </div>
+
+
+
+                <!-- Total Amount -->
+
+                <div class="summary-card">
+
+                    <div class="summary-icon">
+                        ₹
+                    </div>
+
+
+                    <div>
+
+                        <span>
+                            Total Amount Paid
+                        </span>
+
+
+                        <strong id="totalAmount">
+                            ₹0.00
+                        </strong>
+
+                    </div>
+
+                </div>
+
+
+            </div>
+
+
+
+            <!-- =================================================
+                 TRANSACTION HISTORY
+            ================================================== -->
+
+            <div class="payments-card">
+
+
+                <div class="payments-card-header">
+
+                    <h3>
+                        Transaction History
+                    </h3>
+
+                </div>
+
+
+
+                <div
+                    id="paymentHistory"
+                    class="payment-list">
+
+
+                    <!-- Loading -->
+
+                    <div class="payment-loading">
+
+                        Loading payment history...
+
+                    </div>
+
+
+                </div>
+
+
+            </div>
+
+
+        </main>
+
+
+    </div>
+
+
+
+    <!-- Payment Details Modal -->
+<div
+    id="paymentDetailsModal"
+    class="payment-modal">
+
+    <div class="payment-modal-content">
+
+        <button
+            class="payment-modal-close"
+            id="paymentDetailsClose">
+
+            ×
+
+        </button>
+
+
+        <!-- Receipt area -->
+
+        <div
+            id="receiptContent"
+            class="receipt-content">
+
+            <div class="receipt-header">
+
+                <div class="receipt-logo">
+                    ₹
+                </div>
+
+                <h2>
+                    College Fee Management
+                </h2>
+
+                <p>
+                    Payment Receipt
+                </p>
+
+            </div>
+
+
+            <div class="receipt-success">
+
+                ✓ Payment Successful
+
+            </div>
+
+
+            <div class="receipt-student">
+
+                <h3>
+                    Student Details
+                </h3>
+
+                <div class="receipt-row">
+
+                    <span>
+                        Student Name
+                    </span>
+
+                    <strong id="receiptStudentName">
+                        -
+                    </strong>
+
+                </div>
+
+
+                <div class="receipt-row">
+
+                    <span>
+                        Roll Number
+                    </span>
+
+                    <strong id="receiptRollNumber">
+                        -
+                    </strong>
+
+                </div>
+
+            </div>
+
+
+            <div class="receipt-payment">
+
+                <h3>
+                    Payment Details
+                </h3>
+
+
+                <div class="receipt-row">
+
+                    <span>
+                        Fee Type
+                    </span>
+
+                    <strong id="detailsFee">
+                        -
+                    </strong>
+
+                </div>
+
+
+                <div class="receipt-row">
+
+                    <span>
+                        Amount Paid
+                    </span>
+
+                    <strong id="detailsAmount">
+                        ₹0.00
+                    </strong>
+
+                </div>
+
+
+                <div class="receipt-row">
+
+                    <span>
+                        Academic Year
+                    </span>
+
+                    <strong id="detailsAcademicYear">
+                        -
+                    </strong>
+
+                </div>
+
+
+                <div class="receipt-row">
+
+                    <span>
+                        Payment Date
+                    </span>
+
+                    <strong id="detailsDate">
+                        -
+                    </strong>
+
+                </div>
+
+
+                <div class="receipt-row">
+
+                    <span>
+                        Payment Method
+                    </span>
+
+                    <strong id="detailsMethod">
+                        -
+                    </strong>
+
+                </div>
+
+
+                <div class="receipt-row">
+
+                    <span>
+                        Transaction ID
+                    </span>
+
+                    <strong
+                        id="detailsTransaction"
+                        class="receipt-transaction">
+
+                        -
+
+                    </strong>
+
+                </div>
+
+
+                <div class="receipt-row">
+
+                    <span>
+                        Status
+                    </span>
+
+                    <strong id="detailsStatus">
+                        -
+                    </strong>
+
+                </div>
+
+            </div>
+
+
+            <div class="receipt-footer">
+
+                <p>
+                    Thank you for your payment.
+                </p>
+
+                <small>
+                    This is a computer-generated receipt.
+                </small>
+
+            </div>
+
+        </div>
+
+
+        <!-- Receipt buttons -->
+
+        <div class="receipt-actions">
+
+            <button
+                type="button"
+                class="receipt-close-btn"
+                id="receiptCloseBtn">
+
+                Close
+
+            </button>
+
+
+            <button
+                type="button"
+                class="download-receipt-btn"
+                id="downloadReceiptBtn">
+
+                Download / Print Receipt
+
+            </button>
+
+        </div>
+
+    </div>
+
+</div>
+
+    <!-- =====================================================
+         JAVASCRIPT
+    ====================================================== -->
+
+    <script src="js/payments.js"></script>
+
+
+</body>
+
+</html>

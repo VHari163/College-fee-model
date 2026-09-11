@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Student Dashboard</title>
+
+    <link rel="stylesheet" href="css/style.css">
+</head>
+
+<body>
+
+    <!-- Sidebar -->
+    <aside class="sidebar" id="sidebar">
+
+        <div class="sidebar-header">
+            <h2>College Fee</h2>
+            <p>Management System</p>
+        </div>
+
+        <nav class="sidebar-menu">
+
+            <a href="dashboard.html" class="menu-item active">
+                <span class="menu-icon">⌂</span>
+                <span>Dashboard</span>
+            </a>
+
+            <a href="fees.html" class="menu-item">
+                <span class="menu-icon">₹</span>
+                <span>My Fees</span>
+            </a>
+
+            <a href="payments.html" class="menu-item">
+                <span class="menu-icon">▣</span>
+                <span>Payment History</span>
+            </a>
+
+            <a href="profile.html" class="menu-item">
+                <span class="menu-icon">◉</span>
+                <span>My Profile</span>
+            </a>
+
+        </nav>
+
+        <div class="sidebar-footer">
+
+            <button id="logoutButton" class="logout-button">
+                <span class="menu-icon">↪</span>
+                <span>Logout</span>
+            </button>
+
+        </div>
+
+    </aside>
+
+
+    <!-- Main area -->
+    <div class="main-wrapper">
+
+        <!-- Top navbar -->
+        <header class="top-navbar">
+
+            <button id="menuButton" class="menu-button" aria-label="Open menu">
+                ☰
+            </button>
+
+            <div class="navbar-title">
+                College Fee Management System
+            </div>
+
+            <div class="navbar-profile">
+                <span id="topStudentName">Student</span>
+            </div>
+
+        </header>
+
+
+        <!-- Main content -->
+        <main class="dashboard-content">
+
+            <section class="welcome-section">
+
+                <h1>
+                    Welcome,
+                    <span id="studentName">Student</span>
+                </h1>
+
+                <p>Here is your college fee dashboard.</p>
+
+            </section>
+
+
+            <!-- Student information -->
+            <section class="student-card">
+
+                <div class="section-title">
+                    <h2>Student Information</h2>
+                </div>
+
+                <div class="student-info-grid">
+
+                    <div class="info-item">
+                        <span class="info-label">Student ID</span>
+                        <span class="info-value" id="studentId">-</span>
+                    </div>
+
+                    <div class="info-item">
+                        <span class="info-label">Roll Number</span>
+                        <span class="info-value" id="rollNumber">-</span>
+                    </div>
+
+                    <div class="info-item">
+                        <span class="info-label">Name</span>
+                        <span class="info-value" id="name">-</span>
+                    </div>
+
+                    <div class="info-item">
+                        <span class="info-label">Email</span>
+                        <span class="info-value" id="email">-</span>
+                    </div>
+
+                    <div class="info-item">
+                        <span class="info-label">Department</span>
+                        <span class="info-value" id="department">-</span>
+                    </div>
+
+                    <div class="info-item">
+                        <span class="info-label">Course</span>
+                        <span class="info-value" id="course">-</span>
+                    </div>
+
+                    <div class="info-item">
+                        <span class="info-label">Year of Study</span>
+                        <span class="info-value" id="year">-</span>
+                    </div>
+
+                </div>
+
+            </section>
+
+        </main>
+
+    </div>
+
+
+    <!-- Mobile overlay -->
+    <div id="sidebarOverlay" class="sidebar-overlay"></div>
+
+
+    <script src="js/dashboard.js"></script>
+
+</body>
+
+</html>

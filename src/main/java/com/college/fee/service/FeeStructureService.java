@@ -37,15 +37,18 @@ public class FeeStructureService {
     public FeeStructure addFeeStructure(FeeStructureRequest request) {
 
         Course course = courseRepository.findById(request.getCourseId())
-                .orElseThrow(() -> new RuntimeException("Course not found"));
+                .orElseThrow(() ->
+                        new RuntimeException("Course not found"));
 
-        AcademicYear academicYear =
-                academicYearRepository.findById(request.getAcademicYearId())
-                        .orElseThrow(() -> new RuntimeException("Academic year not found"));
+        AcademicYear academicYear = academicYearRepository.findById(
+                request.getAcademicYearId())
+                .orElseThrow(() ->
+                        new RuntimeException("Academic year not found"));
 
-        FeeType feeType =
-                feeTypeRepository.findById(request.getFeeTypeId())
-                        .orElseThrow(() -> new RuntimeException("Fee type not found"));
+        FeeType feeType = feeTypeRepository.findById(
+                request.getFeeTypeId())
+                .orElseThrow(() ->
+                        new RuntimeException("Fee type not found"));
 
         FeeStructure feeStructure = new FeeStructure();
 
@@ -60,5 +63,16 @@ public class FeeStructureService {
 
     public List<FeeStructure> getAllFeeStructures() {
         return feeStructureRepository.findAll();
+    }
+
+    public FeeStructure getFeeStructureById(Integer id) {
+        return feeStructureRepository.findById(id)
+                .orElseThrow(() ->
+                        new RuntimeException("Fee structure not found"));
+    }
+
+    public List<FeeStructure> getFeeStructuresByCourse(Integer courseId) {
+
+        return feeStructureRepository.findByCourseCourseId(courseId);
     }
 }

@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>My Fees - College Fee Management</title>
+
+    <link rel="stylesheet" href="css/style.css">
+
+</head>
+
+<body>
+
+
+    <!-- =====================================================
+         SIDEBAR
+    ====================================================== -->
+
+    <aside class="sidebar" id="sidebar">
+
+        <div class="sidebar-header">
+
+            <h2>College Fee</h2>
+
+        </div>
+
+
+        <nav class="sidebar-nav">
+
+            <a href="dashboard.html">
+                🏠 Dashboard
+            </a>
+
+            <a href="fees.html" class="active">
+                💰 My Fees
+            </a>
+
+            <a href="payments.html">
+                💳 Payment History
+            </a>
+
+            <a href="profile.html">
+                👤 My Profile
+            </a>
+
+            <a href="#" id="logoutBtn">
+                🚪 Logout
+            </a>
+
+        </nav>
+
+    </aside>
+
+
+    <!-- =====================================================
+         MOBILE OVERLAY
+    ====================================================== -->
+
+    <div class="overlay" id="overlay"></div>
+
+
+    <!-- =====================================================
+         MAIN CONTENT
+    ====================================================== -->
+
+    <div class="main-content">
+
+
+        <!-- =================================================
+             TOP NAVBAR
+        ================================================== -->
+
+        <header class="top-navbar">
+
+            <button
+                class="menu-btn"
+                id="menuBtn">
+
+                ☰
+
+            </button>
+
+
+            <h1>My Fees</h1>
+
+
+            <div
+                class="student-name"
+                id="studentName">
+
+                Student
+
+            </div>
+
+        </header>
+
+
+        <!-- =================================================
+             PAGE CONTENT
+        ================================================== -->
+
+        <main class="content">
+
+
+            <div class="page-heading">
+
+                <h2>My Fee Details</h2>
+
+                <p>
+                    Select a fee type to view your payment details
+                </p>
+
+            </div>
+
+
+            <!-- =================================================
+                 FEE TYPE SELECTION
+            ================================================== -->
+
+            <div class="fee-selection-card">
+
+                <label for="feeTypeSelect">
+                    Select Fee Type
+                </label>
+
+                <select id="feeTypeSelect">
+
+                    <option value="">
+                        Loading fee types...
+                    </option>
+
+                </select>
+
+            </div>
+
+
+            <!-- =================================================
+                 SELECTED FEE DETAILS
+            ================================================== -->
+
+            <div
+                id="feeDetails"
+                class="selected-fee-card">
+
+                <div class="loading-message">
+
+                    Loading fee details...
+
+                </div>
+
+            </div>
+
+
+        </main>
+
+    </div>
+
+<!-- Payment Success / Error Animation -->
+<div id="paymentNotification" class="payment-notification">
+
+    <div class="notification-card">
+
+        <button
+            class="notification-close"
+            id="notificationClose">
+            ×
+        </button>
+
+        <div
+            class="notification-icon"
+            id="notificationIcon">
+            ✓
+        </div>
+
+        <h2 id="notificationTitle">
+            Payment Successful
+        </h2>
+
+        <p id="notificationMessage">
+            Payment completed successfully.
+        </p>
+
+        <div class="notification-progress"></div>
+
+    </div>
+
+</div>
+<!-- Payment Confirmation Modal -->
+<div id="paymentConfirmModal" class="payment-modal">
+
+    <div class="payment-modal-content">
+
+        <button
+            class="payment-modal-close"
+            id="paymentModalClose">
+            ×
+        </button>
+
+        <div class="payment-modal-icon">
+            ₹
+        </div>
+
+        <h2>Confirm Payment</h2>
+
+        <p class="payment-modal-subtitle">
+            Please review your payment details
+        </p>
+
+        <div class="payment-modal-details">
+
+            <div class="payment-detail-row">
+                <span>Fee</span>
+                <strong id="confirmFeeName">
+                    Bus Fee
+                </strong>
+            </div>
+
+            <div class="payment-detail-row">
+                <span>Amount</span>
+                <strong id="confirmAmount">
+                    ₹0.00
+                </strong>
+            </div>
+
+            <div class="payment-detail-row">
+                <span>Remaining After Payment</span>
+                <strong id="confirmRemaining">
+                    ₹0.00
+                </strong>
+            </div>
+
+        </div>
+
+        <div class="payment-modal-actions">
+
+            <button
+                class="payment-cancel-btn"
+                id="paymentCancelBtn">
+                Cancel
+            </button>
+
+            <button
+                class="payment-confirm-btn"
+                id="paymentConfirmBtn">
+                Confirm Payment
+            </button>
+
+        </div>
+
+    </div>
+
+</div>
+
+    <script src="js/fees.js"></script>
+
+</body>
+
+</html>

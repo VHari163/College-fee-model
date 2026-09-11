@@ -1,10 +1,15 @@
 package com.college.fee.dto;
 
+import java.math.BigDecimal;
+
 public class FeePaymentRequest {
 
     private Integer studentId;
     private Integer academicYearId;
     private Integer feeTypeId;
+
+    private BigDecimal amount;
+
     private String paymentMethod;
     private String remarks;
 
@@ -30,6 +35,14 @@ public class FeePaymentRequest {
 
     public void setFeeTypeId(Integer feeTypeId) {
         this.feeTypeId = feeTypeId;
+    }
+
+    public BigDecimal getAmount() {
+        return amount;
+    }
+
+    public void setAmount(BigDecimal amount) {
+        this.amount = amount;
     }
 
     public String getPaymentMethod() {
