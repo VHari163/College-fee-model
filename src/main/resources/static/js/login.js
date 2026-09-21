@@ -37,7 +37,15 @@ loginForm.addEventListener("submit", async function (event) {
             localStorage.setItem("email", data.email);
 
             // Go to dashboard
-            window.location.href = "dashboard.html";
+            if (data.role === "ADMIN") {
+
+                window.location.href = "admin.html";
+
+            } else {
+
+                window.location.href = "dashboard.html";
+
+            }
 
         } else {
 

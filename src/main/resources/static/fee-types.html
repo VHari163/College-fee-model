@@ -1,0 +1,553 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>Fee Type Management - Admin</title>
+
+    <link rel="stylesheet"
+          href="css/style.css">
+
+</head>
+
+
+<body>
+
+
+    <!-- =====================================================
+         SIDEBAR
+    ====================================================== -->
+
+    <aside class="sidebar"
+           id="sidebar">
+
+        <div class="sidebar-header">
+
+            <h2>
+                College Fee Management
+            </h2>
+
+            <p>
+                Admin Panel
+            </p>
+
+        </div>
+
+
+        <nav class="sidebar-nav">
+
+            <!-- Dashboard -->
+
+            <a href="admin.html"
+               id="dashboardLink">
+
+                🏠 Dashboard
+
+            </a>
+
+
+            <!-- Students -->
+
+            <a href="#"
+               id="studentsLink">
+
+                👨‍🎓 Students
+
+            </a>
+
+
+            <!-- Departments -->
+
+            <a href="#"
+               id="departmentsLink">
+
+                🏢 Departments
+
+            </a>
+
+
+            <!-- Courses -->
+
+            <a href="#"
+               id="coursesLink">
+
+                📚 Courses
+
+            </a>
+
+
+            <!-- Academic Years -->
+
+            <a href="#"
+               id="academicYearsLink">
+
+                📅 Academic Years
+
+            </a>
+
+
+            <!-- Fee Types -->
+
+            <a href="fee-types.html"
+               id="feeTypesLink"
+               class="active">
+
+                💰 Fee Types
+
+            </a>
+
+
+            <!-- Fee Structures -->
+
+            <a href="#"
+               id="feeStructuresLink">
+
+                📋 Fee Structures
+
+            </a>
+
+
+            <!-- Payments -->
+
+            <a href="#"
+               id="paymentsLink">
+
+                💳 Payments
+
+            </a>
+
+
+            <!-- Logout -->
+
+            <a href="#"
+               id="logoutBtn">
+
+                🚪 Logout
+
+            </a>
+
+        </nav>
+
+    </aside>
+
+
+
+    <!-- =====================================================
+         MAIN CONTENT
+    ====================================================== -->
+
+    <main class="main-content"
+          id="mainContent">
+
+
+        <!-- =================================================
+             TOP NAVBAR
+        ================================================== -->
+
+        <header class="top-navbar">
+
+
+            <!-- Hamburger -->
+
+            <button
+                type="button"
+                class="menu-btn"
+                id="menuBtn"
+                aria-label="Open menu">
+
+                ☰
+
+            </button>
+
+
+            <!-- Page Title -->
+
+            <div class="navbar-title">
+
+                <h2>
+                    Fee Type Management
+                </h2>
+
+            </div>
+
+
+            <!-- Admin Profile -->
+
+            <div class="admin-profile">
+
+                <div class="admin-profile-text">
+
+                    <strong id="adminName">
+                        Admin
+                    </strong>
+
+                    <span id="adminRole">
+                        Administrator
+                    </span>
+
+                </div>
+
+            </div>
+
+        </header>
+
+
+
+        <!-- =================================================
+             PAGE CONTENT
+        ================================================== -->
+
+        <section class="content">
+
+
+            <!-- =================================================
+                 PAGE HEADING
+            ================================================== -->
+
+            <div class="page-heading">
+
+                <h1>
+                    Fee Types
+                </h1>
+
+                <p>
+                    Add and manage different types of college fees.
+                </p>
+
+            </div>
+
+
+
+            <!-- =================================================
+                 ADD FEE TYPE
+            ================================================== -->
+
+            <div class="fee-type-form-card">
+
+
+                <h2>
+                    Add New Fee Type
+                </h2>
+
+
+                <form id="feeTypeForm">
+
+
+                    <!-- Form Grid -->
+
+                    <div class="fee-type-form-grid">
+
+
+                        <!-- Fee Name -->
+
+                        <div class="form-group">
+
+                            <label for="feeName">
+                                Fee Name
+                            </label>
+
+                            <input
+                                type="text"
+                                id="feeName"
+                                name="feeName"
+                                placeholder="Example: Records Fee"
+                                autocomplete="off"
+                                required>
+
+                        </div>
+
+
+                        <!-- Description -->
+
+                        <div class="form-group">
+
+                            <label for="feeDescription">
+                                Description
+                            </label>
+
+                            <input
+                                type="text"
+                                id="feeDescription"
+                                name="feeDescription"
+                                placeholder="Enter fee description"
+                                autocomplete="off">
+
+                        </div>
+
+
+                    </div>
+
+
+                    <!-- Submit -->
+
+                    <div class="fee-type-form-actions">
+
+                        <button
+                            type="submit"
+                            class="admin-primary-btn">
+
+                            Add Fee Type
+
+                        </button>
+
+                    </div>
+
+
+                </form>
+
+            </div>
+
+
+
+            <!-- =================================================
+                 MESSAGE
+            ================================================== -->
+
+            <div
+                id="feeTypeMessage"
+                class="fee-type-message">
+            </div>
+
+
+
+            <!-- =================================================
+                 EXISTING FEE TYPES
+            ================================================== -->
+
+            <div class="fee-type-list-card">
+
+
+                <!-- Header -->
+
+                <div class="fee-type-list-header">
+
+
+                    <div>
+
+                        <h2>
+                            Existing Fee Types
+                        </h2>
+
+                        <p>
+                            All fee types currently available in the system.
+                        </p>
+
+                    </div>
+
+
+                    <!-- Refresh -->
+
+                    <button
+                        type="button"
+                        id="refreshFeeTypesBtn"
+                        class="refresh-btn">
+
+                        ↻ Refresh
+
+                    </button>
+
+
+                </div>
+
+
+
+                <!-- Table -->
+
+                <div class="fee-type-table-container">
+
+
+                    <table class="fee-type-table">
+
+
+                        <thead>
+
+                            <tr>
+
+                                <th>
+                                    ID
+                                </th>
+
+                                <th>
+                                    Fee Name
+                                </th>
+
+                                <th>
+                                    Description
+                                </th>
+
+                                <th>
+                                    Actions
+                                </th>
+
+                            </tr>
+
+                        </thead>
+
+
+                        <tbody id="feeTypesTableBody">
+
+                            <tr>
+
+                                <td
+                                    colspan="4"
+                                    class="loading-cell">
+
+                                    Loading fee types...
+
+                                </td>
+
+                            </tr>
+
+                        </tbody>
+
+
+                    </table>
+
+                </div>
+
+
+            </div>
+
+        </section>
+
+    </main>
+
+
+
+    <!-- =====================================================
+         EDIT FEE TYPE MODAL
+    ====================================================== -->
+
+    <div
+        id="editFeeTypeModal"
+        class="fee-type-modal">
+
+
+        <div
+            class="fee-type-modal-content">
+
+
+            <!-- Close -->
+
+            <button
+                type="button"
+                id="editFeeTypeClose"
+                class="fee-type-modal-close"
+                aria-label="Close">
+
+                ×
+
+            </button>
+
+
+
+            <!-- Heading -->
+
+            <h2>
+                Edit Fee Type
+            </h2>
+
+
+            <p>
+                Update the fee type information.
+            </p>
+
+
+
+            <!-- Edit Form -->
+
+            <form id="editFeeTypeForm">
+
+
+                <!-- Hidden ID -->
+
+                <input
+                    type="hidden"
+                    id="editFeeTypeId">
+
+
+                <!-- Fee Name -->
+
+                <div class="form-group">
+
+                    <label for="editFeeName">
+                        Fee Name
+                    </label>
+
+                    <input
+                        type="text"
+                        id="editFeeName"
+                        name="editFeeName"
+                        required>
+
+                </div>
+
+
+
+                <!-- Description -->
+
+                <div class="form-group">
+
+                    <label for="editFeeDescription">
+                        Description
+                    </label>
+
+                    <input
+                        type="text"
+                        id="editFeeDescription"
+                        name="editFeeDescription">
+
+                </div>
+
+
+
+                <!-- Buttons -->
+
+                <div class="fee-type-modal-actions">
+
+
+                    <button
+                        type="button"
+                        id="editFeeTypeCancel"
+                        class="fee-type-cancel-btn">
+
+                        Cancel
+
+                    </button>
+
+
+                    <button
+                        type="submit"
+                        class="admin-primary-btn">
+
+                        Update Fee Type
+
+                    </button>
+
+
+                </div>
+
+
+            </form>
+
+
+        </div>
+
+    </div>
+
+
+
+    <!-- =====================================================
+         JAVASCRIPT
+    ====================================================== -->
+
+    <script src="js/fee-types.js"></script>
+
+</body>
+
+</html>

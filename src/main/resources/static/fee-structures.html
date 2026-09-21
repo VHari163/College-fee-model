@@ -1,0 +1,401 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>Fee Structure Management - Admin</title>
+
+    <link rel="stylesheet"
+          href="css/style.css">
+
+</head>
+
+<body>
+
+
+    <!-- =====================================================
+         SIDEBAR
+    ====================================================== -->
+
+    <aside class="sidebar"
+           id="sidebar">
+
+        <div class="sidebar-header">
+
+            <h2>
+                College Fee Management
+            </h2>
+
+            <p>
+                Admin Panel
+            </p>
+
+        </div>
+
+
+        <nav class="sidebar-nav">
+
+            <a href="admin.html">
+                🏠 Dashboard
+            </a>
+
+            <a href="#" id="studentsLink">
+                👨‍🎓 Students
+            </a>
+
+            <a href="#" id="departmentsLink">
+                🏢 Departments
+            </a>
+
+            <a href="#" id="coursesLink">
+                📚 Courses
+            </a>
+
+            <a href="#" id="academicYearsLink">
+                📅 Academic Years
+            </a>
+
+            <a href="fee-types.html">
+                💰 Fee Types
+            </a>
+
+            <a href="fee-structures.html"
+               class="active">
+                📋 Fee Structures
+            </a>
+
+            <a href="#" id="paymentsLink">
+                💳 Payments
+            </a>
+
+            <a href="#" id="logoutBtn">
+                🚪 Logout
+            </a>
+
+        </nav>
+
+    </aside>
+
+
+    <!-- =====================================================
+         MAIN CONTENT
+    ====================================================== -->
+
+    <main class="main-content"
+          id="mainContent">
+
+
+        <!-- TOP NAVBAR -->
+
+        <header class="top-navbar">
+
+            <button
+                type="button"
+                class="menu-btn"
+                id="menuBtn">
+
+                ☰
+
+            </button>
+
+
+            <div class="navbar-title">
+
+                <h2>
+                    Fee Structure Management
+                </h2>
+
+            </div>
+
+
+            <div class="admin-profile">
+
+                <div class="admin-profile-text">
+
+                    <strong id="adminName">
+                        Admin
+                    </strong>
+
+                    <span id="adminRole">
+                        Administrator
+                    </span>
+
+                </div>
+
+            </div>
+
+        </header>
+
+
+        <!-- =================================================
+             PAGE CONTENT
+        ================================================== -->
+
+        <section class="content">
+
+
+            <div class="page-heading">
+
+                <h1>
+                    Fee Structures
+                </h1>
+
+                <p>
+                    Configure fees for courses and academic years.
+                </p>
+
+            </div>
+
+
+            <!-- =================================================
+                 ADD FEE STRUCTURE
+            ================================================== -->
+
+            <div class="fee-structure-form-card">
+
+                <h2>
+                    Add Fee Structure
+                </h2>
+
+                <p class="form-description">
+                    Connect a course, academic year and fee type
+                    with an amount and due date.
+                </p>
+
+
+                <form id="feeStructureForm">
+
+
+                    <div class="fee-structure-form-grid">
+
+
+                        <!-- COURSE -->
+
+                        <div class="form-group">
+
+                            <label for="courseSelect">
+                                Course
+                            </label>
+
+                            <select
+                                id="courseSelect"
+                                required>
+
+                                <option value="">
+                                    Loading courses...
+                                </option>
+
+                            </select>
+
+                        </div>
+
+
+                        <!-- ACADEMIC YEAR -->
+
+                        <div class="form-group">
+
+                            <label for="academicYearSelect">
+                                Academic Year
+                            </label>
+
+                            <select
+                                id="academicYearSelect"
+                                required>
+
+                                <option value="">
+                                    Loading academic years...
+                                </option>
+
+                            </select>
+
+                        </div>
+
+
+                        <!-- FEE TYPE -->
+
+                        <div class="form-group">
+
+                            <label for="feeTypeSelect">
+                                Fee Type
+                            </label>
+
+                            <select
+                                id="feeTypeSelect"
+                                required>
+
+                                <option value="">
+                                    Loading fee types...
+                                </option>
+
+                            </select>
+
+                        </div>
+
+
+                        <!-- AMOUNT -->
+
+                        <div class="form-group">
+
+                            <label for="feeAmount">
+                                Amount
+                            </label>
+
+                            <input
+                                type="number"
+                                id="feeAmount"
+                                min="0.01"
+                                step="0.01"
+                                placeholder="Example: 50000"
+                                required>
+
+                        </div>
+
+
+                        <!-- DUE DATE -->
+
+                        <div class="form-group">
+
+                            <label for="dueDate">
+                                Due Date
+                            </label>
+
+                            <input
+                                type="date"
+                                id="dueDate">
+
+                        </div>
+
+
+                    </div>
+
+
+                    <div class="fee-structure-form-actions">
+
+                        <button
+                            type="submit"
+                            class="admin-primary-btn">
+
+                            Add Fee Structure
+
+                        </button>
+
+                    </div>
+
+                </form>
+
+            </div>
+
+
+            <!-- MESSAGE -->
+
+            <div
+                id="feeStructureMessage"
+                class="fee-type-message">
+            </div>
+
+
+            <!-- =================================================
+                 EXISTING FEE STRUCTURES
+            ================================================== -->
+
+            <div class="fee-structure-list-card">
+
+                <div class="fee-structure-list-header">
+
+                    <div>
+
+                        <h2>
+                            Existing Fee Structures
+                        </h2>
+
+                        <p>
+                            Structures configured for the selected course.
+                        </p>
+
+                    </div>
+
+
+                    <button
+                        type="button"
+                        id="refreshStructuresBtn"
+                        class="refresh-btn">
+
+                        ↻ Refresh
+
+                    </button>
+
+                </div>
+
+
+                <div class="fee-structure-table-container">
+
+                    <table class="fee-structure-table">
+
+                        <thead>
+
+                            <tr>
+
+                                <th>
+                                    ID
+                                </th>
+
+                                <th>
+                                    Academic Year
+                                </th>
+
+                                <th>
+                                    Fee Type
+                                </th>
+
+                                <th>
+                                    Amount
+                                </th>
+
+                                <th>
+                                    Due Date
+                                </th>
+
+                            </tr>
+
+                        </thead>
+
+
+                        <tbody id="feeStructuresTableBody">
+
+                            <tr>
+
+                                <td
+                                    colspan="5"
+                                    class="loading-cell">
+
+                                    Select a course to view fee structures.
+
+                                </td>
+
+                            </tr>
+
+                        </tbody>
+
+                    </table>
+
+                </div>
+
+            </div>
+
+        </section>
+
+    </main>
+
+
+    <!-- JAVASCRIPT -->
+
+    <script src="js/fee-structures.js"></script>
+
+</body>
+
+</html>

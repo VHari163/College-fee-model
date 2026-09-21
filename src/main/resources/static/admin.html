@@ -1,0 +1,362 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Admin Dashboard - College Fee Management</title>
+
+    <link rel="stylesheet" href="css/style.css">
+</head>
+
+<body>
+
+    <!-- =========================
+         SIDEBAR
+    ========================== -->
+
+    <aside class="sidebar" id="sidebar">
+
+        <div class="sidebar-header">
+
+            <h2>College Fee Management</h2>
+
+            <p>Admin Panel</p>
+
+        </div>
+
+        <nav class="sidebar-nav">
+
+            <a href="#" id="dashboardLink" class="active">
+                🏠 Dashboard
+            </a>
+
+            <a href="#" id="studentsLink">
+                👨‍🎓 Students
+            </a>
+
+            <a href="#" id="departmentsLink">
+                🏢 Departments
+            </a>
+
+            <a href="#" id="coursesLink">
+                📚 Courses
+            </a>
+
+            <a href="#" id="academicYearsLink">
+                📅 Academic Years
+            </a>
+
+            <a href="#" id="feeTypesLink">
+                💰 Fee Types
+            </a>
+
+            <a href="#" id="feeStructuresLink">
+                📋 Fee Structures
+            </a>
+
+            <a href="#" id="paymentsLink">
+                💳 Payments
+            </a>
+
+            <a href="#" id="logoutBtn">
+                🚪 Logout
+            </a>
+
+        </nav>
+
+    </aside>
+
+
+    <!-- =========================
+         MAIN CONTENT
+    ========================== -->
+
+    <main class="main-content" id="mainContent">
+
+        <!-- TOP NAVBAR -->
+
+        <header class="top-navbar">
+
+            <button class="menu-btn" id="menuBtn">
+                ☰
+            </button>
+
+            <div class="navbar-title">
+                <h2>Admin Dashboard</h2>
+            </div>
+
+            <div class="admin-profile">
+
+                <div class="admin-profile-text">
+
+                    <strong id="adminName">Admin</strong>
+
+                    <span id="adminRole">
+                        Administrator
+                    </span>
+
+                </div>
+
+            </div>
+
+        </header>
+
+
+        <!-- =========================
+             DASHBOARD CONTENT
+        ========================== -->
+
+        <section class="content">
+
+            <div class="page-heading">
+
+                <h1>Welcome, <span id="welcomeAdmin">Admin</span></h1>
+
+                <p>
+                    Manage students, courses, fees and payments from one place.
+                </p>
+
+            </div>
+
+
+            <!-- =========================
+                 DASHBOARD CARDS
+            ========================== -->
+
+            <div class="admin-dashboard-grid">
+
+
+                <!-- STUDENTS -->
+
+                <div class="admin-card">
+
+                    <div class="admin-card-icon">
+                        👨‍🎓
+                    </div>
+
+                    <div class="admin-card-content">
+
+                        <h3>Total Students</h3>
+
+                        <h2 id="totalStudents">0</h2>
+
+                        <p>Registered students</p>
+
+                    </div>
+
+                </div>
+
+
+                <!-- DEPARTMENTS -->
+
+                <div class="admin-card">
+
+                    <div class="admin-card-icon">
+                        🏢
+                    </div>
+
+                    <div class="admin-card-content">
+
+                        <h3>Departments</h3>
+
+                        <h2 id="totalDepartments">0</h2>
+
+                        <p>Available departments</p>
+
+                    </div>
+
+                </div>
+
+
+                <!-- COURSES -->
+
+                <div class="admin-card">
+
+                    <div class="admin-card-icon">
+                        📚
+                    </div>
+
+                    <div class="admin-card-content">
+
+                        <h3>Total Courses</h3>
+
+                        <h2 id="totalCourses">0</h2>
+
+                        <p>Available courses</p>
+
+                    </div>
+
+                </div>
+
+
+                <!-- FEE TYPES -->
+
+                <div class="admin-card">
+
+                    <div class="admin-card-icon">
+                        💰
+                    </div>
+
+                    <div class="admin-card-content">
+
+                        <h3>Fee Types</h3>
+
+                        <h2 id="totalFeeTypes">0</h2>
+
+                        <p>Configured fee types</p>
+
+                    </div>
+
+                </div>
+
+
+                <!-- PAYMENTS -->
+
+                <div class="admin-card">
+
+                    <div class="admin-card-icon">
+                        💳
+                    </div>
+
+                    <div class="admin-card-content">
+
+                        <h3>Total Payments</h3>
+
+                        <h2 id="totalPayments">0</h2>
+
+                        <p>Recorded payments</p>
+
+                    </div>
+
+                </div>
+
+
+            </div>
+
+
+            <!-- =========================
+                 ADMIN MODULES
+            ========================== -->
+
+            <div class="admin-section">
+
+                <h2>Management Modules</h2>
+
+                <p>
+                    Use the sidebar to manage different parts of the college fee
+                    management system.
+                </p>
+
+                <div class="management-grid">
+
+
+                    <div class="management-card">
+
+                        <h3>👨‍🎓 Students</h3>
+
+                        <p>
+                            View and manage student information.
+                        </p>
+
+                        <button id="studentsManagementBtn">
+                            Manage Students
+                        </button>
+
+                    </div>
+
+
+                    <div class="management-card">
+
+                        <h3>🏢 Departments</h3>
+
+                        <p>
+                            Manage college departments.
+                        </p>
+
+                        <button id="departmentsManagementBtn">
+                            Manage Departments
+                        </button>
+
+                    </div>
+
+
+                    <div class="management-card">
+
+                        <h3>📚 Courses</h3>
+
+                        <p>
+                            Add and manage courses.
+                        </p>
+
+                        <button id="coursesManagementBtn">
+                            Manage Courses
+                        </button>
+
+                    </div>
+
+
+                    <div class="management-card">
+
+                        <h3>💰 Fee Types</h3>
+
+                        <p>
+                            Add and manage different fee types.
+                        </p>
+
+                        <button id="feeTypesManagementBtn">
+                            Manage Fee Types
+                        </button>
+
+                    </div>
+
+
+                    <div class="management-card">
+
+                        <h3>📋 Fee Structures</h3>
+
+                        <p>
+                            Configure fees for courses and academic years.
+                        </p>
+
+                        <button id="feeStructuresManagementBtn">
+                            Manage Fee Structures
+                        </button>
+
+                    </div>
+
+
+                    <div class="management-card">
+
+                        <h3>💳 Payments</h3>
+
+                        <p>
+                            View student payment transactions.
+                        </p>
+
+                        <button id="paymentsManagementBtn">
+                            View Payments
+                        </button>
+
+                    </div>
+
+
+                </div>
+
+            </div>
+
+        </section>
+
+    </main>
+
+
+    <!-- =========================
+         JAVASCRIPT
+    ========================== -->
+
+    <script src="js/admin.js"></script>
+
+</body>
+
+</html>

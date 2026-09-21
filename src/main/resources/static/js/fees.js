@@ -1,11 +1,14 @@
 const API_URL = "http://localhost:8081/api";
 
-
 // =========================================================
 // LOGIN
 // =========================================================
 
 const username = localStorage.getItem("username");
+
+if (!username) {
+    window.location.href = "index.html";
+}
 
 
 // =========================================================
@@ -75,9 +78,7 @@ const confirmRemaining =
 // =========================================================
 
 let currentStudent = null;
-
 let feeStructures = [];
-
 let pendingPayment = null;
 
 
@@ -86,13 +87,9 @@ let pendingPayment = null;
 // =========================================================
 
 if (!username) {
-
     window.location.href = "index.html";
-
 } else {
-
     loadFees();
-
 }
 
 
@@ -106,46 +103,33 @@ async function loadFees() {
 
         showLoading();
 
-
         // -------------------------------------------------
         // 1. Get all students
         // -------------------------------------------------
 
         const studentsResponse =
-            await fetch(
-                `${API_URL}/students`
-            );
-
+            await fetch(`${API_URL}/students`);
 
         if (!studentsResponse.ok) {
-
             throw new Error(
                 "Unable to load student details"
             );
-
         }
-
 
         const students =
             await studentsResponse.json();
 
 
         // -------------------------------------------------
-        // 2. Find logged-in student
+        // 2. Find logged-in student using roll number
         // -------------------------------------------------
 
         const student =
-            students.find(
-                student =>
-                    student.rollNumber &&
-                    student.rollNumber
-                        .trim()
-                        .toLowerCase() ===
-                    username
-                        .trim()
-                        .toLowerCase()
+            students.find(student =>
+                student.rollNumber &&
+                student.rollNumber.trim().toLowerCase() ===
+                username.trim().toLowerCase()
             );
-
 
         if (!student) {
 
@@ -157,12 +141,12 @@ async function loadFees() {
             return;
         }
 
-
         currentStudent = student;
 
-
-        studentName.textContent =
-            student.name;
+        if (studentName) {
+            studentName.textContent =
+                student.name;
+        }
 
 
         // -------------------------------------------------
@@ -170,19 +154,13 @@ async function loadFees() {
         // -------------------------------------------------
 
         const coursesResponse =
-            await fetch(
-                `${API_URL}/courses`
-            );
-
+            await fetch(`${API_URL}/courses`);
 
         if (!coursesResponse.ok) {
-
             throw new Error(
                 "Unable to load courses"
             );
-
         }
-
 
         const courses =
             await coursesResponse.json();
@@ -197,7 +175,6 @@ async function loadFees() {
                 .trim()
                 .toLowerCase();
 
-
         const studentCourse =
             courses.find(course =>
                 (course.courseName || "")
@@ -205,7 +182,6 @@ async function loadFees() {
                     .toLowerCase() ===
                 studentCourseName
             );
-
 
         if (!studentCourse) {
 
@@ -227,15 +203,11 @@ async function loadFees() {
                 `${API_URL}/fee-structures/course/${studentCourse.courseId}`
             );
 
-
         if (!feesResponse.ok) {
-
             throw new Error(
                 "Unable to load fee structures"
             );
-
         }
-
 
         feeStructures =
             await feesResponse.json();
@@ -265,7 +237,6 @@ async function loadFees() {
 
         const uniqueFees = new Map();
 
-
         feeStructures.forEach(fee => {
 
             if (
@@ -277,25 +248,18 @@ async function loadFees() {
                 const feeTypeId =
                     fee.feeType.feeTypeId;
 
-
                 if (!uniqueFees.has(feeTypeId)) {
-
                     uniqueFees.set(
                         feeTypeId,
                         fee
                     );
-
                 }
-
             }
 
         });
 
-
         feeStructures =
-            Array.from(
-                uniqueFees.values()
-            );
+            Array.from(uniqueFees.values());
 
 
         // -------------------------------------------------
@@ -314,11 +278,9 @@ async function loadFees() {
             feeTypeSelect.value =
                 feeStructures[0].feeStructureId;
 
-
             await displaySelectedFee(
                 feeStructures[0]
             );
-
         }
 
     }
@@ -329,14 +291,11 @@ async function loadFees() {
             error
         );
 
-
         showMessage(
             "Unable to Load Fees",
             error.message
         );
-
     }
-
 }
 
 
@@ -346,6 +305,10 @@ async function loadFees() {
 
 function populateFeeTypes() {
 
+    if (!feeTypeSelect) {
+        return;
+    }
+
     feeTypeSelect.innerHTML = "";
 
 
@@ -354,21 +317,12 @@ function populateFeeTypes() {
     const defaultOption =
         document.createElement("option");
 
-
     defaultOption.value = "";
-
-
     defaultOption.textContent =
         "Select Fee Type";
 
-
-    defaultOption.disabled =
-        true;
-
-
-    defaultOption.selected =
-        true;
-
+    defaultOption.disabled = true;
+    defaultOption.selected = true;
 
     feeTypeSelect.appendChild(
         defaultOption
@@ -379,24 +333,26 @@ function populateFeeTypes() {
 
     feeStructures.forEach(fee => {
 
+        if (
+            !fee ||
+            !fee.feeType
+        ) {
+            return;
+        }
+
         const option =
             document.createElement("option");
-
 
         option.value =
             fee.feeStructureId;
 
-
         option.textContent =
             fee.feeType.feeName;
-
 
         feeTypeSelect.appendChild(
             option
         );
-
     });
-
 }
 
 
@@ -413,7 +369,6 @@ if (feeTypeSelect) {
             const selectedId =
                 Number(this.value);
 
-
             const selectedFee =
                 feeStructures.find(
                     fee =>
@@ -421,23 +376,18 @@ if (feeTypeSelect) {
                         selectedId
                 );
 
-
             if (!selectedFee) {
 
                 feeDetails.innerHTML = "";
 
                 return;
-
             }
-
 
             await displaySelectedFee(
                 selectedFee
             );
-
         }
     );
-
 }
 
 
@@ -450,13 +400,9 @@ async function displaySelectedFee(fee) {
     try {
 
         feeDetails.innerHTML = `
-
             <div class="fee-loading">
-
                 Loading ${fee.feeType.feeName} details...
-
             </div>
-
         `;
 
 
@@ -466,23 +412,17 @@ async function displaySelectedFee(fee) {
 
         const remainingResponse =
             await fetch(
-
                 `${API_URL}/payments/remaining` +
                 `?studentId=${currentStudent.studentId}` +
                 `&academicYearId=${fee.academicYear.academicYearId}` +
                 `&feeTypeId=${fee.feeType.feeTypeId}`
-
             );
 
-
         if (!remainingResponse.ok) {
-
             throw new Error(
                 "Unable to get remaining amount"
             );
-
         }
-
 
         const remainingAmount =
             Number(
@@ -491,7 +431,7 @@ async function displaySelectedFee(fee) {
 
 
         // -------------------------------------------------
-        // Calculate total amount
+        // Total amount
         // -------------------------------------------------
 
         const totalAmount =
@@ -499,50 +439,38 @@ async function displaySelectedFee(fee) {
 
 
         // -------------------------------------------------
-        // Calculate paid amount
+        // Paid amount
         // -------------------------------------------------
 
         const paidAmount =
             Math.max(
                 0,
-                totalAmount -
-                remainingAmount
+                totalAmount - remainingAmount
             );
 
 
         // -------------------------------------------------
-        // Determine status
+        // Status
         // -------------------------------------------------
 
-        let status =
-            "PENDING";
-
-        let statusClass =
-            "pending";
-
+        let status = "PENDING";
+        let statusClass = "pending";
 
         if (remainingAmount <= 0) {
 
-            status =
-                "PAID";
-
-            statusClass =
-                "paid";
+            status = "PAID";
+            statusClass = "paid";
 
         }
         else if (paidAmount > 0) {
 
-            status =
-                "PARTIALLY PAID";
-
-            statusClass =
-                "partial";
-
+            status = "PARTIALLY PAID";
+            statusClass = "partial";
         }
 
 
         // -------------------------------------------------
-        // Display selected fee
+        // Display fee details
         // -------------------------------------------------
 
         feeDetails.innerHTML = `
@@ -556,17 +484,15 @@ async function displaySelectedFee(fee) {
                     </p>
 
                     <h2>
-                        ${fee.feeType.feeName}
+                        ${escapeHtml(
+                            fee.feeType.feeName
+                        )}
                     </h2>
 
                 </div>
 
-
-                <span
-                    class="fee-status ${statusClass}">
-
+                <span class="fee-status ${statusClass}">
                     ${status}
-
                 </span>
 
             </div>
@@ -581,7 +507,9 @@ async function displaySelectedFee(fee) {
                     </span>
 
                     <strong>
-                        ${fee.academicYear.academicYear}
+                        ${escapeHtml(
+                            fee.academicYear.academicYear
+                        )}
                     </strong>
 
                 </div>
@@ -603,7 +531,6 @@ async function displaySelectedFee(fee) {
 
 
             <div class="fee-summary">
-
 
                 <div class="summary-item">
 
@@ -638,13 +565,10 @@ async function displaySelectedFee(fee) {
                     </span>
 
                     <strong>
-                        ₹${formatAmount(
-                            remainingAmount
-                        )}
+                        ₹${formatAmount(remainingAmount)}
                     </strong>
 
                 </div>
-
 
             </div>
 
@@ -655,16 +579,11 @@ async function displaySelectedFee(fee) {
                 ?
 
                 `
-
                 <div class="payment-area">
 
-                    <label
-                        for="paymentAmount">
-
+                    <label for="paymentAmount">
                         Amount to Pay
-
                     </label>
-
 
                     <input
                         type="number"
@@ -675,41 +594,29 @@ async function displaySelectedFee(fee) {
                         placeholder="Enter amount"
                     >
 
-
                     <small>
-
                         Maximum amount:
-                        ₹${formatAmount(
-                            remainingAmount
-                        )}
-
+                        ₹${formatAmount(remainingAmount)}
                     </small>
-
 
                     <button
                         class="pay-btn"
-                        id="payButton">
-
+                        id="payButton"
+                        type="button"
+                    >
                         Pay Now
-
                     </button>
 
                 </div>
-
                 `
 
                 :
 
                 `
-
                 <div class="fully-paid-message">
-
                     ✓ This fee has been fully paid.
-
                 </div>
-
                 `
-
             }
 
         `;
@@ -720,10 +627,7 @@ async function displaySelectedFee(fee) {
         // -------------------------------------------------
 
         const payButton =
-            document.getElementById(
-                "payButton"
-            );
-
+            document.getElementById("payButton");
 
         if (payButton) {
 
@@ -738,7 +642,6 @@ async function displaySelectedFee(fee) {
 
                 }
             );
-
         }
 
     }
@@ -749,9 +652,7 @@ async function displaySelectedFee(fee) {
             error
         );
 
-
         feeDetails.innerHTML = `
-
             <div class="error-message">
 
                 <h3>
@@ -759,15 +660,12 @@ async function displaySelectedFee(fee) {
                 </h3>
 
                 <p>
-                    ${error.message}
+                    ${escapeHtml(error.message)}
                 </p>
 
             </div>
-
         `;
-
     }
-
 }
 
 
@@ -785,11 +683,8 @@ async function makePayment(
             "paymentAmount"
         );
 
-
     if (!paymentAmountInput) {
-
         return;
-
     }
 
 
@@ -818,7 +713,6 @@ async function makePayment(
         paymentAmountInput.focus();
 
         return;
-
     }
 
 
@@ -839,12 +733,11 @@ async function makePayment(
         paymentAmountInput.focus();
 
         return;
-
     }
 
 
     // -------------------------------------------------
-    // Open animated confirmation modal
+    // Open confirmation modal
     // -------------------------------------------------
 
     openPaymentConfirmation(
@@ -852,7 +745,6 @@ async function makePayment(
         amount,
         remainingAmount
     );
-
 }
 
 
@@ -868,49 +760,37 @@ function openPaymentConfirmation(
 
     if (!paymentConfirmModal) {
 
-        // Fallback in case modal HTML is missing
-
         processPayment(
             fee,
             amount
         );
 
         return;
-
     }
 
 
     pendingPayment = {
-
         fee: fee,
-
         amount: amount,
-
-        remainingAmount:
-            remainingAmount
-
+        remainingAmount: remainingAmount
     };
 
 
     // -------------------------------------------------
-    // Fill modal information
+    // Fill modal
     // -------------------------------------------------
 
     if (confirmFeeName) {
 
         confirmFeeName.textContent =
             fee.feeType.feeName;
-
     }
-
 
     if (confirmAmount) {
 
         confirmAmount.textContent =
             `₹${formatAmount(amount)}`;
-
     }
-
 
     if (confirmRemaining) {
 
@@ -918,7 +798,6 @@ function openPaymentConfirmation(
             `₹${formatAmount(
                 remainingAmount - amount
             )}`;
-
     }
 
 
@@ -928,12 +807,10 @@ function openPaymentConfirmation(
 
     if (paymentConfirmBtn) {
 
-        paymentConfirmBtn.disabled =
-            false;
+        paymentConfirmBtn.disabled = false;
 
         paymentConfirmBtn.textContent =
             "Confirm Payment";
-
     }
 
 
@@ -944,7 +821,6 @@ function openPaymentConfirmation(
     paymentConfirmModal.classList.add(
         "show"
     );
-
 }
 
 
@@ -959,12 +835,9 @@ function closePaymentConfirmation() {
         paymentConfirmModal.classList.remove(
             "show"
         );
-
     }
 
-
     pendingPayment = null;
-
 }
 
 
@@ -975,19 +848,14 @@ function closePaymentConfirmation() {
 async function processConfirmedPayment() {
 
     if (!pendingPayment) {
-
         return;
-
     }
-
 
     const fee =
         pendingPayment.fee;
 
-
     const amount =
         pendingPayment.amount;
-
 
     const payButton =
         document.getElementById(
@@ -1001,28 +869,23 @@ async function processConfirmedPayment() {
 
     if (payButton) {
 
-        payButton.disabled =
-            true;
+        payButton.disabled = true;
 
         payButton.textContent =
             "Processing...";
-
     }
-
 
     if (paymentConfirmBtn) {
 
-        paymentConfirmBtn.disabled =
-            true;
+        paymentConfirmBtn.disabled = true;
 
         paymentConfirmBtn.textContent =
             "Processing...";
-
     }
 
 
     // -------------------------------------------------
-    // Payment data
+    // Payment request
     // -------------------------------------------------
 
     const paymentData = {
@@ -1044,35 +907,30 @@ async function processConfirmedPayment() {
 
         remarks:
             "Prototype payment"
-
     };
 
 
     try {
 
         // -------------------------------------------------
-        // Send payment request
+        // Send request
         // -------------------------------------------------
 
         const response =
             await fetch(
                 `${API_URL}/payments`,
                 {
-
                     method: "POST",
 
                     headers: {
-
                         "Content-Type":
                             "application/json"
-
                     },
 
                     body:
                         JSON.stringify(
                             paymentData
                         )
-
                 }
             );
 
@@ -1086,10 +944,8 @@ async function processConfirmedPayment() {
             const errorText =
                 await response.text();
 
-
             let errorMessage =
                 "Payment failed.";
-
 
             try {
 
@@ -1098,16 +954,13 @@ async function processConfirmedPayment() {
                         errorText
                     );
 
-
                 if (errorData.message) {
 
                     errorMessage =
                         errorData.message;
 
                 }
-                else if (
-                    errorData.error
-                ) {
+                else if (errorData.error) {
 
                     errorMessage =
                         errorData.error;
@@ -1118,7 +971,6 @@ async function processConfirmedPayment() {
                     errorMessage =
                         errorText ||
                         "Payment failed.";
-
                 }
 
             }
@@ -1127,14 +979,11 @@ async function processConfirmedPayment() {
                 errorMessage =
                     errorText ||
                     "Payment failed.";
-
             }
-
 
             throw new Error(
                 errorMessage
             );
-
         }
 
 
@@ -1147,7 +996,7 @@ async function processConfirmedPayment() {
 
 
         // -------------------------------------------------
-        // Close modal
+        // Close confirmation modal
         // -------------------------------------------------
 
         closePaymentConfirmation();
@@ -1171,7 +1020,7 @@ async function processConfirmedPayment() {
 
 
         // -------------------------------------------------
-        // Refresh fees
+        // Refresh fee data
         // -------------------------------------------------
 
         await loadFees();
@@ -1185,12 +1034,8 @@ async function processConfirmedPayment() {
         );
 
 
-        // Close confirmation modal
-
         closePaymentConfirmation();
 
-
-        // Show animated error
 
         showNotification(
             "error",
@@ -1199,8 +1044,6 @@ async function processConfirmedPayment() {
         );
 
 
-        // Enable Pay Now button again
-
         if (payButton) {
 
             payButton.disabled =
@@ -1208,7 +1051,6 @@ async function processConfirmedPayment() {
 
             payButton.textContent =
                 "Pay Now";
-
         }
 
     }
@@ -1221,11 +1063,9 @@ async function processConfirmedPayment() {
 
             paymentConfirmBtn.textContent =
                 "Confirm Payment";
-
         }
 
     }
-
 }
 
 
@@ -1241,7 +1081,6 @@ async function processPayment(
     const remainingAmount =
         Number(fee.amount);
 
-
     pendingPayment = {
 
         fee: fee,
@@ -1250,18 +1089,16 @@ async function processPayment(
 
         remainingAmount:
             remainingAmount
-
     };
 
-
     await processConfirmedPayment();
-
 }
 
 
 // =========================================================
 // SHOW PAYMENT NOTIFICATION
 // =========================================================
+
 function showNotification(
     type,
     title,
@@ -1275,7 +1112,6 @@ function showNotification(
         );
 
         return;
-
     }
 
 
@@ -1305,7 +1141,6 @@ function showNotification(
 
             notificationIcon.textContent =
                 "✓";
-
         }
 
     }
@@ -1319,9 +1154,7 @@ function showNotification(
 
             notificationIcon.textContent =
                 "!";
-
         }
-
     }
 
 
@@ -1331,7 +1164,6 @@ function showNotification(
 
         notificationTitle.textContent =
             title;
-
     }
 
 
@@ -1341,11 +1173,10 @@ function showNotification(
 
         notificationMessage.textContent =
             message;
-
     }
 
 
-    // Force browser reflow
+    // Force reflow
 
     void paymentNotification.offsetWidth;
 
@@ -1370,7 +1201,6 @@ function showNotification(
             },
             5000
         );
-
 }
 
 
@@ -1389,12 +1219,10 @@ if (notificationClose) {
                 paymentNotification.classList.remove(
                     "show"
                 );
-
             }
 
         }
     );
-
 }
 
 
@@ -1412,7 +1240,6 @@ if (paymentModalClose) {
 
         }
     );
-
 }
 
 
@@ -1426,7 +1253,6 @@ if (paymentCancelBtn) {
 
         }
     );
-
 }
 
 
@@ -1440,7 +1266,6 @@ if (paymentConfirmBtn) {
 
         }
     );
-
 }
 
 
@@ -1460,12 +1285,10 @@ if (paymentConfirmModal) {
             ) {
 
                 closePaymentConfirmation();
-
             }
 
         }
     );
-
 }
 
 
@@ -1504,11 +1327,9 @@ function formatAmount(amount) {
             "en-IN",
             {
                 minimumFractionDigits: 2,
-
                 maximumFractionDigits: 2
             }
         );
-
 }
 
 
@@ -1519,27 +1340,42 @@ function formatAmount(amount) {
 function formatDate(dateString) {
 
     if (!dateString) {
-
         return "Not specified";
-
     }
-
 
     const date =
         new Date(dateString);
-
 
     return date.toLocaleDateString(
         "en-IN",
         {
             day: "2-digit",
-
             month: "2-digit",
-
             year: "numeric"
         }
     );
+}
 
+
+// =========================================================
+// ESCAPE HTML
+// =========================================================
+
+function escapeHtml(value) {
+
+    if (
+        value === null ||
+        value === undefined
+    ) {
+        return "";
+    }
+
+    return String(value)
+        .replace(/&/g, "&amp;")
+        .replace(/</g, "&lt;")
+        .replace(/>/g, "&gt;")
+        .replace(/"/g, "&quot;")
+        .replace(/'/g, "&#039;");
 }
 
 
@@ -1555,38 +1391,28 @@ function showMessage(
     if (feeTypeSelect) {
 
         feeTypeSelect.innerHTML = `
-
             <option value="">
-
                 No fee types available
-
             </option>
-
         `;
-
     }
-
 
     if (feeDetails) {
 
         feeDetails.innerHTML = `
-
             <div class="no-fees">
 
                 <h3>
-                    ${title}
+                    ${escapeHtml(title)}
                 </h3>
 
                 <p>
-                    ${message}
+                    ${escapeHtml(message)}
                 </p>
 
             </div>
-
         `;
-
     }
-
 }
 
 
@@ -1599,32 +1425,20 @@ function showLoading() {
     if (feeTypeSelect) {
 
         feeTypeSelect.innerHTML = `
-
             <option value="">
-
                 Loading fee types...
-
             </option>
-
         `;
-
     }
-
 
     if (feeDetails) {
 
         feeDetails.innerHTML = `
-
             <div class="loading-message">
-
                 Loading fee details...
-
             </div>
-
         `;
-
     }
-
 }
 
 
@@ -1633,73 +1447,82 @@ function showLoading() {
 // =========================================================
 
 const menuBtn =
-    document.getElementById(
-        "menuBtn"
-    );
+    document.getElementById("menuBtn");
 
 const sidebar =
-    document.getElementById(
-        "sidebar"
-    );
+    document.getElementById("sidebar");
 
-const overlay =
-    document.getElementById(
-        "overlay"
-    );
+const mainContent =
+    document.getElementById("mainContent");
 
 
-if (menuBtn) {
+// =========================================================
+// SIDEBAR TOGGLE
+// =========================================================
+
+if (menuBtn && sidebar) {
 
     menuBtn.addEventListener(
         "click",
-        () => {
+        (event) => {
 
-            if (sidebar) {
+            event.stopPropagation();
 
-                sidebar.classList.toggle(
-                    "open"
-                );
-
-            }
-
-
-            if (overlay) {
-
-                overlay.classList.toggle(
-                    "show"
-                );
-
-            }
-
-        }
-    );
-
-}
-
-
-if (overlay) {
-
-    overlay.addEventListener(
-        "click",
-        () => {
-
-            if (sidebar) {
-
-                sidebar.classList.remove(
-                    "open"
-                );
-
-            }
-
-
-            overlay.classList.remove(
-                "show"
+            sidebar.classList.toggle(
+                "active"
             );
 
+            if (mainContent) {
+
+                mainContent.classList.toggle(
+                    "sidebar-open"
+                );
+            }
+
         }
     );
-
 }
+
+
+// =========================================================
+// CLOSE SIDEBAR WHEN CLICKING OUTSIDE
+// =========================================================
+
+document.addEventListener(
+    "click",
+    (event) => {
+
+        if (!sidebar || !menuBtn) {
+            return;
+        }
+
+        const clickedInsideSidebar =
+            sidebar.contains(event.target);
+
+        const clickedMenuButton =
+            menuBtn.contains(event.target);
+
+
+        if (
+            sidebar.classList.contains("active") &&
+            !clickedInsideSidebar &&
+            !clickedMenuButton
+        ) {
+
+            sidebar.classList.remove(
+                "active"
+            );
+
+            if (mainContent) {
+
+                mainContent.classList.remove(
+                    "sidebar-open"
+                );
+            }
+        }
+
+    }
+);
 
 
 // =========================================================
@@ -1707,10 +1530,7 @@ if (overlay) {
 // =========================================================
 
 const logoutBtn =
-    document.getElementById(
-        "logoutBtn"
-    );
-
+    document.getElementById("logoutBtn");
 
 if (logoutBtn) {
 
@@ -1718,12 +1538,14 @@ if (logoutBtn) {
         "click",
         () => {
 
-            localStorage.clear();
+            localStorage.removeItem("userId");
+            localStorage.removeItem("username");
+            localStorage.removeItem("role");
+            localStorage.removeItem("email");
 
             window.location.href =
                 "index.html";
 
         }
     );
-
 }
