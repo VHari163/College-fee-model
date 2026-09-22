@@ -22,18 +22,13 @@
          SIDEBAR
     ====================================================== -->
 
-    <aside class="sidebar"
-           id="sidebar">
+    <aside class="sidebar" id="sidebar">
 
         <div class="sidebar-header">
 
-            <h2>
-                College Fee Management
-            </h2>
+            <h2>College Fee Management</h2>
 
-            <p>
-                Admin Panel
-            </p>
+            <p>Admin Panel</p>
 
         </div>
 
@@ -64,8 +59,7 @@
                 💰 Fee Types
             </a>
 
-            <a href="fee-structures.html"
-               class="active">
+            <a href="fee-structures.html" class="active">
                 📋 Fee Structures
             </a>
 
@@ -86,18 +80,20 @@
          MAIN CONTENT
     ====================================================== -->
 
-    <main class="main-content"
-          id="mainContent">
+    <main class="main-content" id="mainContent">
 
 
-        <!-- TOP NAVBAR -->
+        <!-- =================================================
+             TOP NAVBAR
+        ================================================== -->
 
         <header class="top-navbar">
 
             <button
                 type="button"
                 class="menu-btn"
-                id="menuBtn">
+                id="menuBtn"
+                aria-label="Open menu">
 
                 ☰
 
@@ -138,6 +134,8 @@
 
         <section class="content">
 
+
+            <!-- PAGE HEADING -->
 
             <div class="page-heading">
 
@@ -274,6 +272,8 @@
                     </div>
 
 
+                    <!-- SUBMIT -->
+
                     <div class="fee-structure-form-actions">
 
                         <button
@@ -291,7 +291,9 @@
             </div>
 
 
-            <!-- MESSAGE -->
+            <!-- =================================================
+                 MESSAGE
+            ================================================== -->
 
             <div
                 id="feeStructureMessage"
@@ -305,6 +307,7 @@
 
             <div class="fee-structure-list-card">
 
+
                 <div class="fee-structure-list-header">
 
                     <div>
@@ -314,7 +317,8 @@
                         </h2>
 
                         <p>
-                            Structures configured for the selected course.
+                            All fee structures currently configured
+                            in the system.
                         </p>
 
                     </div>
@@ -332,6 +336,8 @@
                 </div>
 
 
+                <!-- TABLE -->
+
                 <div class="fee-structure-table-container">
 
                     <table class="fee-structure-table">
@@ -342,6 +348,10 @@
 
                                 <th>
                                     ID
+                                </th>
+
+                                <th>
+                                    Course
                                 </th>
 
                                 <th>
@@ -360,6 +370,10 @@
                                     Due Date
                                 </th>
 
+                                <th>
+                                    Actions
+                                </th>
+
                             </tr>
 
                         </thead>
@@ -370,10 +384,10 @@
                             <tr>
 
                                 <td
-                                    colspan="5"
+                                    colspan="7"
                                     class="loading-cell">
 
-                                    Select a course to view fee structures.
+                                    Loading fee structures...
 
                                 </td>
 
@@ -392,7 +406,184 @@
     </main>
 
 
-    <!-- JAVASCRIPT -->
+    <!-- =====================================================
+         EDIT FEE STRUCTURE MODAL
+    ====================================================== -->
+
+    <div
+        id="editFeeStructureModal"
+        class="fee-structure-modal">
+
+
+        <div class="fee-structure-modal-content">
+
+
+            <!-- CLOSE BUTTON -->
+
+            <button
+                type="button"
+                id="editFeeStructureClose"
+                class="fee-structure-modal-close"
+                aria-label="Close">
+
+                ×
+
+            </button>
+
+
+            <!-- TITLE -->
+
+            <h2>
+                Edit Fee Structure
+            </h2>
+
+            <p>
+                Update the fee structure details.
+            </p>
+
+
+            <!-- EDIT FORM -->
+
+            <form id="editFeeStructureForm">
+
+
+                <!-- HIDDEN ID -->
+
+                <input
+                    type="hidden"
+                    id="editFeeStructureId">
+
+
+                <!-- COURSE -->
+
+                <div class="form-group">
+
+                    <label for="editCourseSelect">
+                        Course
+                    </label>
+
+                    <select
+                        id="editCourseSelect"
+                        required>
+
+                        <option value="">
+                            Select Course
+                        </option>
+
+                    </select>
+
+                </div>
+
+
+                <!-- ACADEMIC YEAR -->
+
+                <div class="form-group">
+
+                    <label for="editAcademicYearSelect">
+                        Academic Year
+                    </label>
+
+                    <select
+                        id="editAcademicYearSelect"
+                        required>
+
+                        <option value="">
+                            Select Academic Year
+                        </option>
+
+                    </select>
+
+                </div>
+
+
+                <!-- FEE TYPE -->
+
+                <div class="form-group">
+
+                    <label for="editFeeTypeSelect">
+                        Fee Type
+                    </label>
+
+                    <select
+                        id="editFeeTypeSelect"
+                        required>
+
+                        <option value="">
+                            Select Fee Type
+                        </option>
+
+                    </select>
+
+                </div>
+
+
+                <!-- AMOUNT -->
+
+                <div class="form-group">
+
+                    <label for="editFeeAmount">
+                        Amount
+                    </label>
+
+                    <input
+                        type="number"
+                        id="editFeeAmount"
+                        min="0.01"
+                        step="0.01"
+                        required>
+
+                </div>
+
+
+                <!-- DUE DATE -->
+
+                <div class="form-group">
+
+                    <label for="editDueDate">
+                        Due Date
+                    </label>
+
+                    <input
+                        type="date"
+                        id="editDueDate">
+
+                </div>
+
+
+                <!-- MODAL BUTTONS -->
+
+                <div class="fee-structure-modal-actions">
+
+                    <button
+                        type="button"
+                        id="editFeeStructureCancel"
+                        class="fee-structure-cancel-btn">
+
+                        Cancel
+
+                    </button>
+
+
+                    <button
+                        type="submit"
+                        class="admin-primary-btn">
+
+                        Update Fee Structure
+
+                    </button>
+
+                </div>
+
+            </form>
+
+        </div>
+
+    </div>
+
+
+    <!-- =====================================================
+         JAVASCRIPT
+    ====================================================== -->
 
     <script src="js/fee-structures.js"></script>
 

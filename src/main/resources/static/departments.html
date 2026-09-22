@@ -1,0 +1,314 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>Department Management - Admin</title>
+
+    <link rel="stylesheet"
+          href="css/style.css">
+
+</head>
+
+<body>
+
+
+    <!-- =====================================================
+         SIDEBAR
+    ====================================================== -->
+
+    <aside class="sidebar" id="sidebar">
+
+        <div class="sidebar-header">
+
+            <h2>College Fee Management</h2>
+
+            <p>Admin Panel</p>
+
+        </div>
+
+
+        <nav class="sidebar-nav">
+
+            <a href="admin.html">
+                🏠 Dashboard
+            </a>
+
+            <a href="#" id="studentsLink">
+                👨‍🎓 Students
+            </a>
+
+            <a href="departments.html" class="active">
+                🏢 Departments
+            </a>
+
+            <a href="#" id="coursesLink">
+                📚 Courses
+            </a>
+
+            <a href="#" id="academicYearsLink">
+                📅 Academic Years
+            </a>
+
+            <a href="fee-types.html">
+                💰 Fee Types
+            </a>
+
+            <a href="fee-structures.html">
+                📋 Fee Structures
+            </a>
+
+            <a href="#" id="paymentsLink">
+                💳 Payments
+            </a>
+
+            <a href="#" id="logoutBtn">
+                🚪 Logout
+            </a>
+
+        </nav>
+
+    </aside>
+
+
+    <!-- =====================================================
+         MAIN CONTENT
+    ====================================================== -->
+
+    <main class="main-content" id="mainContent">
+
+
+        <!-- TOP NAVBAR -->
+
+        <header class="top-navbar">
+
+            <button
+                type="button"
+                class="menu-btn"
+                id="menuBtn">
+
+                ☰
+
+            </button>
+
+
+            <div class="navbar-title">
+
+                <h2>
+                    Department Management
+                </h2>
+
+            </div>
+
+
+            <div class="admin-profile">
+
+                <div class="admin-profile-text">
+
+                    <strong id="adminName">
+                        Admin
+                    </strong>
+
+                    <span id="adminRole">
+                        Administrator
+                    </span>
+
+                </div>
+
+            </div>
+
+        </header>
+
+
+        <!-- =====================================================
+             CONTENT
+        ====================================================== -->
+
+        <section class="content">
+
+
+            <div class="page-heading">
+
+                <h1>
+                    Departments
+                </h1>
+
+                <p>
+                    Add and manage college departments.
+                </p>
+
+            </div>
+
+
+            <!-- =================================================
+                 ADD DEPARTMENT
+            ================================================== -->
+
+            <div class="department-form-card">
+
+                <h2>
+                    Add New Department
+                </h2>
+
+
+                <form id="departmentForm">
+
+
+                    <div class="department-form-grid">
+
+
+                        <div class="form-group">
+
+                            <label for="departmentName">
+                                Department Name
+                            </label>
+
+                            <input
+                                type="text"
+                                id="departmentName"
+                                placeholder="Example: Computer Science and Engineering"
+                                required>
+
+                        </div>
+
+
+                        <div class="form-group">
+
+                            <label for="departmentCode">
+                                Department Code
+                            </label>
+
+                            <input
+                                type="text"
+                                id="departmentCode"
+                                placeholder="Example: CSE"
+                                required>
+
+                        </div>
+
+
+                    </div>
+
+
+                    <div class="department-form-actions">
+
+                        <button
+                            type="submit"
+                            class="admin-primary-btn">
+
+                            Add Department
+
+                        </button>
+
+                    </div>
+
+                </form>
+
+            </div>
+
+
+            <!-- MESSAGE -->
+
+            <div
+                id="departmentMessage"
+                class="fee-type-message">
+            </div>
+
+
+            <!-- =================================================
+                 EXISTING DEPARTMENTS
+            ================================================== -->
+
+            <div class="department-list-card">
+
+                <div class="department-list-header">
+
+                    <div>
+
+                        <h2>
+                            Existing Departments
+                        </h2>
+
+                        <p>
+                            All departments currently available.
+                        </p>
+
+                    </div>
+
+
+                    <button
+                        type="button"
+                        id="refreshDepartmentsBtn"
+                        class="refresh-btn">
+
+                        ↻ Refresh
+
+                    </button>
+
+                </div>
+
+
+                <div class="department-table-container">
+
+                    <table class="department-table">
+
+                        <thead>
+
+                            <tr>
+
+                                <th>
+                                    ID
+                                </th>
+
+                                <th>
+                                    Department Name
+                                </th>
+
+                                <th>
+                                    Department Code
+                                </th>
+
+                            </tr>
+
+                        </thead>
+
+
+                        <tbody id="departmentsTableBody">
+
+                            <tr>
+
+                                <td
+                                    colspan="3"
+                                    class="loading-cell">
+
+                                    Loading departments...
+
+                                </td>
+
+                            </tr>
+
+                        </tbody>
+
+                    </table>
+
+                </div>
+
+            </div>
+
+        </section>
+
+    </main>
+
+
+    <!-- JAVASCRIPT -->
+
+    <script src="js/departments.js"></script>
+
+</body>
+
+</html>

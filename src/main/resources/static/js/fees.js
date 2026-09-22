@@ -121,7 +121,7 @@ async function loadFees() {
 
 
         // -------------------------------------------------
-        // 2. Find logged-in student using roll number
+        // 2. Find logged-in student
         // -------------------------------------------------
 
         const student =
@@ -141,7 +141,9 @@ async function loadFees() {
             return;
         }
 
+
         currentStudent = student;
+
 
         if (studentName) {
             studentName.textContent =
@@ -175,6 +177,7 @@ async function loadFees() {
                 .trim()
                 .toLowerCase();
 
+
         const studentCourse =
             courses.find(course =>
                 (course.courseName || "")
@@ -182,6 +185,7 @@ async function loadFees() {
                     .toLowerCase() ===
                 studentCourseName
             );
+
 
         if (!studentCourse) {
 
@@ -203,18 +207,107 @@ async function loadFees() {
                 `${API_URL}/fee-structures/course/${studentCourse.courseId}`
             );
 
+
         if (!feesResponse.ok) {
             throw new Error(
                 "Unable to load fee structures"
             );
         }
 
-        feeStructures =
+
+        let allFeeStructures =
             await feesResponse.json();
 
 
         // -------------------------------------------------
-        // 6. Check fee structures
+        // 6. Filter conditional fees
+        // -------------------------------------------------
+
+        feeStructures =
+            allFeeStructures.filter(fee => {
+
+                if (
+                    !fee ||
+                    !fee.feeType
+                ) {
+                    return false;
+                }
+
+
+                const feeName =
+                    (
+                        fee.feeType.feeName ||
+                        ""
+                    )
+                    .trim()
+                    .toLowerCase();
+
+
+                // -----------------------------------------
+                // HOSTEL FEE
+                // -----------------------------------------
+
+                if (
+                    feeName === "hostel fee"
+                ) {
+
+                    return (
+                        student.hostelStatus &&
+                        student.hostelStatus
+                            .trim()
+                            .toUpperCase() ===
+                        "HOSTELLER"
+                    );
+                }
+
+
+                // -----------------------------------------
+                // BUS FEE
+                // -----------------------------------------
+
+                if (
+                    feeName === "bus fee"
+                ) {
+
+                    return (
+                        student.transportStatus &&
+                        student.transportStatus
+                            .trim()
+                            .toUpperCase() ===
+                        "YES"
+                    );
+                }
+
+
+                // -----------------------------------------
+                // TRANSPORT FEE
+                // -----------------------------------------
+
+                if (
+                    feeName === "transport fee"
+                ) {
+
+                    return (
+                        student.transportStatus &&
+                        student.transportStatus
+                            .trim()
+                            .toUpperCase() ===
+                        "YES"
+                    );
+                }
+
+
+                // -----------------------------------------
+                // NORMAL FEES
+                // -----------------------------------------
+
+                return true;
+
+            });
+
+
+        // -------------------------------------------------
+        // 7. Check fees
         // -------------------------------------------------
 
         if (
@@ -224,7 +317,7 @@ async function loadFees() {
 
             showMessage(
                 "No Fees Available",
-                "No fee structures have been configured for your course."
+                "No applicable fee structures have been configured for your course."
             );
 
             return;
@@ -232,10 +325,12 @@ async function loadFees() {
 
 
         // -------------------------------------------------
-        // 7. Remove duplicate fee types
+        // 8. Remove duplicate fee types
         // -------------------------------------------------
 
-        const uniqueFees = new Map();
+        const uniqueFees =
+            new Map();
+
 
         feeStructures.forEach(fee => {
 
@@ -248,7 +343,11 @@ async function loadFees() {
                 const feeTypeId =
                     fee.feeType.feeTypeId;
 
-                if (!uniqueFees.has(feeTypeId)) {
+
+                if (
+                    !uniqueFees.has(feeTypeId)
+                ) {
+
                     uniqueFees.set(
                         feeTypeId,
                         fee
@@ -258,25 +357,32 @@ async function loadFees() {
 
         });
 
+
         feeStructures =
-            Array.from(uniqueFees.values());
+            Array.from(
+                uniqueFees.values()
+            );
 
 
         // -------------------------------------------------
-        // 8. Populate dropdown
+        // 9. Populate dropdown
         // -------------------------------------------------
 
         populateFeeTypes();
 
 
         // -------------------------------------------------
-        // 9. Select first fee automatically
+        // 10. Select first fee
         // -------------------------------------------------
 
-        if (feeStructures.length > 0) {
+        if (
+            feeStructures.length > 0
+        ) {
 
             feeTypeSelect.value =
-                feeStructures[0].feeStructureId;
+                feeStructures[0]
+                    .feeStructureId;
+
 
             await displaySelectedFee(
                 feeStructures[0]
@@ -291,10 +397,12 @@ async function loadFees() {
             error
         );
 
+
         showMessage(
             "Unable to Load Fees",
             error.message
         );
+
     }
 }
 

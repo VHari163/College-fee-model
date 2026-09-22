@@ -50,11 +50,16 @@ const totalPayments = document.getElementById("totalPayments");
 
 async function loadAdminDashboard() {
 
+    // -----------------------------------------------------
+    // STUDENTS
+    // -----------------------------------------------------
+
     try {
 
         const response = await fetch(`${API_URL}/students`);
 
         if (response.ok) {
+
             const data = await response.json();
 
             if (totalStudents) {
@@ -63,15 +68,22 @@ async function loadAdminDashboard() {
         }
 
     } catch (error) {
+
         console.error("Students error:", error);
+
     }
 
+
+    // -----------------------------------------------------
+    // DEPARTMENTS
+    // -----------------------------------------------------
 
     try {
 
         const response = await fetch(`${API_URL}/departments`);
 
         if (response.ok) {
+
             const data = await response.json();
 
             if (totalDepartments) {
@@ -80,15 +92,22 @@ async function loadAdminDashboard() {
         }
 
     } catch (error) {
+
         console.error("Departments error:", error);
+
     }
 
+
+    // -----------------------------------------------------
+    // COURSES
+    // -----------------------------------------------------
 
     try {
 
         const response = await fetch(`${API_URL}/courses`);
 
         if (response.ok) {
+
             const data = await response.json();
 
             if (totalCourses) {
@@ -97,15 +116,22 @@ async function loadAdminDashboard() {
         }
 
     } catch (error) {
+
         console.error("Courses error:", error);
+
     }
 
+
+    // -----------------------------------------------------
+    // FEE TYPES
+    // -----------------------------------------------------
 
     try {
 
         const response = await fetch(`${API_URL}/fee-types`);
 
         if (response.ok) {
+
             const data = await response.json();
 
             if (totalFeeTypes) {
@@ -114,15 +140,22 @@ async function loadAdminDashboard() {
         }
 
     } catch (error) {
+
         console.error("Fee types error:", error);
+
     }
 
+
+    // -----------------------------------------------------
+    // PAYMENTS
+    // -----------------------------------------------------
 
     try {
 
         const response = await fetch(`${API_URL}/payments`);
 
         if (response.ok) {
+
             const data = await response.json();
 
             if (totalPayments) {
@@ -131,7 +164,9 @@ async function loadAdminDashboard() {
         }
 
     } catch (error) {
+
         console.error("Payments error:", error);
+
     }
 }
 
@@ -189,6 +224,7 @@ document.addEventListener("click", function (event) {
             mainContent.classList.remove("sidebar-open");
         }
     }
+
 });
 
 
@@ -221,7 +257,10 @@ const paymentsLink =
     document.getElementById("paymentsLink");
 
 
-// Dashboard
+// =========================================================
+// DASHBOARD LINK
+// =========================================================
+
 if (dashboardLink) {
 
     dashboardLink.addEventListener("click", function (event) {
@@ -231,10 +270,14 @@ if (dashboardLink) {
         window.location.href = "admin.html";
 
     });
+
 }
 
 
-// Students
+// =========================================================
+// STUDENTS LINK
+// =========================================================
+
 if (studentsLink) {
 
     studentsLink.addEventListener("click", function (event) {
@@ -244,36 +287,48 @@ if (studentsLink) {
         alert("Students Management will be added next.");
 
     });
+
 }
 
 
-// Departments
+// =========================================================
+// DEPARTMENTS LINK
+// =========================================================
+
 if (departmentsLink) {
 
     departmentsLink.addEventListener("click", function (event) {
 
         event.preventDefault();
 
-        alert("Department Management will be added next.");
+        window.location.href = "departments.html";
 
     });
+
 }
 
 
-// Courses
+// =========================================================
+// COURSES LINK
+// =========================================================
+
 if (coursesLink) {
 
     coursesLink.addEventListener("click", function (event) {
 
         event.preventDefault();
 
-        alert("Course Management will be added next.");
+        window.location.href = "courses.html";
 
     });
+
 }
 
 
-// Academic Years
+// =========================================================
+// ACADEMIC YEARS LINK
+// =========================================================
+
 if (academicYearsLink) {
 
     academicYearsLink.addEventListener("click", function (event) {
@@ -283,10 +338,14 @@ if (academicYearsLink) {
         alert("Academic Year Management will be added next.");
 
     });
+
 }
 
 
-// Fee Types
+// =========================================================
+// FEE TYPES LINK
+// =========================================================
+
 if (feeTypesLink) {
 
     feeTypesLink.addEventListener("click", function (event) {
@@ -296,10 +355,14 @@ if (feeTypesLink) {
         window.location.href = "fee-types.html";
 
     });
+
 }
 
 
-// Fee Structures
+// =========================================================
+// FEE STRUCTURES LINK
+// =========================================================
+
 if (feeStructuresLink) {
 
     feeStructuresLink.addEventListener("click", function (event) {
@@ -313,7 +376,10 @@ if (feeStructuresLink) {
 }
 
 
-// Payments
+// =========================================================
+// PAYMENTS LINK
+// =========================================================
+
 if (paymentsLink) {
 
     paymentsLink.addEventListener("click", function (event) {
@@ -323,6 +389,7 @@ if (paymentsLink) {
         alert("Payment Management will be added next.");
 
     });
+
 }
 
 
@@ -339,6 +406,9 @@ const departmentsManagementBtn =
 const coursesManagementBtn =
     document.getElementById("coursesManagementBtn");
 
+const academicYearsManagementBtn =
+    document.getElementById("academicYearsManagementBtn");
+
 const feeTypesManagementBtn =
     document.getElementById("feeTypesManagementBtn");
 
@@ -349,6 +419,10 @@ const paymentsManagementBtn =
     document.getElementById("paymentsManagementBtn");
 
 
+// =========================================================
+// STUDENTS MANAGEMENT BUTTON
+// =========================================================
+
 if (studentsManagementBtn) {
 
     studentsManagementBtn.addEventListener("click", function () {
@@ -356,28 +430,58 @@ if (studentsManagementBtn) {
         alert("Students Management will be added next.");
 
     });
+
 }
 
+
+// =========================================================
+// DEPARTMENTS MANAGEMENT BUTTON
+// =========================================================
 
 if (departmentsManagementBtn) {
 
     departmentsManagementBtn.addEventListener("click", function () {
 
-        alert("Department Management will be added next.");
+        window.location.href = "departments.html";
 
     });
+
 }
 
+
+// =========================================================
+// COURSES MANAGEMENT BUTTON
+// =========================================================
 
 if (coursesManagementBtn) {
 
     coursesManagementBtn.addEventListener("click", function () {
 
-        alert("Course Management will be added next.");
+        window.location.href = "courses.html";
 
     });
+
 }
 
+
+// =========================================================
+// ACADEMIC YEARS MANAGEMENT BUTTON
+// =========================================================
+
+if (academicYearsManagementBtn) {
+
+    academicYearsManagementBtn.addEventListener("click", function () {
+
+        alert("Academic Year Management will be added next.");
+
+    });
+
+}
+
+
+// =========================================================
+// FEE TYPES MANAGEMENT BUTTON
+// =========================================================
 
 if (feeTypesManagementBtn) {
 
@@ -386,8 +490,13 @@ if (feeTypesManagementBtn) {
         window.location.href = "fee-types.html";
 
     });
+
 }
 
+
+// =========================================================
+// FEE STRUCTURES MANAGEMENT BUTTON
+// =========================================================
 
 if (feeStructuresManagementBtn) {
 
@@ -400,6 +509,10 @@ if (feeStructuresManagementBtn) {
 }
 
 
+// =========================================================
+// PAYMENTS MANAGEMENT BUTTON
+// =========================================================
+
 if (paymentsManagementBtn) {
 
     paymentsManagementBtn.addEventListener("click", function () {
@@ -407,6 +520,7 @@ if (paymentsManagementBtn) {
         alert("Payment Management will be added next.");
 
     });
+
 }
 
 
@@ -431,6 +545,7 @@ if (logoutBtn) {
         window.location.href = "index.html";
 
     });
+
 }
 
 
@@ -443,3 +558,4 @@ document.addEventListener("DOMContentLoaded", function () {
     loadAdminDashboard();
 
 });
+

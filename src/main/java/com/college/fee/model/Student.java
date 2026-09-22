@@ -1,17 +1,31 @@
 package com.college.fee.model;
 
-import jakarta.persistence.*;
 import java.time.LocalDate;
-import java.time.LocalDateTime;
+
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.Table;
 
 @Entity
 @Table(name = "students")
 public class Student {
 
+    // =========================================================
+    // STUDENT ID
+    // =========================================================
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "student_id")
     private Integer studentId;
+
+
+    // =========================================================
+    // BASIC DETAILS
+    // =========================================================
 
     @Column(name = "roll_number", nullable = false, unique = true)
     private String rollNumber;
@@ -34,6 +48,11 @@ public class Student {
     @Column(name = "address")
     private String address;
 
+
+    // =========================================================
+    // ACADEMIC DETAILS
+    // =========================================================
+
     @Column(name = "department")
     private String department;
 
@@ -46,15 +65,46 @@ public class Student {
     @Column(name = "admission_year")
     private Integer admissionYear;
 
-    @Column(name = "created_at", insertable = false, updatable = false)
-    private LocalDateTime createdAt;
+
+    // =========================================================
+    // HOSTEL / TRANSPORT DETAILS
+    // =========================================================
+
+    @Column(name = "hostel_status")
+    private String hostelStatus;
+
+    @Column(name = "transport_status")
+    private String transportStatus;
+
+
+    // =========================================================
+    // CREATED DATE
+    // =========================================================
+
+    @Column(name = "created_at")
+    private java.time.LocalDateTime createdAt;
+
+
+    // =========================================================
+    // CONSTRUCTOR
+    // =========================================================
 
     public Student() {
     }
 
+
+    // =========================================================
+    // GETTERS AND SETTERS
+    // =========================================================
+
     public Integer getStudentId() {
         return studentId;
     }
+
+    public void setStudentId(Integer studentId) {
+        this.studentId = studentId;
+    }
+
 
     public String getRollNumber() {
         return rollNumber;
@@ -64,6 +114,7 @@ public class Student {
         this.rollNumber = rollNumber;
     }
 
+
     public String getName() {
         return name;
     }
@@ -71,6 +122,7 @@ public class Student {
     public void setName(String name) {
         this.name = name;
     }
+
 
     public String getEmail() {
         return email;
@@ -80,6 +132,7 @@ public class Student {
         this.email = email;
     }
 
+
     public String getPhone() {
         return phone;
     }
@@ -87,6 +140,7 @@ public class Student {
     public void setPhone(String phone) {
         this.phone = phone;
     }
+
 
     public String getGender() {
         return gender;
@@ -96,6 +150,7 @@ public class Student {
         this.gender = gender;
     }
 
+
     public LocalDate getDateOfBirth() {
         return dateOfBirth;
     }
@@ -103,6 +158,7 @@ public class Student {
     public void setDateOfBirth(LocalDate dateOfBirth) {
         this.dateOfBirth = dateOfBirth;
     }
+
 
     public String getAddress() {
         return address;
@@ -112,6 +168,7 @@ public class Student {
         this.address = address;
     }
 
+
     public String getDepartment() {
         return department;
     }
@@ -119,6 +176,7 @@ public class Student {
     public void setDepartment(String department) {
         this.department = department;
     }
+
 
     public String getCourse() {
         return course;
@@ -128,6 +186,7 @@ public class Student {
         this.course = course;
     }
 
+
     public Integer getYearOfStudy() {
         return yearOfStudy;
     }
@@ -135,6 +194,7 @@ public class Student {
     public void setYearOfStudy(Integer yearOfStudy) {
         this.yearOfStudy = yearOfStudy;
     }
+
 
     public Integer getAdmissionYear() {
         return admissionYear;
@@ -144,7 +204,30 @@ public class Student {
         this.admissionYear = admissionYear;
     }
 
-    public LocalDateTime getCreatedAt() {
+
+    public String getHostelStatus() {
+        return hostelStatus;
+    }
+
+    public void setHostelStatus(String hostelStatus) {
+        this.hostelStatus = hostelStatus;
+    }
+
+
+    public String getTransportStatus() {
+        return transportStatus;
+    }
+
+    public void setTransportStatus(String transportStatus) {
+        this.transportStatus = transportStatus;
+    }
+
+
+    public java.time.LocalDateTime getCreatedAt() {
         return createdAt;
+    }
+
+    public void setCreatedAt(java.time.LocalDateTime createdAt) {
+        this.createdAt = createdAt;
     }
 }

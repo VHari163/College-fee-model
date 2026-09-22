@@ -2,96 +2,198 @@
 <html lang="en">
 
 <head>
+
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
 
     <title>Admin Dashboard - College Fee Management</title>
 
-    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet"
+          href="css/style.css">
+
 </head>
+
 
 <body>
 
-    <!-- =========================
+
+    <!-- =====================================================
          SIDEBAR
-    ========================== -->
+    ====================================================== -->
 
     <aside class="sidebar" id="sidebar">
 
+
+        <!-- SIDEBAR HEADER -->
+
         <div class="sidebar-header">
 
-            <h2>College Fee Management</h2>
+            <h2>
+                College Fee Management
+            </h2>
 
-            <p>Admin Panel</p>
+            <p>
+                Admin Panel
+            </p>
 
         </div>
 
+
+
+        <!-- SIDEBAR NAVIGATION -->
+
         <nav class="sidebar-nav">
 
-            <a href="#" id="dashboardLink" class="active">
+
+            <!-- DASHBOARD -->
+
+            <a href="admin.html"
+               id="dashboardLink"
+               class="active">
+
                 🏠 Dashboard
+
             </a>
 
-            <a href="#" id="studentsLink">
+
+            <!-- STUDENTS -->
+
+            <a href="#"
+               id="studentsLink">
+
                 👨‍🎓 Students
+
             </a>
 
-            <a href="#" id="departmentsLink">
+
+            <!-- DEPARTMENTS -->
+
+            <a href="departments.html"
+               id="departmentsLink">
+
                 🏢 Departments
+
             </a>
 
-            <a href="#" id="coursesLink">
+
+            <!-- COURSES -->
+
+            <a href="courses.html"
+               id="coursesLink">
+
                 📚 Courses
+
             </a>
 
-            <a href="#" id="academicYearsLink">
+
+            <!-- ACADEMIC YEARS -->
+
+            <a href="#"
+               id="academicYearsLink">
+
                 📅 Academic Years
+
             </a>
 
-            <a href="#" id="feeTypesLink">
+
+            <!-- FEE TYPES -->
+
+            <a href="fee-types.html"
+               id="feeTypesLink">
+
                 💰 Fee Types
+
             </a>
 
-            <a href="#" id="feeStructuresLink">
+
+            <!-- FEE STRUCTURES -->
+
+            <a href="fee-structures.html"
+               id="feeStructuresLink">
+
                 📋 Fee Structures
+
             </a>
 
-            <a href="#" id="paymentsLink">
+
+            <!-- PAYMENTS -->
+
+            <a href="#"
+               id="paymentsLink">
+
                 💳 Payments
+
             </a>
 
-            <a href="#" id="logoutBtn">
+
+            <!-- LOGOUT -->
+
+            <a href="#"
+               id="logoutBtn">
+
                 🚪 Logout
+
             </a>
+
 
         </nav>
 
     </aside>
 
 
-    <!-- =========================
+
+    <!-- =====================================================
          MAIN CONTENT
-    ========================== -->
+    ====================================================== -->
 
-    <main class="main-content" id="mainContent">
+    <main class="main-content"
+          id="mainContent">
 
-        <!-- TOP NAVBAR -->
+
+        <!-- =================================================
+             TOP NAVBAR
+        ================================================== -->
 
         <header class="top-navbar">
 
-            <button class="menu-btn" id="menuBtn">
+
+            <!-- HAMBURGER BUTTON -->
+
+            <button
+                type="button"
+                class="menu-btn"
+                id="menuBtn"
+                aria-label="Open menu">
+
                 ☰
+
             </button>
 
+
+
+            <!-- PAGE TITLE -->
+
             <div class="navbar-title">
-                <h2>Admin Dashboard</h2>
+
+                <h2>
+                    Admin Dashboard
+                </h2>
+
             </div>
+
+
+
+            <!-- ADMIN PROFILE -->
 
             <div class="admin-profile">
 
                 <div class="admin-profile-text">
 
-                    <strong id="adminName">Admin</strong>
+                    <strong id="adminName">
+                        Admin
+                    </strong>
 
                     <span id="adminRole">
                         Administrator
@@ -101,29 +203,41 @@
 
             </div>
 
+
         </header>
 
 
-        <!-- =========================
-             DASHBOARD CONTENT
-        ========================== -->
+
+        <!-- =================================================
+             PAGE CONTENT
+        ================================================== -->
 
         <section class="content">
 
+
+            <!-- PAGE HEADING -->
+
             <div class="page-heading">
 
-                <h1>Welcome, <span id="welcomeAdmin">Admin</span></h1>
+                <h1>
+                    Welcome,
+                    <span id="welcomeAdmin">
+                        Admin
+                    </span>
+                </h1>
 
                 <p>
-                    Manage students, courses, fees and payments from one place.
+                    Manage students, courses, fees and payments
+                    from one place.
                 </p>
 
             </div>
 
 
-            <!-- =========================
-                 DASHBOARD CARDS
-            ========================== -->
+
+            <!-- =================================================
+                 DASHBOARD SUMMARY CARDS
+            ================================================== -->
 
             <div class="admin-dashboard-grid">
 
@@ -138,15 +252,22 @@
 
                     <div class="admin-card-content">
 
-                        <h3>Total Students</h3>
+                        <h3>
+                            Total Students
+                        </h3>
 
-                        <h2 id="totalStudents">0</h2>
+                        <h2 id="totalStudents">
+                            0
+                        </h2>
 
-                        <p>Registered students</p>
+                        <p>
+                            Registered students
+                        </p>
 
                     </div>
 
                 </div>
+
 
 
                 <!-- DEPARTMENTS -->
@@ -159,15 +280,22 @@
 
                     <div class="admin-card-content">
 
-                        <h3>Departments</h3>
+                        <h3>
+                            Departments
+                        </h3>
 
-                        <h2 id="totalDepartments">0</h2>
+                        <h2 id="totalDepartments">
+                            0
+                        </h2>
 
-                        <p>Available departments</p>
+                        <p>
+                            Available departments
+                        </p>
 
                     </div>
 
                 </div>
+
 
 
                 <!-- COURSES -->
@@ -180,15 +308,22 @@
 
                     <div class="admin-card-content">
 
-                        <h3>Total Courses</h3>
+                        <h3>
+                            Total Courses
+                        </h3>
 
-                        <h2 id="totalCourses">0</h2>
+                        <h2 id="totalCourses">
+                            0
+                        </h2>
 
-                        <p>Available courses</p>
+                        <p>
+                            Available courses
+                        </p>
 
                     </div>
 
                 </div>
+
 
 
                 <!-- FEE TYPES -->
@@ -201,15 +336,22 @@
 
                     <div class="admin-card-content">
 
-                        <h3>Fee Types</h3>
+                        <h3>
+                            Fee Types
+                        </h3>
 
-                        <h2 id="totalFeeTypes">0</h2>
+                        <h2 id="totalFeeTypes">
+                            0
+                        </h2>
 
-                        <p>Configured fee types</p>
+                        <p>
+                            Configured fee types
+                        </p>
 
                     </div>
 
                 </div>
+
 
 
                 <!-- PAYMENTS -->
@@ -222,11 +364,17 @@
 
                     <div class="admin-card-content">
 
-                        <h3>Total Payments</h3>
+                        <h3>
+                            Total Payments
+                        </h3>
 
-                        <h2 id="totalPayments">0</h2>
+                        <h2 id="totalPayments">
+                            0
+                        </h2>
 
-                        <p>Recorded payments</p>
+                        <p>
+                            Recorded payments
+                        </p>
 
                     </div>
 
@@ -236,107 +384,198 @@
             </div>
 
 
-            <!-- =========================
-                 ADMIN MODULES
-            ========================== -->
+
+            <!-- =================================================
+                 MANAGEMENT MODULES
+            ================================================== -->
 
             <div class="admin-section">
 
-                <h2>Management Modules</h2>
+
+                <h2>
+                    Management Modules
+                </h2>
+
 
                 <p>
-                    Use the sidebar to manage different parts of the college fee
-                    management system.
+                    Use the modules below to manage different
+                    parts of the college fee management system.
                 </p>
+
+
 
                 <div class="management-grid">
 
 
+                    <!-- STUDENTS -->
+
                     <div class="management-card">
 
-                        <h3>👨‍🎓 Students</h3>
+                        <h3>
+                            👨‍🎓 Students
+                        </h3>
 
                         <p>
-                            View and manage student information.
+                            View and manage student information,
+                            hostel status and transport status.
                         </p>
 
-                        <button id="studentsManagementBtn">
+                        <button
+                            type="button"
+                            id="studentsManagementBtn">
+
                             Manage Students
+
                         </button>
 
                     </div>
 
 
+
+                    <!-- DEPARTMENTS -->
+
                     <div class="management-card">
 
-                        <h3>🏢 Departments</h3>
+                        <h3>
+                            🏢 Departments
+                        </h3>
 
                         <p>
-                            Manage college departments.
+                            Add and manage college departments
+                            such as CSE, CSD, ECE, EEE and others.
                         </p>
 
-                        <button id="departmentsManagementBtn">
+                        <button
+                            type="button"
+                            id="departmentsManagementBtn">
+
                             Manage Departments
+
                         </button>
 
                     </div>
 
 
+
+                    <!-- COURSES -->
+
                     <div class="management-card">
 
-                        <h3>📚 Courses</h3>
+                        <h3>
+                            📚 Courses
+                        </h3>
 
                         <p>
-                            Add and manage courses.
+                            Manage B.Tech branches and connect
+                            them with their departments.
                         </p>
 
-                        <button id="coursesManagementBtn">
+                        <button
+                            type="button"
+                            id="coursesManagementBtn">
+
                             Manage Courses
+
                         </button>
 
                     </div>
 
 
+
+                    <!-- ACADEMIC YEARS -->
+
                     <div class="management-card">
 
-                        <h3>💰 Fee Types</h3>
+                        <h3>
+                            📅 Academic Years
+                        </h3>
 
                         <p>
-                            Add and manage different fee types.
+                            Manage active and previous academic
+                            years.
                         </p>
 
-                        <button id="feeTypesManagementBtn">
+                        <button
+                            type="button"
+                            id="academicYearsManagementBtn">
+
+                            Manage Academic Years
+
+                        </button>
+
+                    </div>
+
+
+
+                    <!-- FEE TYPES -->
+
+                    <div class="management-card">
+
+                        <h3>
+                            💰 Fee Types
+                        </h3>
+
+                        <p>
+                            Add and manage tuition, exam, library,
+                            hostel, bus and other fees.
+                        </p>
+
+                        <button
+                            type="button"
+                            id="feeTypesManagementBtn">
+
                             Manage Fee Types
+
                         </button>
 
                     </div>
 
 
+
+                    <!-- FEE STRUCTURES -->
+
                     <div class="management-card">
 
-                        <h3>📋 Fee Structures</h3>
+                        <h3>
+                            📋 Fee Structures
+                        </h3>
 
                         <p>
-                            Configure fees for courses and academic years.
+                            Configure course-wise fees with
+                            academic year, amount and due date.
                         </p>
 
-                        <button id="feeStructuresManagementBtn">
+                        <button
+                            type="button"
+                            id="feeStructuresManagementBtn">
+
                             Manage Fee Structures
+
                         </button>
 
                     </div>
 
 
+
+                    <!-- PAYMENTS -->
+
                     <div class="management-card">
 
-                        <h3>💳 Payments</h3>
+                        <h3>
+                            💳 Payments
+                        </h3>
 
                         <p>
-                            View student payment transactions.
+                            View and manage student payment
+                            transactions.
                         </p>
 
-                        <button id="paymentsManagementBtn">
+                        <button
+                            type="button"
+                            id="paymentsManagementBtn">
+
                             View Payments
+
                         </button>
 
                     </div>
@@ -345,17 +584,20 @@
                 </div>
 
             </div>
+
 
         </section>
 
     </main>
 
 
-    <!-- =========================
+
+    <!-- =====================================================
          JAVASCRIPT
-    ========================== -->
+    ====================================================== -->
 
     <script src="js/admin.js"></script>
+
 
 </body>
 

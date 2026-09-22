@@ -1,0 +1,476 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>Course Management - Admin</title>
+
+    <link rel="stylesheet"
+          href="css/style.css">
+
+</head>
+
+<body>
+
+
+    <!-- =====================================================
+         SIDEBAR
+    ====================================================== -->
+
+    <aside class="sidebar" id="sidebar">
+
+        <div class="sidebar-header">
+
+            <h2>
+                College Fee Management
+            </h2>
+
+            <p>
+                Admin Panel
+            </p>
+
+        </div>
+
+
+        <nav class="sidebar-nav">
+
+
+            <!-- DASHBOARD -->
+
+            <a href="admin.html">
+                🏠 Dashboard
+            </a>
+
+
+            <!-- STUDENTS -->
+
+            <a href="#" id="studentsLink">
+                👨‍🎓 Students
+            </a>
+
+
+            <!-- DEPARTMENTS -->
+
+            <a href="departments.html">
+                🏢 Departments
+            </a>
+
+
+            <!-- COURSES -->
+
+            <a href="courses.html"
+               class="active">
+
+                📚 Courses
+
+            </a>
+
+
+            <!-- ACADEMIC YEARS -->
+
+            <a href="#" id="academicYearsLink">
+                📅 Academic Years
+            </a>
+
+
+            <!-- FEE TYPES -->
+
+            <a href="fee-types.html">
+                💰 Fee Types
+            </a>
+
+
+            <!-- FEE STRUCTURES -->
+
+            <a href="fee-structures.html">
+                📋 Fee Structures
+            </a>
+
+
+            <!-- PAYMENTS -->
+
+            <a href="#" id="paymentsLink">
+                💳 Payments
+            </a>
+
+
+            <!-- LOGOUT -->
+
+            <a href="#" id="logoutBtn">
+                🚪 Logout
+            </a>
+
+        </nav>
+
+    </aside>
+
+
+
+    <!-- =====================================================
+         MAIN CONTENT
+    ====================================================== -->
+
+    <main class="main-content"
+          id="mainContent">
+
+
+        <!-- =================================================
+             TOP NAVBAR
+        ================================================== -->
+
+        <header class="top-navbar">
+
+
+            <!-- HAMBURGER -->
+
+            <button
+                type="button"
+                class="menu-btn"
+                id="menuBtn"
+                aria-label="Open menu">
+
+                ☰
+
+            </button>
+
+
+            <!-- PAGE TITLE -->
+
+            <div class="navbar-title">
+
+                <h2>
+                    Course Management
+                </h2>
+
+            </div>
+
+
+            <!-- ADMIN PROFILE -->
+
+            <div class="admin-profile">
+
+                <div class="admin-profile-text">
+
+                    <strong id="adminName">
+                        Admin
+                    </strong>
+
+                    <span id="adminRole">
+                        Administrator
+                    </span>
+
+                </div>
+
+            </div>
+
+        </header>
+
+
+
+        <!-- =================================================
+             PAGE CONTENT
+        ================================================== -->
+
+        <section class="content">
+
+
+            <!-- =================================================
+                 PAGE HEADING
+            ================================================== -->
+
+            <div class="page-heading">
+
+                <h1>
+                    Courses
+                </h1>
+
+                <p>
+                    Manage all B.Tech branches and connect them
+                    to their respective departments.
+                </p>
+
+            </div>
+
+
+
+            <!-- =================================================
+                 ADD COURSE FORM
+            ================================================== -->
+
+            <div class="course-form-card">
+
+
+                <h2>
+                    Add New Course
+                </h2>
+
+
+                <p class="form-description">
+
+                    Add a B.Tech branch and assign it to
+                    the correct department.
+
+                </p>
+
+
+
+                <form id="courseForm">
+
+
+                    <div class="course-form-grid">
+
+
+                        <!-- COURSE NAME -->
+
+                        <div class="form-group">
+
+                            <label for="courseName">
+                                Course Name
+                            </label>
+
+                            <input
+                                type="text"
+                                id="courseName"
+                                placeholder="Example: B.Tech Artificial Intelligence"
+                                autocomplete="off"
+                                required>
+
+                        </div>
+
+
+
+                        <!-- COURSE CODE -->
+
+                        <div class="form-group">
+
+                            <label for="courseCode">
+                                Course Code
+                            </label>
+
+                            <input
+                                type="text"
+                                id="courseCode"
+                                placeholder="Example: BTAI"
+                                autocomplete="off"
+                                required>
+
+                        </div>
+
+
+
+                        <!-- DURATION -->
+
+                        <div class="form-group">
+
+                            <label for="durationYears">
+                                Duration (Years)
+                            </label>
+
+                            <input
+                                type="number"
+                                id="durationYears"
+                                min="1"
+                                max="8"
+                                value="4"
+                                required>
+
+                        </div>
+
+
+
+                        <!-- DEPARTMENT -->
+
+                        <div class="form-group">
+
+                            <label for="departmentSelect">
+                                Department
+                            </label>
+
+                            <select
+                                id="departmentSelect"
+                                required>
+
+                                <option value="">
+                                    Loading departments...
+                                </option>
+
+                            </select>
+
+                        </div>
+
+
+                    </div>
+
+
+
+                    <!-- SUBMIT BUTTON -->
+
+                    <div class="course-form-actions">
+
+                        <button
+                            type="submit"
+                            class="admin-primary-btn">
+
+                            Add Course
+
+                        </button>
+
+                    </div>
+
+
+                </form>
+
+            </div>
+
+
+
+            <!-- =================================================
+                 MESSAGE
+            ================================================== -->
+
+            <div
+                id="courseMessage"
+                class="fee-type-message">
+            </div>
+
+
+
+            <!-- =================================================
+                 EXISTING COURSES
+            ================================================== -->
+
+            <div class="course-list-card">
+
+
+                <!-- HEADER -->
+
+                <div class="course-list-header">
+
+
+                    <div>
+
+                        <h2>
+                            Existing Courses
+                        </h2>
+
+                        <p>
+
+                            All courses currently configured
+                            in the system.
+
+                        </p>
+
+                    </div>
+
+
+
+                    <!-- REFRESH BUTTON -->
+
+                    <button
+                        type="button"
+                        id="refreshCoursesBtn"
+                        class="refresh-btn">
+
+                        ↻ Refresh
+
+                    </button>
+
+
+                </div>
+
+
+
+                <!-- TABLE -->
+
+                <div class="course-table-container">
+
+
+                    <table class="course-table">
+
+
+                        <thead>
+
+                            <tr>
+
+
+                                <th>
+                                    ID
+                                </th>
+
+
+                                <th>
+                                    Course Name
+                                </th>
+
+
+                                <th>
+                                    Course Code
+                                </th>
+
+
+                                <th>
+                                    Duration
+                                </th>
+
+
+                                <th>
+                                    Department
+                                </th>
+
+
+                            </tr>
+
+                        </thead>
+
+
+
+                        <tbody id="coursesTableBody">
+
+
+                            <tr>
+
+                                <td
+                                    colspan="5"
+                                    class="loading-cell">
+
+                                    Loading courses...
+
+                                </td>
+
+                            </tr>
+
+
+                        </tbody>
+
+
+                    </table>
+
+
+                </div>
+
+
+            </div>
+
+
+        </section>
+
+
+    </main>
+
+
+
+    <!-- =====================================================
+         JAVASCRIPT
+    ====================================================== -->
+
+    <script src="js/courses.js"></script>
+
+
+</body>
+
+</html>
