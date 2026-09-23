@@ -37,11 +37,20 @@ if (welcomeAdmin) {
 // DASHBOARD CARDS
 // =========================================================
 
-const totalStudents = document.getElementById("totalStudents");
-const totalDepartments = document.getElementById("totalDepartments");
-const totalCourses = document.getElementById("totalCourses");
-const totalFeeTypes = document.getElementById("totalFeeTypes");
-const totalPayments = document.getElementById("totalPayments");
+const totalStudents =
+    document.getElementById("totalStudents");
+
+const totalDepartments =
+    document.getElementById("totalDepartments");
+
+const totalCourses =
+    document.getElementById("totalCourses");
+
+const totalFeeTypes =
+    document.getElementById("totalFeeTypes");
+
+const totalPayments =
+    document.getElementById("totalPayments");
 
 
 // =========================================================
@@ -50,122 +59,137 @@ const totalPayments = document.getElementById("totalPayments");
 
 async function loadAdminDashboard() {
 
-    // -----------------------------------------------------
-    // STUDENTS
-    // -----------------------------------------------------
-
+    // Students
     try {
 
-        const response = await fetch(`${API_URL}/students`);
+        const response =
+            await fetch(`${API_URL}/students`);
 
         if (response.ok) {
 
-            const data = await response.json();
+            const data =
+                await response.json();
 
             if (totalStudents) {
-                totalStudents.textContent = data.length;
+                totalStudents.textContent =
+                    data.length;
             }
         }
 
     } catch (error) {
 
-        console.error("Students error:", error);
+        console.error(
+            "Students error:",
+            error
+        );
 
     }
 
 
-    // -----------------------------------------------------
-    // DEPARTMENTS
-    // -----------------------------------------------------
-
+    // Departments
     try {
 
-        const response = await fetch(`${API_URL}/departments`);
+        const response =
+            await fetch(`${API_URL}/departments`);
 
         if (response.ok) {
 
-            const data = await response.json();
+            const data =
+                await response.json();
 
             if (totalDepartments) {
-                totalDepartments.textContent = data.length;
+                totalDepartments.textContent =
+                    data.length;
             }
         }
 
     } catch (error) {
 
-        console.error("Departments error:", error);
+        console.error(
+            "Departments error:",
+            error
+        );
 
     }
 
 
-    // -----------------------------------------------------
-    // COURSES
-    // -----------------------------------------------------
-
+    // Courses
     try {
 
-        const response = await fetch(`${API_URL}/courses`);
+        const response =
+            await fetch(`${API_URL}/courses`);
 
         if (response.ok) {
 
-            const data = await response.json();
+            const data =
+                await response.json();
 
             if (totalCourses) {
-                totalCourses.textContent = data.length;
+                totalCourses.textContent =
+                    data.length;
             }
         }
 
     } catch (error) {
 
-        console.error("Courses error:", error);
+        console.error(
+            "Courses error:",
+            error
+        );
 
     }
 
 
-    // -----------------------------------------------------
-    // FEE TYPES
-    // -----------------------------------------------------
-
+    // Fee Types
     try {
 
-        const response = await fetch(`${API_URL}/fee-types`);
+        const response =
+            await fetch(`${API_URL}/fee-types`);
 
         if (response.ok) {
 
-            const data = await response.json();
+            const data =
+                await response.json();
 
             if (totalFeeTypes) {
-                totalFeeTypes.textContent = data.length;
+                totalFeeTypes.textContent =
+                    data.length;
             }
         }
 
     } catch (error) {
 
-        console.error("Fee types error:", error);
+        console.error(
+            "Fee types error:",
+            error
+        );
 
     }
 
 
-    // -----------------------------------------------------
-    // PAYMENTS
-    // -----------------------------------------------------
-
+    // Payments
     try {
 
-        const response = await fetch(`${API_URL}/payments`);
+        const response =
+            await fetch(`${API_URL}/payments`);
 
         if (response.ok) {
 
-            const data = await response.json();
+            const data =
+                await response.json();
 
             if (totalPayments) {
-                totalPayments.textContent = data.length;
+                totalPayments.textContent =
+                    data.length;
             }
         }
 
     } catch (error) {
 
-        console.error("Payments error:", error);
+        console.error(
+            "Payments error:",
+            error
+        );
 
     }
 }
@@ -175,24 +199,37 @@ async function loadAdminDashboard() {
 // HAMBURGER / SIDEBAR
 // =========================================================
 
-const menuBtn = document.getElementById("menuBtn");
-const sidebar = document.getElementById("sidebar");
-const mainContent = document.getElementById("mainContent");
+const menuBtn =
+    document.getElementById("menuBtn");
+
+const sidebar =
+    document.getElementById("sidebar");
+
+const mainContent =
+    document.getElementById("mainContent");
 
 if (menuBtn && sidebar) {
 
-    menuBtn.addEventListener("click", function (event) {
+    menuBtn.addEventListener(
+        "click",
+        function (event) {
 
-        event.preventDefault();
-        event.stopPropagation();
+            event.preventDefault();
+            event.stopPropagation();
 
-        sidebar.classList.toggle("active");
+            sidebar.classList.toggle("active");
 
-        if (mainContent) {
-            mainContent.classList.toggle("sidebar-open");
+            if (mainContent) {
+
+                mainContent.classList.toggle(
+                    "sidebar-open"
+                );
+
+            }
+
         }
+    );
 
-    });
 }
 
 
@@ -200,36 +237,44 @@ if (menuBtn && sidebar) {
 // CLOSE SIDEBAR WHEN CLICKING OUTSIDE
 // =========================================================
 
-document.addEventListener("click", function (event) {
+document.addEventListener(
+    "click",
+    function (event) {
 
-    if (!sidebar || !menuBtn) {
-        return;
-    }
-
-    const clickedInsideSidebar =
-        sidebar.contains(event.target);
-
-    const clickedMenuButton =
-        menuBtn.contains(event.target);
-
-    if (
-        sidebar.classList.contains("active") &&
-        !clickedInsideSidebar &&
-        !clickedMenuButton
-    ) {
-
-        sidebar.classList.remove("active");
-
-        if (mainContent) {
-            mainContent.classList.remove("sidebar-open");
+        if (!sidebar || !menuBtn) {
+            return;
         }
-    }
 
-});
+        const clickedInsideSidebar =
+            sidebar.contains(event.target);
+
+        const clickedMenuButton =
+            menuBtn.contains(event.target);
+
+        if (
+            sidebar.classList.contains("active") &&
+            !clickedInsideSidebar &&
+            !clickedMenuButton
+        ) {
+
+            sidebar.classList.remove("active");
+
+            if (mainContent) {
+
+                mainContent.classList.remove(
+                    "sidebar-open"
+                );
+
+            }
+
+        }
+
+    }
+);
 
 
 // =========================================================
-// SIDEBAR LINKS
+// SIDEBAR NAVIGATION ELEMENTS
 // =========================================================
 
 const dashboardLink =
@@ -263,13 +308,17 @@ const paymentsLink =
 
 if (dashboardLink) {
 
-    dashboardLink.addEventListener("click", function (event) {
+    dashboardLink.addEventListener(
+        "click",
+        function (event) {
 
-        event.preventDefault();
+            event.preventDefault();
 
-        window.location.href = "admin.html";
+            window.location.href =
+                "admin.html";
 
-    });
+        }
+    );
 
 }
 
@@ -280,13 +329,18 @@ if (dashboardLink) {
 
 if (studentsLink) {
 
-    studentsLink.addEventListener("click", function (event) {
+    studentsLink.addEventListener(
+        "click",
+        function (event) {
 
-        event.preventDefault();
+            event.preventDefault();
 
-        alert("Students Management will be added next.");
+            alert(
+                "Students Management will be added next."
+            );
 
-    });
+        }
+    );
 
 }
 
@@ -297,13 +351,17 @@ if (studentsLink) {
 
 if (departmentsLink) {
 
-    departmentsLink.addEventListener("click", function (event) {
+    departmentsLink.addEventListener(
+        "click",
+        function (event) {
 
-        event.preventDefault();
+            event.preventDefault();
 
-        window.location.href = "departments.html";
+            window.location.href =
+                "departments.html";
 
-    });
+        }
+    );
 
 }
 
@@ -314,13 +372,17 @@ if (departmentsLink) {
 
 if (coursesLink) {
 
-    coursesLink.addEventListener("click", function (event) {
+    coursesLink.addEventListener(
+        "click",
+        function (event) {
 
-        event.preventDefault();
+            event.preventDefault();
 
-        window.location.href = "courses.html";
+            window.location.href =
+                "courses.html";
 
-    });
+        }
+    );
 
 }
 
@@ -331,13 +393,18 @@ if (coursesLink) {
 
 if (academicYearsLink) {
 
-    academicYearsLink.addEventListener("click", function (event) {
+    academicYearsLink.addEventListener(
+        "click",
+        function (event) {
 
-        event.preventDefault();
+            event.preventDefault();
 
-        alert("Academic Year Management will be added next.");
+            alert(
+                "Academic Year Management will be added next."
+            );
 
-    });
+        }
+    );
 
 }
 
@@ -348,13 +415,17 @@ if (academicYearsLink) {
 
 if (feeTypesLink) {
 
-    feeTypesLink.addEventListener("click", function (event) {
+    feeTypesLink.addEventListener(
+        "click",
+        function (event) {
 
-        event.preventDefault();
+            event.preventDefault();
 
-        window.location.href = "fee-types.html";
+            window.location.href =
+                "fee-types.html";
 
-    });
+        }
+    );
 
 }
 
@@ -365,13 +436,17 @@ if (feeTypesLink) {
 
 if (feeStructuresLink) {
 
-    feeStructuresLink.addEventListener("click", function (event) {
+    feeStructuresLink.addEventListener(
+        "click",
+        function (event) {
 
-        event.preventDefault();
+            event.preventDefault();
 
-        window.location.href = "fee-structures.html";
+            window.location.href =
+                "fee-structures.html";
 
-    });
+        }
+    );
 
 }
 
@@ -382,13 +457,18 @@ if (feeStructuresLink) {
 
 if (paymentsLink) {
 
-    paymentsLink.addEventListener("click", function (event) {
+    paymentsLink.addEventListener(
+        "click",
+        function (event) {
 
-        event.preventDefault();
+            event.preventDefault();
 
-        alert("Payment Management will be added next.");
+            alert(
+                "Payment Management will be added next."
+            );
 
-    });
+        }
+    );
 
 }
 
@@ -398,128 +478,159 @@ if (paymentsLink) {
 // =========================================================
 
 const studentsManagementBtn =
-    document.getElementById("studentsManagementBtn");
+    document.getElementById(
+        "studentsManagementBtn"
+    );
 
 const departmentsManagementBtn =
-    document.getElementById("departmentsManagementBtn");
+    document.getElementById(
+        "departmentsManagementBtn"
+    );
 
 const coursesManagementBtn =
-    document.getElementById("coursesManagementBtn");
+    document.getElementById(
+        "coursesManagementBtn"
+    );
 
 const academicYearsManagementBtn =
-    document.getElementById("academicYearsManagementBtn");
+    document.getElementById(
+        "academicYearsManagementBtn"
+    );
 
 const feeTypesManagementBtn =
-    document.getElementById("feeTypesManagementBtn");
+    document.getElementById(
+        "feeTypesManagementBtn"
+    );
 
 const feeStructuresManagementBtn =
-    document.getElementById("feeStructuresManagementBtn");
+    document.getElementById(
+        "feeStructuresManagementBtn"
+    );
 
 const paymentsManagementBtn =
-    document.getElementById("paymentsManagementBtn");
+    document.getElementById(
+        "paymentsManagementBtn"
+    );
 
 
-// =========================================================
-// STUDENTS MANAGEMENT BUTTON
-// =========================================================
+// Students button
 
 if (studentsManagementBtn) {
 
-    studentsManagementBtn.addEventListener("click", function () {
+    studentsManagementBtn.addEventListener(
+        "click",
+        function () {
 
-        alert("Students Management will be added next.");
+            alert(
+                "Students Management will be added next."
+            );
 
-    });
+        }
+    );
 
 }
 
 
-// =========================================================
-// DEPARTMENTS MANAGEMENT BUTTON
-// =========================================================
+// Departments button
 
 if (departmentsManagementBtn) {
 
-    departmentsManagementBtn.addEventListener("click", function () {
+    departmentsManagementBtn.addEventListener(
+        "click",
+        function () {
 
-        window.location.href = "departments.html";
+            window.location.href =
+                "departments.html";
 
-    });
+        }
+    );
 
 }
 
 
-// =========================================================
-// COURSES MANAGEMENT BUTTON
-// =========================================================
+// Courses button
 
 if (coursesManagementBtn) {
 
-    coursesManagementBtn.addEventListener("click", function () {
+    coursesManagementBtn.addEventListener(
+        "click",
+        function () {
 
-        window.location.href = "courses.html";
+            window.location.href =
+                "courses.html";
 
-    });
+        }
+    );
 
 }
 
 
-// =========================================================
-// ACADEMIC YEARS MANAGEMENT BUTTON
-// =========================================================
+// Academic Years button
 
 if (academicYearsManagementBtn) {
 
-    academicYearsManagementBtn.addEventListener("click", function () {
+    academicYearsManagementBtn.addEventListener(
+        "click",
+        function () {
 
-        alert("Academic Year Management will be added next.");
+            alert(
+                "Academic Year Management will be added next."
+            );
 
-    });
+        }
+    );
 
 }
 
 
-// =========================================================
-// FEE TYPES MANAGEMENT BUTTON
-// =========================================================
+// Fee Types button
 
 if (feeTypesManagementBtn) {
 
-    feeTypesManagementBtn.addEventListener("click", function () {
+    feeTypesManagementBtn.addEventListener(
+        "click",
+        function () {
 
-        window.location.href = "fee-types.html";
+            window.location.href =
+                "fee-types.html";
 
-    });
+        }
+    );
 
 }
 
 
-// =========================================================
-// FEE STRUCTURES MANAGEMENT BUTTON
-// =========================================================
+// Fee Structures button
 
 if (feeStructuresManagementBtn) {
 
-    feeStructuresManagementBtn.addEventListener("click", function () {
+    feeStructuresManagementBtn.addEventListener(
+        "click",
+        function () {
 
-        window.location.href = "fee-structures.html";
+            window.location.href =
+                "fee-structures.html";
 
-    });
+        }
+    );
 
 }
 
 
-// =========================================================
-// PAYMENTS MANAGEMENT BUTTON
-// =========================================================
+// Payments button
 
 if (paymentsManagementBtn) {
 
-    paymentsManagementBtn.addEventListener("click", function () {
+    paymentsManagementBtn.addEventListener(
+        "click",
+        function () {
 
-        alert("Payment Management will be added next.");
+            alert(
+                "Payment Management will be added next."
+            );
 
-    });
+        }
+    );
 
 }
 
@@ -533,18 +644,22 @@ const logoutBtn =
 
 if (logoutBtn) {
 
-    logoutBtn.addEventListener("click", function (event) {
+    logoutBtn.addEventListener(
+        "click",
+        function (event) {
 
-        event.preventDefault();
+            event.preventDefault();
 
-        localStorage.removeItem("userId");
-        localStorage.removeItem("username");
-        localStorage.removeItem("role");
-        localStorage.removeItem("email");
+            localStorage.removeItem("userId");
+            localStorage.removeItem("username");
+            localStorage.removeItem("role");
+            localStorage.removeItem("email");
 
-        window.location.href = "index.html";
+            window.location.href =
+                "index.html";
 
-    });
+        }
+    );
 
 }
 
@@ -553,9 +668,11 @@ if (logoutBtn) {
 // LOAD DASHBOARD
 // =========================================================
 
-document.addEventListener("DOMContentLoaded", function () {
+document.addEventListener(
+    "DOMContentLoaded",
+    function () {
 
-    loadAdminDashboard();
+        loadAdminDashboard();
 
-});
-
+    }
+);

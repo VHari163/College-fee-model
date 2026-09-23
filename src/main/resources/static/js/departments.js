@@ -1,6 +1,5 @@
 const API_URL = "http://localhost:8081/api";
 
-
 // =========================================================
 // ADMIN LOGIN CHECK
 // =========================================================
@@ -14,7 +13,7 @@ if (role !== "ADMIN") {
 
 
 // =========================================================
-// ELEMENTS
+// HTML ELEMENTS
 // =========================================================
 
 const adminName =
@@ -32,14 +31,15 @@ const departmentName =
 const departmentCode =
     document.getElementById("departmentCode");
 
-const departmentMessage =
-    document.getElementById("departmentMessage");
-
 const departmentsTableBody =
-    document.getElementById("departmentsTableBody");
+    document.getElementById(
+        "departmentsTableBody"
+    );
 
 const refreshDepartmentsBtn =
-    document.getElementById("refreshDepartmentsBtn");
+    document.getElementById(
+        "refreshDepartmentsBtn"
+    );
 
 
 // =========================================================
@@ -47,41 +47,17 @@ const refreshDepartmentsBtn =
 // =========================================================
 
 if (adminName) {
+
     adminName.textContent =
         username || "Admin";
+
 }
 
 if (adminRole) {
+
     adminRole.textContent =
         "Administrator";
-}
 
-
-// =========================================================
-// SHOW MESSAGE
-// =========================================================
-
-function showMessage(message, type) {
-
-    if (!departmentMessage) {
-        return;
-    }
-
-    departmentMessage.textContent =
-        message;
-
-    departmentMessage.className =
-        "fee-type-message " + type;
-
-    setTimeout(() => {
-
-        departmentMessage.textContent =
-            "";
-
-        departmentMessage.className =
-            "fee-type-message";
-
-    }, 5000);
 }
 
 
@@ -91,12 +67,15 @@ function showMessage(message, type) {
 
 async function loadDepartments() {
 
+    if (!departmentsTableBody) {
+        return;
+    }
+
     try {
 
         departmentsTableBody.innerHTML = `
             <tr>
-                <td colspan="3"
-                    class="loading-cell">
+                <td colspan="4" class="loading-cell">
                     Loading departments...
                 </td>
             </tr>
@@ -114,6 +93,7 @@ async function loadDepartments() {
             throw new Error(
                 "Unable to load departments."
             );
+
         }
 
 
@@ -132,8 +112,7 @@ async function loadDepartments() {
 
             departmentsTableBody.innerHTML = `
                 <tr>
-                    <td colspan="3"
-                        class="empty-cell">
+                    <td colspan="4" class="empty-cell">
                         No departments found.
                     </td>
                 </tr>
@@ -143,63 +122,64 @@ async function loadDepartments() {
         }
 
 
-        departments.forEach(department => {
+        departments.forEach(
+            function (department) {
 
-            const row =
-                document.createElement("tr");
+                const row =
+                    document.createElement("tr");
 
 
-            row.innerHTML = `
+                row.innerHTML = `
+                    <td>
+                        ${department.departmentId}
+                    </td>
 
-                <td>
-                    ${department.departmentId}
-                </td>
+                    <td>
+                        <strong>
+                            ${escapeHtml(
+                                department.departmentCode || ""
+                            )}
+                        </strong>
+                    </td>
 
-                <td>
-                    <strong>
+                    <td>
                         ${escapeHtml(
-                            department.departmentName
+                            department.departmentName || ""
                         )}
-                    </strong>
-                </td>
+                    </td>
 
-                <td>
-                    ${escapeHtml(
-                        department.departmentCode
-                    )}
-                </td>
-
-            `;
+                    <td>
+                        <span class="status-badge">
+                            Active
+                        </span>
+                    </td>
+                `;
 
 
-            departmentsTableBody.appendChild(
-                row
-            );
+                departmentsTableBody.appendChild(
+                    row
+                );
 
-        });
+            }
+        );
 
-    }
-    catch (error) {
+
+    } catch (error) {
 
         console.error(
-            "Department loading error:",
+            "Error loading departments:",
             error
         );
 
 
         departmentsTableBody.innerHTML = `
             <tr>
-
-                <td
-                    colspan="3"
-                    class="error-cell">
-
+                <td colspan="4" class="error-cell">
                     Unable to load departments.
-
                 </td>
-
             </tr>
         `;
+
     }
 }
 
@@ -221,16 +201,16 @@ if (departmentForm) {
                 departmentName.value.trim();
 
             const code =
-                departmentCode.value.trim()
-                    .toUpperCase();
+                departmentCode.value.trim();
 
 
             if (!name) {
 
-                showMessage(
-                    "Please enter department name.",
-                    "error"
+                alert(
+                    "Please enter department name."
                 );
+
+                departmentName.focus();
 
                 return;
             }
@@ -238,10 +218,11 @@ if (departmentForm) {
 
             if (!code) {
 
-                showMessage(
-                    "Please enter department code.",
-                    "error"
+                alert(
+                    "Please enter department code."
                 );
+
+                departmentCode.focus();
 
                 return;
             }
@@ -288,12 +269,12 @@ if (departmentForm) {
                         errorText ||
                         "Unable to add department."
                     );
+
                 }
 
 
-                showMessage(
-                    "Department added successfully.",
-                    "success"
+                alert(
+                    "Department added successfully."
                 );
 
 
@@ -302,40 +283,25 @@ if (departmentForm) {
 
                 await loadDepartments();
 
-            }
-            catch (error) {
+
+            } catch (error) {
 
                 console.error(
-                    "Add department error:",
+                    "Error adding department:",
                     error
                 );
 
 
-                showMessage(
-                    "Unable to add department. The department name or code may already exist.",
-                    "error"
+                alert(
+                    "Unable to add department.\n\n" +
+                    error.message
                 );
+
             }
 
         }
     );
-}
 
-
-// =========================================================
-// REFRESH
-// =========================================================
-
-if (refreshDepartmentsBtn) {
-
-    refreshDepartmentsBtn.addEventListener(
-        "click",
-        function () {
-
-            loadDepartments();
-
-        }
-    );
 }
 
 
@@ -349,8 +315,11 @@ function escapeHtml(value) {
         value === null ||
         value === undefined
     ) {
+
         return "";
+
     }
+
 
     return String(value)
         .replace(/&/g, "&amp;")
@@ -358,11 +327,12 @@ function escapeHtml(value) {
         .replace(/>/g, "&gt;")
         .replace(/"/g, "&quot;")
         .replace(/'/g, "&#039;");
+
 }
 
 
 // =========================================================
-// SIDEBAR
+// HAMBURGER / SIDEBAR
 // =========================================================
 
 const menuBtn =
@@ -384,6 +354,7 @@ if (menuBtn && sidebar) {
             event.preventDefault();
             event.stopPropagation();
 
+
             sidebar.classList.toggle(
                 "active"
             );
@@ -394,10 +365,12 @@ if (menuBtn && sidebar) {
                 mainContent.classList.toggle(
                     "sidebar-open"
                 );
+
             }
 
         }
     );
+
 }
 
 
@@ -437,6 +410,7 @@ document.addEventListener(
                 mainContent.classList.remove(
                     "sidebar-open"
                 );
+
             }
 
         }
@@ -446,11 +420,17 @@ document.addEventListener(
 
 
 // =========================================================
-// NAVIGATION
+// SIDEBAR NAVIGATION
 // =========================================================
+
+const dashboardLink =
+    document.getElementById("dashboardLink");
 
 const studentsLink =
     document.getElementById("studentsLink");
+
+const departmentsLink =
+    document.getElementById("departmentsLink");
 
 const coursesLink =
     document.getElementById("coursesLink");
@@ -458,9 +438,36 @@ const coursesLink =
 const academicYearsLink =
     document.getElementById("academicYearsLink");
 
+const feeTypesLink =
+    document.getElementById("feeTypesLink");
+
+const feeStructuresLink =
+    document.getElementById("feeStructuresLink");
+
 const paymentsLink =
     document.getElementById("paymentsLink");
 
+
+// Dashboard
+
+if (dashboardLink) {
+
+    dashboardLink.addEventListener(
+        "click",
+        function (event) {
+
+            event.preventDefault();
+
+            window.location.href =
+                "admin.html";
+
+        }
+    );
+
+}
+
+
+// Students
 
 if (studentsLink) {
 
@@ -476,8 +483,30 @@ if (studentsLink) {
 
         }
     );
+
 }
 
+
+// Departments
+
+if (departmentsLink) {
+
+    departmentsLink.addEventListener(
+        "click",
+        function (event) {
+
+            event.preventDefault();
+
+            window.location.href =
+                "departments.html";
+
+        }
+    );
+
+}
+
+
+// Courses
 
 if (coursesLink) {
 
@@ -487,14 +516,16 @@ if (coursesLink) {
 
             event.preventDefault();
 
-            alert(
-                "Course Management will be added next."
-            );
+            window.location.href =
+                "courses.html";
 
         }
     );
+
 }
 
+
+// Academic Years
 
 if (academicYearsLink) {
 
@@ -510,8 +541,49 @@ if (academicYearsLink) {
 
         }
     );
+
 }
 
+
+// Fee Types
+
+if (feeTypesLink) {
+
+    feeTypesLink.addEventListener(
+        "click",
+        function (event) {
+
+            event.preventDefault();
+
+            window.location.href =
+                "fee-types.html";
+
+        }
+    );
+
+}
+
+
+// Fee Structures
+
+if (feeStructuresLink) {
+
+    feeStructuresLink.addEventListener(
+        "click",
+        function (event) {
+
+            event.preventDefault();
+
+            window.location.href =
+                "fee-structures.html";
+
+        }
+    );
+
+}
+
+
+// Payments
 
 if (paymentsLink) {
 
@@ -527,6 +599,7 @@ if (paymentsLink) {
 
         }
     );
+
 }
 
 
@@ -558,11 +631,30 @@ if (logoutBtn) {
 
         }
     );
+
 }
 
 
 // =========================================================
-// PAGE LOAD
+// REFRESH
+// =========================================================
+
+if (refreshDepartmentsBtn) {
+
+    refreshDepartmentsBtn.addEventListener(
+        "click",
+        function () {
+
+            loadDepartments();
+
+        }
+    );
+
+}
+
+
+// =========================================================
+// LOAD PAGE
 // =========================================================
 
 document.addEventListener(
@@ -573,3 +665,4 @@ document.addEventListener(
 
     }
 );
+

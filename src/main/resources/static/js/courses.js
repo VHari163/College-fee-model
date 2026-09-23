@@ -1,6 +1,5 @@
 const API_URL = "http://localhost:8081/api";
 
-
 // =========================================================
 // ADMIN LOGIN CHECK
 // =========================================================
@@ -38,9 +37,6 @@ const durationYears =
 const departmentSelect =
     document.getElementById("departmentSelect");
 
-const courseMessage =
-    document.getElementById("courseMessage");
-
 const coursesTableBody =
     document.getElementById("coursesTableBody");
 
@@ -64,123 +60,63 @@ if (adminRole) {
 
 
 // =========================================================
-// SHOW MESSAGE
-// =========================================================
-
-function showMessage(message, type) {
-
-    if (!courseMessage) {
-        return;
-    }
-
-    courseMessage.textContent =
-        message;
-
-    courseMessage.className =
-        "fee-type-message " + type;
-
-    setTimeout(() => {
-
-        courseMessage.textContent =
-            "";
-
-        courseMessage.className =
-            "fee-type-message";
-
-    }, 5000);
-}
-
-
-// =========================================================
 // LOAD DEPARTMENTS
 // =========================================================
 
 async function loadDepartments() {
 
+    if (!departmentSelect) {
+        return;
+    }
+
     try {
-
-        departmentSelect.innerHTML = `
-            <option value="">
-                Loading departments...
-            </option>
-        `;
-
 
         const response =
             await fetch(
                 `${API_URL}/departments`
             );
 
-
         if (!response.ok) {
-
             throw new Error(
                 "Unable to load departments."
             );
-
         }
-
 
         const departments =
             await response.json();
 
+        departmentSelect.innerHTML =
+            `<option value="">Select Department</option>`;
 
-        departmentSelect.innerHTML = `
-            <option value="">
-                Select Department
-            </option>
-        `;
+        departments.forEach(
+            function (department) {
 
+                const option =
+                    document.createElement("option");
 
-        if (
-            !departments ||
-            departments.length === 0
-        ) {
+                option.value =
+                    department.departmentId;
 
-            departmentSelect.innerHTML = `
-                <option value="">
-                    No departments available
-                </option>
-            `;
+                option.textContent =
+                    `${department.departmentCode} - ${department.departmentName}`;
 
-            return;
-        }
+                departmentSelect.appendChild(
+                    option
+                );
 
+            }
+        );
 
-        departments.forEach(department => {
-
-            const option =
-                document.createElement("option");
-
-
-            option.value =
-                department.departmentId;
-
-
-            option.textContent =
-                `${department.departmentName} (${department.departmentCode})`;
-
-
-            departmentSelect.appendChild(
-                option
-            );
-
-        });
-
-    }
-    catch (error) {
+    } catch (error) {
 
         console.error(
-            "Department loading error:",
+            "Error loading departments:",
             error
         );
 
+        departmentSelect.innerHTML =
+            `<option value="">Unable to load departments</option>`;
 
-        departmentSelect.innerHTML = `
-            <option value="">
-                Unable to load departments
-            </option>
-        `;
     }
 }
 
@@ -191,43 +127,35 @@ async function loadDepartments() {
 
 async function loadCourses() {
 
+    if (!coursesTableBody) {
+        return;
+    }
+
     try {
 
         coursesTableBody.innerHTML = `
             <tr>
-                <td
-                    colspan="5"
-                    class="loading-cell">
-
+                <td colspan="6" class="loading-cell">
                     Loading courses...
-
                 </td>
             </tr>
         `;
-
 
         const response =
             await fetch(
                 `${API_URL}/courses`
             );
 
-
         if (!response.ok) {
-
             throw new Error(
                 "Unable to load courses."
             );
-
         }
-
 
         const courses =
             await response.json();
 
-
-        coursesTableBody.innerHTML =
-            "";
-
+        coursesTableBody.innerHTML = "";
 
         if (
             !courses ||
@@ -236,12 +164,8 @@ async function loadCourses() {
 
             coursesTableBody.innerHTML = `
                 <tr>
-                    <td
-                        colspan="5"
-                        class="empty-cell">
-
+                    <td colspan="6" class="empty-cell">
                         No courses found.
-
                     </td>
                 </tr>
             `;
@@ -250,89 +174,96 @@ async function loadCourses() {
         }
 
 
-        courses.forEach(course => {
+        courses.forEach(
+            function (course) {
 
-            const row =
-                document.createElement("tr");
+                const row =
+                    document.createElement("tr");
 
+                let departmentName =
+                    "Not assigned";
 
-            let departmentName =
-                "Not assigned";
+                let departmentCode =
+                    "";
 
+                if (course.department) {
 
-            if (
-                course.department
-            ) {
+                    departmentName =
+                        course.department.departmentName ||
+                        "Not assigned";
 
-                departmentName =
-                    `${course.department.departmentName}
-                    (${course.department.departmentCode})`;
+                    departmentCode =
+                        course.department.departmentCode ||
+                        "";
+
+                }
+
+                row.innerHTML = `
+                    <td>
+                        ${course.courseId}
+                    </td>
+
+                    <td>
+                        <strong>
+                            ${escapeHtml(
+                                course.courseName || ""
+                            )}
+                        </strong>
+                    </td>
+
+                    <td>
+                        ${escapeHtml(
+                            course.courseCode || ""
+                        )}
+                    </td>
+
+                    <td>
+                        ${course.durationYears || ""}
+                    </td>
+
+                    <td>
+                        ${escapeHtml(
+                            departmentCode
+                        )}
+                        ${
+                            departmentCode
+                                ? " - "
+                                : ""
+                        }
+                        ${escapeHtml(
+                            departmentName
+                        )}
+                    </td>
+
+                    <td>
+                        <span class="status-badge">
+                            Active
+                        </span>
+                    </td>
+                `;
+
+                coursesTableBody.appendChild(
+                    row
+                );
 
             }
+        );
 
-
-            row.innerHTML = `
-
-                <td>
-                    ${course.courseId}
-                </td>
-
-                <td>
-                    <strong>
-                        ${escapeHtml(
-                            course.courseName
-                        )}
-                    </strong>
-                </td>
-
-                <td>
-                    ${escapeHtml(
-                        course.courseCode
-                    )}
-                </td>
-
-                <td>
-                    ${course.durationYears}
-                    Years
-                </td>
-
-                <td>
-                    ${escapeHtml(
-                        departmentName
-                    )}
-                </td>
-
-            `;
-
-
-            coursesTableBody.appendChild(
-                row
-            );
-
-        });
-
-    }
-    catch (error) {
+    } catch (error) {
 
         console.error(
-            "Course loading error:",
+            "Error loading courses:",
             error
         );
 
-
         coursesTableBody.innerHTML = `
             <tr>
-
-                <td
-                    colspan="5"
-                    class="error-cell">
-
+                <td colspan="6" class="error-cell">
                     Unable to load courses.
-
                 </td>
-
             </tr>
         `;
+
     }
 }
 
@@ -349,38 +280,25 @@ if (courseForm) {
 
             event.preventDefault();
 
-
             const name =
                 courseName.value.trim();
 
-
             const code =
-                courseCode.value
-                    .trim()
-                    .toUpperCase();
-
+                courseCode.value.trim();
 
             const duration =
-                Number(
+                parseInt(
                     durationYears.value
                 );
 
-
             const departmentId =
-                Number(
-                    departmentSelect.value
-                );
+                departmentSelect.value;
 
-
-            // -----------------------------------------
-            // VALIDATION
-            // -----------------------------------------
 
             if (!name) {
 
-                showMessage(
-                    "Please enter course name.",
-                    "error"
+                alert(
+                    "Please enter course name."
                 );
 
                 courseName.focus();
@@ -391,9 +309,8 @@ if (courseForm) {
 
             if (!code) {
 
-                showMessage(
-                    "Please enter course code.",
-                    "error"
+                alert(
+                    "Please enter course code."
                 );
 
                 courseCode.focus();
@@ -407,9 +324,8 @@ if (courseForm) {
                 duration <= 0
             ) {
 
-                showMessage(
-                    "Please enter a valid duration.",
-                    "error"
+                alert(
+                    "Please enter a valid duration."
                 );
 
                 durationYears.focus();
@@ -420,9 +336,8 @@ if (courseForm) {
 
             if (!departmentId) {
 
-                showMessage(
-                    "Please select a department.",
-                    "error"
+                alert(
+                    "Please select a department."
                 );
 
                 departmentSelect.focus();
@@ -431,23 +346,18 @@ if (courseForm) {
             }
 
 
-            // -----------------------------------------
-            // REQUEST DATA
-            // -----------------------------------------
-
             const courseData = {
 
-                courseName:
-                    name,
+                courseName: name,
 
-                courseCode:
-                    code,
+                courseCode: code,
 
-                durationYears:
-                    duration,
+                durationYears: duration,
 
                 departmentId:
-                    departmentId
+                    parseInt(
+                        departmentId
+                    )
 
             };
 
@@ -478,7 +388,6 @@ if (courseForm) {
                     const errorText =
                         await response.text();
 
-
                     throw new Error(
                         errorText ||
                         "Unable to add course."
@@ -487,56 +396,34 @@ if (courseForm) {
                 }
 
 
-                showMessage(
-                    "Course added successfully.",
-                    "success"
+                alert(
+                    "Course added successfully."
                 );
-
 
                 courseForm.reset();
 
-
-                durationYears.value =
-                    "4";
-
+                await loadDepartments();
 
                 await loadCourses();
 
-            }
-            catch (error) {
+
+            } catch (error) {
 
                 console.error(
-                    "Add course error:",
+                    "Error adding course:",
                     error
                 );
 
-
-                showMessage(
-                    "Unable to add course. The course code may already exist.",
-                    "error"
+                alert(
+                    "Unable to add course.\n\n" +
+                    error.message
                 );
 
             }
 
         }
     );
-}
 
-
-// =========================================================
-// REFRESH BUTTON
-// =========================================================
-
-if (refreshCoursesBtn) {
-
-    refreshCoursesBtn.addEventListener(
-        "click",
-        function () {
-
-            loadCourses();
-
-        }
-    );
 }
 
 
@@ -550,11 +437,8 @@ function escapeHtml(value) {
         value === null ||
         value === undefined
     ) {
-
         return "";
-
     }
-
 
     return String(value)
         .replace(/&/g, "&amp;")
@@ -566,7 +450,7 @@ function escapeHtml(value) {
 
 
 // =========================================================
-// SIDEBAR
+// HAMBURGER / SIDEBAR
 // =========================================================
 
 const menuBtn =
@@ -578,25 +462,18 @@ const sidebar =
 const mainContent =
     document.getElementById("mainContent");
 
-
-if (
-    menuBtn &&
-    sidebar
-) {
+if (menuBtn && sidebar) {
 
     menuBtn.addEventListener(
         "click",
         function (event) {
 
             event.preventDefault();
-
             event.stopPropagation();
-
 
             sidebar.classList.toggle(
                 "active"
             );
-
 
             if (mainContent) {
 
@@ -608,6 +485,7 @@ if (
 
         }
     );
+
 }
 
 
@@ -619,32 +497,18 @@ document.addEventListener(
     "click",
     function (event) {
 
-        if (
-            !sidebar ||
-            !menuBtn
-        ) {
-
+        if (!sidebar || !menuBtn) {
             return;
-
         }
 
-
         const clickedInsideSidebar =
-            sidebar.contains(
-                event.target
-            );
-
+            sidebar.contains(event.target);
 
         const clickedMenuButton =
-            menuBtn.contains(
-                event.target
-            );
-
+            menuBtn.contains(event.target);
 
         if (
-            sidebar.classList.contains(
-                "active"
-            ) &&
+            sidebar.classList.contains("active") &&
             !clickedInsideSidebar &&
             !clickedMenuButton
         ) {
@@ -652,7 +516,6 @@ document.addEventListener(
             sidebar.classList.remove(
                 "active"
             );
-
 
             if (mainContent) {
 
@@ -672,20 +535,48 @@ document.addEventListener(
 // SIDEBAR NAVIGATION
 // =========================================================
 
+const dashboardLink =
+    document.getElementById("dashboardLink");
+
 const studentsLink =
-    document.getElementById(
-        "studentsLink"
-    );
+    document.getElementById("studentsLink");
+
+const departmentsLink =
+    document.getElementById("departmentsLink");
+
+const coursesLink =
+    document.getElementById("coursesLink");
 
 const academicYearsLink =
-    document.getElementById(
-        "academicYearsLink"
-    );
+    document.getElementById("academicYearsLink");
+
+const feeTypesLink =
+    document.getElementById("feeTypesLink");
+
+const feeStructuresLink =
+    document.getElementById("feeStructuresLink");
 
 const paymentsLink =
-    document.getElementById(
-        "paymentsLink"
+    document.getElementById("paymentsLink");
+
+
+// Dashboard
+
+if (dashboardLink) {
+
+    dashboardLink.addEventListener(
+        "click",
+        function (event) {
+
+            event.preventDefault();
+
+            window.location.href =
+                "admin.html";
+
+        }
     );
+
+}
 
 
 // Students
@@ -708,6 +599,44 @@ if (studentsLink) {
 }
 
 
+// Departments
+
+if (departmentsLink) {
+
+    departmentsLink.addEventListener(
+        "click",
+        function (event) {
+
+            event.preventDefault();
+
+            window.location.href =
+                "departments.html";
+
+        }
+    );
+
+}
+
+
+// Courses
+
+if (coursesLink) {
+
+    coursesLink.addEventListener(
+        "click",
+        function (event) {
+
+            event.preventDefault();
+
+            window.location.href =
+                "courses.html";
+
+        }
+    );
+
+}
+
+
 // Academic Years
 
 if (academicYearsLink) {
@@ -721,6 +650,44 @@ if (academicYearsLink) {
             alert(
                 "Academic Year Management will be added next."
             );
+
+        }
+    );
+
+}
+
+
+// Fee Types
+
+if (feeTypesLink) {
+
+    feeTypesLink.addEventListener(
+        "click",
+        function (event) {
+
+            event.preventDefault();
+
+            window.location.href =
+                "fee-types.html";
+
+        }
+    );
+
+}
+
+
+// Fee Structures
+
+if (feeStructuresLink) {
+
+    feeStructuresLink.addEventListener(
+        "click",
+        function (event) {
+
+            event.preventDefault();
+
+            window.location.href =
+                "fee-structures.html";
 
         }
     );
@@ -753,10 +720,7 @@ if (paymentsLink) {
 // =========================================================
 
 const logoutBtn =
-    document.getElementById(
-        "logoutBtn"
-    );
-
+    document.getElementById("logoutBtn");
 
 if (logoutBtn) {
 
@@ -766,60 +730,50 @@ if (logoutBtn) {
 
             event.preventDefault();
 
-
-            localStorage.removeItem(
-                "userId"
-            );
-
-            localStorage.removeItem(
-                "username"
-            );
-
-            localStorage.removeItem(
-                "role"
-            );
-
-            localStorage.removeItem(
-                "email"
-            );
-
+            localStorage.removeItem("userId");
+            localStorage.removeItem("username");
+            localStorage.removeItem("role");
+            localStorage.removeItem("email");
 
             window.location.href =
                 "index.html";
 
         }
     );
+
 }
 
 
 // =========================================================
-// PAGE LOAD
+// REFRESH COURSES
+// =========================================================
+
+if (refreshCoursesBtn) {
+
+    refreshCoursesBtn.addEventListener(
+        "click",
+        function () {
+
+            loadCourses();
+
+        }
+    );
+
+}
+
+
+// =========================================================
+// LOAD PAGE
 // =========================================================
 
 document.addEventListener(
     "DOMContentLoaded",
     async function () {
 
-        try {
+        await loadDepartments();
 
-            await loadDepartments();
-
-            await loadCourses();
-
-        }
-        catch (error) {
-
-            console.error(
-                "Course page initialization error:",
-                error
-            );
-
-            showMessage(
-                "Unable to load course data.",
-                "error"
-            );
-
-        }
+        await loadCourses();
 
     }
 );
+

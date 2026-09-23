@@ -16,20 +16,12 @@ if (role !== "ADMIN") {
 // HTML ELEMENTS
 // =========================================================
 
-const adminName =
-    document.getElementById("adminName");
+const adminName = document.getElementById("adminName");
+const adminRole = document.getElementById("adminRole");
 
-const adminRole =
-    document.getElementById("adminRole");
-
-const feeTypeForm =
-    document.getElementById("feeTypeForm");
-
-const feeName =
-    document.getElementById("feeName");
-
-const feeDescription =
-    document.getElementById("feeDescription");
+const feeTypeForm = document.getElementById("feeTypeForm");
+const feeName = document.getElementById("feeName");
+const feeDescription = document.getElementById("feeDescription");
 
 const feeTypesTableBody =
     document.getElementById("feeTypesTableBody");
@@ -39,7 +31,6 @@ const feeTypeMessage =
 
 const refreshFeeTypesBtn =
     document.getElementById("refreshFeeTypesBtn");
-
 
 // =========================================================
 // EDIT MODAL ELEMENTS
@@ -66,7 +57,6 @@ const editFeeName =
 const editFeeDescription =
     document.getElementById("editFeeDescription");
 
-
 // =========================================================
 // ADMIN INFORMATION
 // =========================================================
@@ -78,7 +68,6 @@ if (adminName) {
 if (adminRole) {
     adminRole.textContent = "Administrator";
 }
-
 
 // =========================================================
 // SHOW MESSAGE
@@ -105,7 +94,6 @@ function showMessage(message, type) {
     }, 4000);
 }
 
-
 // =========================================================
 // LOAD FEE TYPES
 // =========================================================
@@ -126,9 +114,7 @@ async function loadFeeTypes() {
             await fetch(`${API_URL}/fee-types`);
 
         if (!response.ok) {
-            throw new Error(
-                "Unable to load fee types."
-            );
+            throw new Error("Unable to load fee types.");
         }
 
         const feeTypes =
@@ -155,16 +141,13 @@ async function loadFeeTypes() {
                 document.createElement("tr");
 
             row.innerHTML = `
-
                 <td>
                     ${feeType.feeTypeId}
                 </td>
 
                 <td>
                     <strong>
-                        ${escapeHtml(
-                            feeType.feeName
-                        )}
+                        ${escapeHtml(feeType.feeName)}
                     </strong>
                 </td>
 
@@ -176,7 +159,6 @@ async function loadFeeTypes() {
                 </td>
 
                 <td>
-
                     <div class="fee-type-actions">
 
                         <button
@@ -202,16 +184,13 @@ async function loadFeeTypes() {
                         </button>
 
                     </div>
-
                 </td>
             `;
 
             feeTypesTableBody.appendChild(row);
-
         });
 
-    }
-    catch (error) {
+    } catch (error) {
 
         console.error(
             "Error loading fee types:",
@@ -227,7 +206,6 @@ async function loadFeeTypes() {
         `;
     }
 }
-
 
 // =========================================================
 // ADD FEE TYPE
@@ -307,8 +285,7 @@ if (feeTypeForm) {
 
                 await loadFeeTypes();
 
-            }
-            catch (error) {
+            } catch (error) {
 
                 console.error(
                     "Error adding fee type:",
@@ -320,11 +297,9 @@ if (feeTypeForm) {
                     "error"
                 );
             }
-
         }
     );
 }
-
 
 // =========================================================
 // OPEN EDIT MODAL
@@ -349,7 +324,6 @@ function openEditFeeType(
     editFeeName.focus();
 }
 
-
 // =========================================================
 // CLOSE EDIT MODAL
 // =========================================================
@@ -364,7 +338,6 @@ function closeEditFeeType() {
     }
 }
 
-
 if (editFeeTypeClose) {
 
     editFeeTypeClose.addEventListener(
@@ -373,7 +346,6 @@ if (editFeeTypeClose) {
     );
 }
 
-
 if (editFeeTypeCancel) {
 
     editFeeTypeCancel.addEventListener(
@@ -381,7 +353,6 @@ if (editFeeTypeCancel) {
         closeEditFeeType
     );
 }
-
 
 // =========================================================
 // UPDATE FEE TYPE
@@ -463,8 +434,7 @@ if (editFeeTypeForm) {
 
                 await loadFeeTypes();
 
-            }
-            catch (error) {
+            } catch (error) {
 
                 console.error(
                     "Error updating fee type:",
@@ -476,11 +446,9 @@ if (editFeeTypeForm) {
                     "error"
                 );
             }
-
         }
     );
 }
-
 
 // =========================================================
 // DELETE FEE TYPE
@@ -521,16 +489,17 @@ async function deleteFeeType(id) {
                     JSON.parse(responseText);
 
                 if (errorData.message) {
+
                     errorMessage =
                         errorData.message;
-                }
-                else if (errorData.error) {
+
+                } else if (errorData.error) {
+
                     errorMessage =
                         errorData.error;
                 }
 
-            }
-            catch (e) {
+            } catch (e) {
 
                 if (responseText) {
                     errorMessage =
@@ -550,8 +519,7 @@ async function deleteFeeType(id) {
 
         await loadFeeTypes();
 
-    }
-    catch (error) {
+    } catch (error) {
 
         console.error(
             "Error deleting fee type:",
@@ -565,7 +533,6 @@ async function deleteFeeType(id) {
     }
 }
 
-
 // =========================================================
 // REFRESH
 // =========================================================
@@ -574,14 +541,9 @@ if (refreshFeeTypesBtn) {
 
     refreshFeeTypesBtn.addEventListener(
         "click",
-        function () {
-
-            loadFeeTypes();
-
-        }
+        loadFeeTypes
     );
 }
-
 
 // =========================================================
 // ESCAPE HTML
@@ -604,7 +566,6 @@ function escapeHtml(value) {
         .replace(/'/g, "&#039;");
 }
 
-
 // =========================================================
 // ESCAPE JAVASCRIPT STRINGS
 // =========================================================
@@ -626,7 +587,6 @@ function escapeJs(value) {
         .replace(/\n/g, "\\n");
 }
 
-
 // =========================================================
 // SIDEBAR
 // =========================================================
@@ -640,7 +600,6 @@ const sidebar =
 const mainContent =
     document.getElementById("mainContent");
 
-
 if (menuBtn && sidebar) {
 
     menuBtn.addEventListener(
@@ -650,9 +609,7 @@ if (menuBtn && sidebar) {
             event.preventDefault();
             event.stopPropagation();
 
-            sidebar.classList.toggle(
-                "active"
-            );
+            sidebar.classList.toggle("active");
 
             if (mainContent) {
 
@@ -660,14 +617,12 @@ if (menuBtn && sidebar) {
                     "sidebar-open"
                 );
             }
-
         }
     );
 }
 
-
 // =========================================================
-// CLOSE SIDEBAR OUTSIDE
+// CLOSE SIDEBAR WHEN CLICKING OUTSIDE
 // =========================================================
 
 document.addEventListener(
@@ -690,9 +645,7 @@ document.addEventListener(
             !clickedMenuButton
         ) {
 
-            sidebar.classList.remove(
-                "active"
-            );
+            sidebar.classList.remove("active");
 
             if (mainContent) {
 
@@ -704,16 +657,12 @@ document.addEventListener(
     }
 );
 
-
 // =========================================================
 // SIDEBAR NAVIGATION
 // =========================================================
 
 const dashboardLink =
     document.getElementById("dashboardLink");
-
-const feeTypesLink =
-    document.getElementById("feeTypesLink");
 
 const studentsLink =
     document.getElementById("studentsLink");
@@ -727,13 +676,16 @@ const coursesLink =
 const academicYearsLink =
     document.getElementById("academicYearsLink");
 
+const feeTypesLink =
+    document.getElementById("feeTypesLink");
+
 const feeStructuresLink =
     document.getElementById("feeStructuresLink");
 
 const paymentsLink =
     document.getElementById("paymentsLink");
 
-
+// Dashboard
 if (dashboardLink) {
 
     dashboardLink.addEventListener(
@@ -748,22 +700,7 @@ if (dashboardLink) {
     );
 }
 
-
-if (feeTypesLink) {
-
-    feeTypesLink.addEventListener(
-        "click",
-        function (event) {
-
-            event.preventDefault();
-
-            window.location.href =
-                "fee-types.html";
-        }
-    );
-}
-
-
+// Students - not created yet
 if (studentsLink) {
 
     studentsLink.addEventListener(
@@ -773,13 +710,13 @@ if (studentsLink) {
             event.preventDefault();
 
             alert(
-                "Students Management will be added next."
+                "Student Management will be added next."
             );
         }
     );
 }
 
-
+// Departments
 if (departmentsLink) {
 
     departmentsLink.addEventListener(
@@ -788,14 +725,13 @@ if (departmentsLink) {
 
             event.preventDefault();
 
-            alert(
-                "Department Management will be added next."
-            );
+            window.location.href =
+                "departments.html";
         }
     );
 }
 
-
+// Courses
 if (coursesLink) {
 
     coursesLink.addEventListener(
@@ -804,14 +740,13 @@ if (coursesLink) {
 
             event.preventDefault();
 
-            alert(
-                "Course Management will be added next."
-            );
+            window.location.href =
+                "courses.html";
         }
     );
 }
 
-
+// Academic Years - not created yet
 if (academicYearsLink) {
 
     academicYearsLink.addEventListener(
@@ -827,7 +762,22 @@ if (academicYearsLink) {
     );
 }
 
+// Fee Types
+if (feeTypesLink) {
 
+    feeTypesLink.addEventListener(
+        "click",
+        function (event) {
+
+            event.preventDefault();
+
+            window.location.href =
+                "fee-types.html";
+        }
+    );
+}
+
+// Fee Structures
 if (feeStructuresLink) {
 
     feeStructuresLink.addEventListener(
@@ -836,14 +786,13 @@ if (feeStructuresLink) {
 
             event.preventDefault();
 
-            alert(
-                "Fee Structure Management will be added next."
-            );
+            window.location.href =
+                "fee-structures.html";
         }
     );
 }
 
-
+// Payments
 if (paymentsLink) {
 
     paymentsLink.addEventListener(
@@ -852,13 +801,11 @@ if (paymentsLink) {
 
             event.preventDefault();
 
-            alert(
-                "Payment Management will be added next."
-            );
+            window.location.href =
+                "payments.html";
         }
     );
 }
-
 
 // =========================================================
 // LOGOUT
@@ -886,9 +833,8 @@ if (logoutBtn) {
     );
 }
 
-
 // =========================================================
-// CLOSE MODAL WITH ESC
+// CLOSE EDIT MODAL WITH ESC
 // =========================================================
 
 document.addEventListener(
@@ -905,7 +851,6 @@ document.addEventListener(
         }
     }
 );
-
 
 // =========================================================
 // CLOSE MODAL BY CLICKING OUTSIDE
@@ -928,7 +873,6 @@ if (editFeeTypeModal) {
     );
 }
 
-
 // =========================================================
 // LOAD PAGE
 // =========================================================
@@ -940,3 +884,4 @@ document.addEventListener(
         loadFeeTypes();
     }
 );
+

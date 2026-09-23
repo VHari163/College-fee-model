@@ -11,9 +11,8 @@ if (role !== "ADMIN") {
     window.location.href = "index.html";
 }
 
-
 // =========================================================
-// HTML ELEMENTS
+// ADMIN INFORMATION
 // =========================================================
 
 const adminName =
@@ -21,6 +20,21 @@ const adminName =
 
 const adminRole =
     document.getElementById("adminRole");
+
+if (adminName) {
+    adminName.textContent = username || "Admin";
+}
+
+if (adminRole) {
+    adminRole.textContent = "Administrator";
+}
+
+// =========================================================
+// ELEMENTS
+// =========================================================
+
+const feeStructureForm =
+    document.getElementById("feeStructureForm");
 
 const courseSelect =
     document.getElementById("courseSelect");
@@ -37,383 +51,287 @@ const feeAmount =
 const dueDate =
     document.getElementById("dueDate");
 
-const feeStructureForm =
-    document.getElementById("feeStructureForm");
-
-const feeStructureMessage =
-    document.getElementById("feeStructureMessage");
-
 const feeStructuresTableBody =
     document.getElementById("feeStructuresTableBody");
 
-const refreshStructuresBtn =
-    document.getElementById("refreshStructuresBtn");
-
+const refreshFeeStructuresBtn =
+    document.getElementById(
+        "refreshFeeStructuresBtn"
+    );
 
 // =========================================================
-// EDIT MODAL ELEMENTS
+// EDIT MODAL
 // =========================================================
 
-const editModal =
-    document.getElementById("editFeeStructureModal");
+const editFeeStructureModal =
+    document.getElementById(
+        "editFeeStructureModal"
+    );
 
-const editClose =
-    document.getElementById("editFeeStructureClose");
+const editFeeStructureClose =
+    document.getElementById(
+        "editFeeStructureClose"
+    );
 
-const editCancel =
-    document.getElementById("editFeeStructureCancel");
+const editFeeStructureCancel =
+    document.getElementById(
+        "editFeeStructureCancel"
+    );
 
-const editForm =
-    document.getElementById("editFeeStructureForm");
+const editFeeStructureForm =
+    document.getElementById(
+        "editFeeStructureForm"
+    );
 
-const editId =
-    document.getElementById("editFeeStructureId");
+const editFeeStructureId =
+    document.getElementById(
+        "editFeeStructureId"
+    );
 
 const editCourseSelect =
-    document.getElementById("editCourseSelect");
+    document.getElementById(
+        "editCourseSelect"
+    );
 
 const editAcademicYearSelect =
-    document.getElementById("editAcademicYearSelect");
+    document.getElementById(
+        "editAcademicYearSelect"
+    );
 
 const editFeeTypeSelect =
-    document.getElementById("editFeeTypeSelect");
+    document.getElementById(
+        "editFeeTypeSelect"
+    );
 
 const editFeeAmount =
-    document.getElementById("editFeeAmount");
+    document.getElementById(
+        "editFeeAmount"
+    );
 
 const editDueDate =
-    document.getElementById("editDueDate");
-
-
-// =========================================================
-// ADMIN INFORMATION
-// =========================================================
-
-if (adminName) {
-    adminName.textContent = username || "Admin";
-}
-
-if (adminRole) {
-    adminRole.textContent = "Administrator";
-}
-
-
-// =========================================================
-// SHOW MESSAGE
-// =========================================================
-
-function showMessage(message, type) {
-
-    if (!feeStructureMessage) {
-        return;
-    }
-
-    feeStructureMessage.textContent = message;
-
-    feeStructureMessage.className =
-        "fee-type-message " + type;
-
-    setTimeout(() => {
-
-        feeStructureMessage.textContent = "";
-
-        feeStructureMessage.className =
-            "fee-type-message";
-
-    }, 5000);
-}
-
+    document.getElementById(
+        "editDueDate"
+    );
 
 // =========================================================
 // LOAD COURSES
 // =========================================================
 
-async function loadCourses(
-    targetSelect = courseSelect
-) {
+async function loadCourses() {
 
-    if (!targetSelect) {
-        return;
-    }
+    const response =
+        await fetch(`${API_URL}/courses`);
 
-    try {
-
-        targetSelect.innerHTML = `
-            <option value="">
-                Loading courses...
-            </option>
-        `;
-
-
-        const response =
-            await fetch(
-                `${API_URL}/courses`
-            );
-
-
-        if (!response.ok) {
-
-            throw new Error(
-                "Unable to load courses."
-            );
-        }
-
-
-        const courses =
-            await response.json();
-
-
-        targetSelect.innerHTML = `
-            <option value="">
-                Select Course
-            </option>
-        `;
-
-
-        if (
-            !courses ||
-            courses.length === 0
-        ) {
-
-            targetSelect.innerHTML = `
-                <option value="">
-                    No courses available
-                </option>
-            `;
-
-            return;
-        }
-
-
-        courses.forEach(course => {
-
-            const option =
-                document.createElement("option");
-
-            option.value =
-                course.courseId;
-
-            option.textContent =
-                `${course.courseName} (${course.courseCode})`;
-
-            targetSelect.appendChild(
-                option
-            );
-
-        });
-
-    }
-    catch (error) {
-
-        console.error(
-            "Course loading error:",
-            error
+    if (!response.ok) {
+        throw new Error(
+            "Unable to load courses."
         );
-
-
-        targetSelect.innerHTML = `
-            <option value="">
-                Unable to load courses
-            </option>
-        `;
     }
-}
 
+    return await response.json();
+}
 
 // =========================================================
 // LOAD ACADEMIC YEARS
 // =========================================================
 
-async function loadAcademicYears(
-    targetSelect = academicYearSelect
-) {
+async function loadAcademicYears() {
 
-    if (!targetSelect) {
-        return;
-    }
+    const response =
+        await fetch(`${API_URL}/academic-years`);
 
-    try {
-
-        targetSelect.innerHTML = `
-            <option value="">
-                Loading academic years...
-            </option>
-        `;
-
-
-        const response =
-            await fetch(
-                `${API_URL}/academic-years`
-            );
-
-
-        if (!response.ok) {
-
-            throw new Error(
-                "Unable to load academic years."
-            );
-        }
-
-
-        const academicYears =
-            await response.json();
-
-
-        targetSelect.innerHTML = `
-            <option value="">
-                Select Academic Year
-            </option>
-        `;
-
-
-        if (
-            !academicYears ||
-            academicYears.length === 0
-        ) {
-
-            targetSelect.innerHTML = `
-                <option value="">
-                    No academic years available
-                </option>
-            `;
-
-            return;
-        }
-
-
-        academicYears.forEach(year => {
-
-            const option =
-                document.createElement("option");
-
-            option.value =
-                year.academicYearId;
-
-            option.textContent =
-                year.academicYear;
-
-            targetSelect.appendChild(
-                option
-            );
-
-        });
-
-    }
-    catch (error) {
-
-        console.error(
-            "Academic year loading error:",
-            error
+    if (!response.ok) {
+        throw new Error(
+            "Unable to load academic years."
         );
-
-
-        targetSelect.innerHTML = `
-            <option value="">
-                Unable to load academic years
-            </option>
-        `;
     }
-}
 
+    return await response.json();
+}
 
 // =========================================================
 // LOAD FEE TYPES
 // =========================================================
 
-async function loadFeeTypes(
-    targetSelect = feeTypeSelect
+async function loadFeeTypes() {
+
+    const response =
+        await fetch(`${API_URL}/fee-types`);
+
+    if (!response.ok) {
+        throw new Error(
+            "Unable to load fee types."
+        );
+    }
+
+    return await response.json();
+}
+
+// =========================================================
+// FILL COURSE SELECT
+// =========================================================
+
+function fillCourseSelect(
+    selectElement,
+    courses
 ) {
 
-    if (!targetSelect) {
+    if (!selectElement) {
         return;
     }
 
+    selectElement.innerHTML = `
+        <option value="">
+            Select Course
+        </option>
+    `;
+
+    courses.forEach(course => {
+
+        const option =
+            document.createElement("option");
+
+        option.value =
+            course.courseId;
+
+        option.textContent =
+            course.courseName;
+
+        selectElement.appendChild(option);
+    });
+}
+
+// =========================================================
+// FILL ACADEMIC YEAR SELECT
+// =========================================================
+
+function fillAcademicYearSelect(
+    selectElement,
+    academicYears
+) {
+
+    if (!selectElement) {
+        return;
+    }
+
+    selectElement.innerHTML = `
+        <option value="">
+            Select Academic Year
+        </option>
+    `;
+
+    academicYears.forEach(year => {
+
+        const option =
+            document.createElement("option");
+
+        option.value =
+            year.academicYearId;
+
+        option.textContent =
+            year.academicYear;
+
+        selectElement.appendChild(option);
+    });
+}
+
+// =========================================================
+// FILL FEE TYPE SELECT
+// =========================================================
+
+function fillFeeTypeSelect(
+    selectElement,
+    feeTypes
+) {
+
+    if (!selectElement) {
+        return;
+    }
+
+    selectElement.innerHTML = `
+        <option value="">
+            Select Fee Type
+        </option>
+    `;
+
+    feeTypes.forEach(feeType => {
+
+        const option =
+            document.createElement("option");
+
+        option.value =
+            feeType.feeTypeId;
+
+        option.textContent =
+            feeType.feeName;
+
+        selectElement.appendChild(option);
+    });
+}
+
+// =========================================================
+// LOAD ALL MASTER DATA
+// =========================================================
+
+async function loadMasterData() {
+
     try {
 
-        targetSelect.innerHTML = `
-            <option value="">
-                Loading fee types...
-            </option>
-        `;
+        const [
+            courses,
+            academicYears,
+            feeTypes
+        ] = await Promise.all([
+            loadCourses(),
+            loadAcademicYears(),
+            loadFeeTypes()
+        ]);
 
+        fillCourseSelect(
+            courseSelect,
+            courses
+        );
 
-        const response =
-            await fetch(
-                `${API_URL}/fee-types`
-            );
+        fillAcademicYearSelect(
+            academicYearSelect,
+            academicYears
+        );
 
+        fillFeeTypeSelect(
+            feeTypeSelect,
+            feeTypes
+        );
 
-        if (!response.ok) {
+        fillCourseSelect(
+            editCourseSelect,
+            courses
+        );
 
-            throw new Error(
-                "Unable to load fee types."
-            );
-        }
+        fillAcademicYearSelect(
+            editAcademicYearSelect,
+            academicYears
+        );
 
+        fillFeeTypeSelect(
+            editFeeTypeSelect,
+            feeTypes
+        );
 
-        const feeTypes =
-            await response.json();
-
-
-        targetSelect.innerHTML = `
-            <option value="">
-                Select Fee Type
-            </option>
-        `;
-
-
-        if (
-            !feeTypes ||
-            feeTypes.length === 0
-        ) {
-
-            targetSelect.innerHTML = `
-                <option value="">
-                    No fee types available
-                </option>
-            `;
-
-            return;
-        }
-
-
-        feeTypes.forEach(feeType => {
-
-            const option =
-                document.createElement("option");
-
-            option.value =
-                feeType.feeTypeId;
-
-            option.textContent =
-                feeType.feeName;
-
-            targetSelect.appendChild(
-                option
-            );
-
-        });
-
-    }
-    catch (error) {
+    } catch (error) {
 
         console.error(
-            "Fee type loading error:",
+            "Error loading master data:",
             error
         );
 
-
-        targetSelect.innerHTML = `
-            <option value="">
-                Unable to load fee types
-            </option>
-        `;
+        alert(
+            "Unable to load course, academic year or fee type data."
+        );
     }
 }
 
-
 // =========================================================
-// LOAD ALL FEE STRUCTURES
+// LOAD FEE STRUCTURES
 // =========================================================
 
 async function loadFeeStructures() {
@@ -422,47 +340,37 @@ async function loadFeeStructures() {
 
         feeStructuresTableBody.innerHTML = `
             <tr>
-                <td colspan="7" class="loading-cell">
+                <td colspan="7">
                     Loading fee structures...
                 </td>
             </tr>
         `;
-
 
         const response =
             await fetch(
                 `${API_URL}/fee-structures`
             );
 
-
         if (!response.ok) {
-
             throw new Error(
                 "Unable to load fee structures."
             );
         }
 
-
-        const feeStructures =
+        const structures =
             await response.json();
-
 
         feeStructuresTableBody.innerHTML = "";
 
-
         if (
-            !feeStructures ||
-            feeStructures.length === 0
+            !structures ||
+            structures.length === 0
         ) {
 
             feeStructuresTableBody.innerHTML = `
                 <tr>
-                    <td
-                        colspan="7"
-                        class="empty-cell">
-
+                    <td colspan="7">
                         No fee structures found.
-
                     </td>
                 </tr>
             `;
@@ -470,66 +378,51 @@ async function loadFeeStructures() {
             return;
         }
 
-
-        feeStructures.forEach(fee => {
+        structures.forEach(structure => {
 
             const row =
                 document.createElement("tr");
 
-
             row.innerHTML = `
-
                 <td>
-                    ${fee.feeStructureId}
+                    ${structure.feeStructureId}
                 </td>
 
-
                 <td>
-                    ${
-                        fee.course
-                            ? escapeHtml(
-                                fee.course.courseName
-                            )
-                            : "-"
-                    }
-                </td>
-
-
-                <td>
-                    ${
-                        fee.academicYear
-                            ? escapeHtml(
-                                fee.academicYear.academicYear
-                            )
-                            : "-"
-                    }
-                </td>
-
-
-                <td>
-                    ${
-                        fee.feeType
-                            ? escapeHtml(
-                                fee.feeType.feeName
-                            )
-                            : "-"
-                    }
-                </td>
-
-
-                <td>
-                    ₹${formatAmount(
-                        fee.amount
+                    ${escapeHtml(
+                        structure.course?.courseName ||
+                        "Unknown"
                     )}
                 </td>
 
-
                 <td>
-                    ${formatDate(
-                        fee.dueDate
+                    ${escapeHtml(
+                        structure.academicYear?.academicYear ||
+                        "Unknown"
                     )}
                 </td>
 
+                <td>
+                    ${escapeHtml(
+                        structure.feeType?.feeName ||
+                        "Unknown"
+                    )}
+                </td>
+
+                <td>
+                    ₹${Number(
+                        structure.amount
+                    ).toLocaleString("en-IN", {
+                        minimumFractionDigits: 2
+                    })}
+                </td>
+
+                <td>
+                    ${
+                        structure.dueDate ||
+                        "-"
+                    }
+                </td>
 
                 <td>
 
@@ -537,65 +430,46 @@ async function loadFeeStructures() {
 
                         <button
                             type="button"
-                            class="fee-structure-edit-btn"
+                            class="fee-edit-btn"
                             onclick="openEditFeeStructure(
-                                ${fee.feeStructureId}
+                                ${structure.feeStructureId}
                             )">
-
                             Edit
-
                         </button>
-
 
                         <button
                             type="button"
-                            class="fee-structure-delete-btn"
+                            class="fee-delete-btn"
                             onclick="deleteFeeStructure(
-                                ${fee.feeStructureId}
+                                ${structure.feeStructureId}
                             )">
-
                             Delete
-
                         </button>
 
                     </div>
 
                 </td>
-
             `;
 
-
-            feeStructuresTableBody.appendChild(
-                row
-            );
-
+            feeStructuresTableBody.appendChild(row);
         });
 
-    }
-    catch (error) {
+    } catch (error) {
 
         console.error(
-            "Fee structure loading error:",
+            "Error loading fee structures:",
             error
         );
 
-
         feeStructuresTableBody.innerHTML = `
             <tr>
-
-                <td
-                    colspan="7"
-                    class="error-cell">
-
+                <td colspan="7">
                     Unable to load fee structures.
-
                 </td>
-
             </tr>
         `;
     }
 }
-
 
 // =========================================================
 // ADD FEE STRUCTURE
@@ -609,109 +483,79 @@ if (feeStructureForm) {
 
             event.preventDefault();
 
-
             const courseId =
-                Number(
-                    courseSelect.value
-                );
-
+                courseSelect.value;
 
             const academicYearId =
-                Number(
-                    academicYearSelect.value
-                );
-
+                academicYearSelect.value;
 
             const feeTypeId =
-                Number(
-                    feeTypeSelect.value
-                );
-
+                feeTypeSelect.value;
 
             const amount =
-                Number(
+                parseFloat(
                     feeAmount.value
                 );
 
-
-            const selectedDueDate =
+            const date =
                 dueDate.value;
-
-
-            // -----------------------------------------
-            // VALIDATION
-            // -----------------------------------------
 
             if (!courseId) {
 
-                showMessage(
-                    "Please select a course.",
-                    "error"
+                alert(
+                    "Please select a course."
                 );
 
                 return;
             }
-
 
             if (!academicYearId) {
 
-                showMessage(
-                    "Please select an academic year.",
-                    "error"
+                alert(
+                    "Please select an academic year."
                 );
 
                 return;
             }
-
 
             if (!feeTypeId) {
 
-                showMessage(
-                    "Please select a fee type.",
-                    "error"
+                alert(
+                    "Please select a fee type."
                 );
 
                 return;
             }
 
-
             if (
-                !amount ||
+                isNaN(amount) ||
                 amount <= 0
             ) {
 
-                showMessage(
-                    "Please enter a valid amount.",
-                    "error"
+                alert(
+                    "Please enter a valid amount."
                 );
 
                 return;
             }
-
-
-            // -----------------------------------------
-            // REQUEST DATA
-            // -----------------------------------------
 
             const feeStructureData = {
 
                 courseId:
-                    courseId,
+                    parseInt(courseId),
 
                 academicYearId:
-                    academicYearId,
+                    parseInt(academicYearId),
 
                 feeTypeId:
-                    feeTypeId,
+                    parseInt(feeTypeId),
 
                 amount:
                     amount,
 
                 dueDate:
-                    selectedDueDate || null
-
+                    date || null
             };
-
 
             try {
 
@@ -733,7 +577,6 @@ if (feeStructureForm) {
                         }
                     );
 
-
                 if (!response.ok) {
 
                     const errorText =
@@ -745,38 +588,28 @@ if (feeStructureForm) {
                     );
                 }
 
-
-                showMessage(
-                    "Fee structure added successfully.",
-                    "success"
+                alert(
+                    "Fee structure added successfully."
                 );
 
-
-                feeAmount.value = "";
-                dueDate.value = "";
-
+                feeStructureForm.reset();
 
                 await loadFeeStructures();
 
-            }
-            catch (error) {
+            } catch (error) {
 
                 console.error(
-                    "Add fee structure error:",
+                    "Error adding fee structure:",
                     error
                 );
 
-
-                showMessage(
-                    "Unable to add fee structure. This combination may already exist.",
-                    "error"
+                alert(
+                    "Unable to add fee structure."
                 );
             }
-
         }
     );
 }
-
 
 // =========================================================
 // OPEN EDIT MODAL
@@ -791,7 +624,6 @@ async function openEditFeeStructure(id) {
                 `${API_URL}/fee-structures/${id}`
             );
 
-
         if (!response.ok) {
 
             throw new Error(
@@ -799,188 +631,114 @@ async function openEditFeeStructure(id) {
             );
         }
 
-
-        const fee =
+        const structure =
             await response.json();
 
-
-        // Load edit dropdowns
-
-        await loadCourses(
-            editCourseSelect
-        );
-
-        await loadAcademicYears(
-            editAcademicYearSelect
-        );
-
-        await loadFeeTypes(
-            editFeeTypeSelect
-        );
-
-
-        // Set current values
-
-        editId.value =
-            fee.feeStructureId;
-
+        editFeeStructureId.value =
+            structure.feeStructureId;
 
         editCourseSelect.value =
-            fee.course.courseId;
-
+            structure.course?.courseId || "";
 
         editAcademicYearSelect.value =
-            fee.academicYear.academicYearId;
-
+            structure.academicYear?.academicYearId || "";
 
         editFeeTypeSelect.value =
-            fee.feeType.feeTypeId;
-
+            structure.feeType?.feeTypeId || "";
 
         editFeeAmount.value =
-            fee.amount;
-
+            structure.amount || "";
 
         editDueDate.value =
-            fee.dueDate || "";
+            structure.dueDate || "";
 
-
-        // Show modal
-
-        editModal.classList.add(
+        editFeeStructureModal.classList.add(
             "show"
         );
 
-    }
-    catch (error) {
+    } catch (error) {
 
         console.error(
-            "Edit loading error:",
+            "Error opening fee structure:",
             error
         );
 
-
-        showMessage(
-            "Unable to load fee structure.",
-            "error"
+        alert(
+            "Unable to load fee structure."
         );
     }
 }
-
 
 // =========================================================
 // CLOSE EDIT MODAL
 // =========================================================
 
-function closeEditModal() {
+function closeEditFeeStructure() {
 
-    if (editModal) {
+    if (editFeeStructureModal) {
 
-        editModal.classList.remove(
+        editFeeStructureModal.classList.remove(
             "show"
         );
     }
 }
 
+if (editFeeStructureClose) {
 
-if (editClose) {
-
-    editClose.addEventListener(
+    editFeeStructureClose.addEventListener(
         "click",
-        closeEditModal
+        closeEditFeeStructure
     );
 }
 
+if (editFeeStructureCancel) {
 
-if (editCancel) {
-
-    editCancel.addEventListener(
+    editFeeStructureCancel.addEventListener(
         "click",
-        closeEditModal
+        closeEditFeeStructure
     );
 }
-
 
 // =========================================================
 // UPDATE FEE STRUCTURE
 // =========================================================
 
-if (editForm) {
+if (editFeeStructureForm) {
 
-    editForm.addEventListener(
+    editFeeStructureForm.addEventListener(
         "submit",
         async function (event) {
 
             event.preventDefault();
 
-
             const id =
-                Number(
-                    editId.value
-                );
+                editFeeStructureId.value;
 
-
-            const updatedData = {
+            const data = {
 
                 courseId:
-                    Number(
+                    parseInt(
                         editCourseSelect.value
                     ),
 
                 academicYearId:
-                    Number(
+                    parseInt(
                         editAcademicYearSelect.value
                     ),
 
                 feeTypeId:
-                    Number(
+                    parseInt(
                         editFeeTypeSelect.value
                     ),
 
                 amount:
-                    Number(
+                    parseFloat(
                         editFeeAmount.value
                     ),
 
                 dueDate:
-                    editDueDate.value ||
-                    null
-
+                    editDueDate.value || null
             };
-
-
-            // -----------------------------------------
-            // VALIDATION
-            // -----------------------------------------
-
-            if (
-                !updatedData.courseId ||
-                !updatedData.academicYearId ||
-                !updatedData.feeTypeId
-            ) {
-
-                showMessage(
-                    "Please complete all required fields.",
-                    "error"
-                );
-
-                return;
-            }
-
-
-            if (
-                !updatedData.amount ||
-                updatedData.amount <= 0
-            ) {
-
-                showMessage(
-                    "Amount must be greater than zero.",
-                    "error"
-                );
-
-                return;
-            }
-
 
             try {
 
@@ -996,12 +754,9 @@ if (editForm) {
                             },
 
                             body:
-                                JSON.stringify(
-                                    updatedData
-                                )
+                                JSON.stringify(data)
                         }
                     );
-
 
                 if (!response.ok) {
 
@@ -1014,37 +769,28 @@ if (editForm) {
                     );
                 }
 
+                closeEditFeeStructure();
 
-                closeEditModal();
-
-
-                showMessage(
-                    "Fee structure updated successfully.",
-                    "success"
+                alert(
+                    "Fee structure updated successfully."
                 );
-
 
                 await loadFeeStructures();
 
-            }
-            catch (error) {
+            } catch (error) {
 
                 console.error(
-                    "Update error:",
+                    "Error updating fee structure:",
                     error
                 );
 
-
-                showMessage(
-                    "Unable to update fee structure. Check whether the same course, academic year and fee type combination already exists.",
-                    "error"
+                alert(
+                    "Unable to update fee structure."
                 );
             }
-
         }
     );
 }
-
 
 // =========================================================
 // DELETE FEE STRUCTURE
@@ -1057,11 +803,9 @@ async function deleteFeeStructure(id) {
             "Are you sure you want to delete this fee structure?"
         );
 
-
     if (!confirmed) {
         return;
     }
-
 
     try {
 
@@ -1073,132 +817,35 @@ async function deleteFeeStructure(id) {
                 }
             );
 
-
-        const responseText =
-            await response.text();
-
-
         if (!response.ok) {
 
-            let message =
-                "Unable to delete fee structure.";
-
-
-            try {
-
-                const errorData =
-                    JSON.parse(
-                        responseText
-                    );
-
-
-                if (errorData.message) {
-
-                    message =
-                        errorData.message;
-                }
-
-            }
-            catch (e) {
-
-                if (responseText) {
-
-                    message =
-                        responseText;
-                }
-            }
-
+            const errorText =
+                await response.text();
 
             throw new Error(
-                message
+                errorText ||
+                "Unable to delete fee structure."
             );
         }
 
-
-        showMessage(
-            "Fee structure deleted successfully.",
-            "success"
+        alert(
+            "Fee structure deleted successfully."
         );
-
 
         await loadFeeStructures();
 
-    }
-    catch (error) {
+    } catch (error) {
 
         console.error(
-            "Delete error:",
+            "Error deleting fee structure:",
             error
         );
 
-
-        showMessage(
-            "This fee structure may already be referenced by a payment and cannot be deleted.",
-            "error"
+        alert(
+            "Unable to delete fee structure. It may already be used by a payment."
         );
     }
 }
-
-
-// =========================================================
-// REFRESH BUTTON
-// =========================================================
-
-if (refreshStructuresBtn) {
-
-    refreshStructuresBtn.addEventListener(
-        "click",
-        function () {
-
-            loadFeeStructures();
-
-        }
-    );
-}
-
-
-// =========================================================
-// FORMAT AMOUNT
-// =========================================================
-
-function formatAmount(amount) {
-
-    return Number(amount)
-        .toLocaleString(
-            "en-IN",
-            {
-                minimumFractionDigits: 2,
-                maximumFractionDigits: 2
-            }
-        );
-}
-
-
-// =========================================================
-// FORMAT DATE
-// =========================================================
-
-function formatDate(dateString) {
-
-    if (!dateString) {
-        return "Not specified";
-    }
-
-
-    const date =
-        new Date(dateString);
-
-
-    return date.toLocaleDateString(
-        "en-IN",
-        {
-            day: "2-digit",
-            month: "2-digit",
-            year: "numeric"
-        }
-    );
-}
-
 
 // =========================================================
 // ESCAPE HTML
@@ -1213,7 +860,6 @@ function escapeHtml(value) {
         return "";
     }
 
-
     return String(value)
         .replace(/&/g, "&amp;")
         .replace(/</g, "&lt;")
@@ -1221,7 +867,6 @@ function escapeHtml(value) {
         .replace(/"/g, "&quot;")
         .replace(/'/g, "&#039;");
 }
-
 
 // =========================================================
 // SIDEBAR
@@ -1236,7 +881,6 @@ const sidebar =
 const mainContent =
     document.getElementById("mainContent");
 
-
 if (menuBtn && sidebar) {
 
     menuBtn.addEventListener(
@@ -1246,11 +890,7 @@ if (menuBtn && sidebar) {
             event.preventDefault();
             event.stopPropagation();
 
-
-            sidebar.classList.toggle(
-                "active"
-            );
-
+            sidebar.classList.toggle("active");
 
             if (mainContent) {
 
@@ -1258,11 +898,9 @@ if (menuBtn && sidebar) {
                     "sidebar-open"
                 );
             }
-
         }
     );
 }
-
 
 // =========================================================
 // CLOSE SIDEBAR OUTSIDE
@@ -1276,14 +914,11 @@ document.addEventListener(
             return;
         }
 
-
         const clickedInsideSidebar =
             sidebar.contains(event.target);
 
-
         const clickedMenuButton =
             menuBtn.contains(event.target);
-
 
         if (
             sidebar.classList.contains("active") &&
@@ -1291,10 +926,7 @@ document.addEventListener(
             !clickedMenuButton
         ) {
 
-            sidebar.classList.remove(
-                "active"
-            );
-
+            sidebar.classList.remove("active");
 
             if (mainContent) {
 
@@ -1303,45 +935,15 @@ document.addEventListener(
                 );
             }
         }
-
     }
 );
 
-
 // =========================================================
-// LOGOUT
+// NAVIGATION
 // =========================================================
 
-const logoutBtn =
-    document.getElementById("logoutBtn");
-
-
-if (logoutBtn) {
-
-    logoutBtn.addEventListener(
-        "click",
-        function (event) {
-
-            event.preventDefault();
-
-
-            localStorage.removeItem("userId");
-            localStorage.removeItem("username");
-            localStorage.removeItem("role");
-            localStorage.removeItem("email");
-
-
-            window.location.href =
-                "index.html";
-
-        }
-    );
-}
-
-
-// =========================================================
-// PLACEHOLDER LINKS
-// =========================================================
+const dashboardLink =
+    document.getElementById("dashboardLink");
 
 const studentsLink =
     document.getElementById("studentsLink");
@@ -1355,10 +957,31 @@ const coursesLink =
 const academicYearsLink =
     document.getElementById("academicYearsLink");
 
+const feeTypesLink =
+    document.getElementById("feeTypesLink");
+
+const feeStructuresLink =
+    document.getElementById("feeStructuresLink");
+
 const paymentsLink =
     document.getElementById("paymentsLink");
 
+// Dashboard
+if (dashboardLink) {
 
+    dashboardLink.addEventListener(
+        "click",
+        function (event) {
+
+            event.preventDefault();
+
+            window.location.href =
+                "admin.html";
+        }
+    );
+}
+
+// Students
 if (studentsLink) {
 
     studentsLink.addEventListener(
@@ -1368,14 +991,13 @@ if (studentsLink) {
             event.preventDefault();
 
             alert(
-                "Students Management will be added next."
+                "Student Management will be added next."
             );
-
         }
     );
 }
 
-
+// Departments
 if (departmentsLink) {
 
     departmentsLink.addEventListener(
@@ -1384,15 +1006,13 @@ if (departmentsLink) {
 
             event.preventDefault();
 
-            alert(
-                "Department Management will be added next."
-            );
-
+            window.location.href =
+                "departments.html";
         }
     );
 }
 
-
+// Courses
 if (coursesLink) {
 
     coursesLink.addEventListener(
@@ -1401,15 +1021,13 @@ if (coursesLink) {
 
             event.preventDefault();
 
-            alert(
-                "Course Management will be added next."
-            );
-
+            window.location.href =
+                "courses.html";
         }
     );
 }
 
-
+// Academic Years
 if (academicYearsLink) {
 
     academicYearsLink.addEventListener(
@@ -1421,12 +1039,41 @@ if (academicYearsLink) {
             alert(
                 "Academic Year Management will be added next."
             );
-
         }
     );
 }
 
+// Fee Types
+if (feeTypesLink) {
 
+    feeTypesLink.addEventListener(
+        "click",
+        function (event) {
+
+            event.preventDefault();
+
+            window.location.href =
+                "fee-types.html";
+        }
+    );
+}
+
+// Fee Structures
+if (feeStructuresLink) {
+
+    feeStructuresLink.addEventListener(
+        "click",
+        function (event) {
+
+            event.preventDefault();
+
+            window.location.href =
+                "fee-structures.html";
+        }
+    );
+}
+
+// Payments
 if (paymentsLink) {
 
     paymentsLink.addEventListener(
@@ -1435,37 +1082,41 @@ if (paymentsLink) {
 
             event.preventDefault();
 
-            alert(
-                "Payment Management will be added next."
-            );
-
+            window.location.href =
+                "payments.html";
         }
     );
 }
 
-
 // =========================================================
-// MODAL EVENTS
+// LOGOUT
 // =========================================================
 
-if (editModal) {
+const logoutBtn =
+    document.getElementById("logoutBtn");
 
-    editModal.addEventListener(
+if (logoutBtn) {
+
+    logoutBtn.addEventListener(
         "click",
         function (event) {
 
-            if (
-                event.target ===
-                editModal
-            ) {
+            event.preventDefault();
 
-                closeEditModal();
-            }
+            localStorage.removeItem("userId");
+            localStorage.removeItem("username");
+            localStorage.removeItem("role");
+            localStorage.removeItem("email");
 
+            window.location.href =
+                "index.html";
         }
     );
 }
 
+// =========================================================
+// CLOSE MODAL WITH ESC
+// =========================================================
 
 document.addEventListener(
     "keydown",
@@ -1473,49 +1124,47 @@ document.addEventListener(
 
         if (
             event.key === "Escape" &&
-            editModal &&
-            editModal.classList.contains("show")
+            editFeeStructureModal &&
+            editFeeStructureModal.classList.contains("show")
         ) {
 
-            closeEditModal();
+            closeEditFeeStructure();
         }
-
     }
 );
 
+// =========================================================
+// CLOSE MODAL BY CLICKING OUTSIDE
+// =========================================================
+
+if (editFeeStructureModal) {
+
+    editFeeStructureModal.addEventListener(
+        "click",
+        function (event) {
+
+            if (
+                event.target ===
+                editFeeStructureModal
+            ) {
+
+                closeEditFeeStructure();
+            }
+        }
+    );
+}
 
 // =========================================================
-// PAGE LOAD
+// LOAD PAGE
 // =========================================================
 
 document.addEventListener(
     "DOMContentLoaded",
     async function () {
 
-        try {
+        await loadMasterData();
 
-            await loadCourses();
-
-            await loadAcademicYears();
-
-            await loadFeeTypes();
-
-            await loadFeeStructures();
-
-        }
-        catch (error) {
-
-            console.error(
-                "Page initialization error:",
-                error
-            );
-
-
-            showMessage(
-                "Unable to load fee structure data.",
-                "error"
-            );
-        }
-
+        await loadFeeStructures();
     }
 );
+

@@ -15,14 +15,15 @@
 
 </head>
 
-<body>
 
+<body>
 
     <!-- =====================================================
          SIDEBAR
     ====================================================== -->
 
-    <aside class="sidebar" id="sidebar">
+    <aside class="sidebar"
+           id="sidebar">
 
         <div class="sidebar-header">
 
@@ -39,31 +40,32 @@
 
         <nav class="sidebar-nav">
 
+            <a href="admin.html"
+               id="dashboardLink">
 
-            <!-- DASHBOARD -->
-
-            <a href="admin.html">
                 🏠 Dashboard
+
             </a>
 
 
-            <!-- STUDENTS -->
+            <a href="#"
+               id="studentsLink">
 
-            <a href="#" id="studentsLink">
                 👨‍🎓 Students
+
             </a>
 
 
-            <!-- DEPARTMENTS -->
+            <a href="departments.html"
+               id="departmentsLink">
 
-            <a href="departments.html">
                 🏢 Departments
+
             </a>
 
-
-            <!-- COURSES -->
 
             <a href="courses.html"
+               id="coursesLink"
                class="active">
 
                 📚 Courses
@@ -71,44 +73,48 @@
             </a>
 
 
-            <!-- ACADEMIC YEARS -->
+            <a href="#"
+               id="academicYearsLink">
 
-            <a href="#" id="academicYearsLink">
                 📅 Academic Years
+
             </a>
 
 
-            <!-- FEE TYPES -->
+            <a href="fee-types.html"
+               id="feeTypesLink">
 
-            <a href="fee-types.html">
                 💰 Fee Types
+
             </a>
 
 
-            <!-- FEE STRUCTURES -->
+            <a href="fee-structures.html"
+               id="feeStructuresLink">
 
-            <a href="fee-structures.html">
                 📋 Fee Structures
+
             </a>
 
 
-            <!-- PAYMENTS -->
+            <a href="#"
+               id="paymentsLink">
 
-            <a href="#" id="paymentsLink">
                 💳 Payments
+
             </a>
 
 
-            <!-- LOGOUT -->
+            <a href="#"
+               id="logoutBtn">
 
-            <a href="#" id="logoutBtn">
                 🚪 Logout
+
             </a>
 
         </nav>
 
     </aside>
-
 
 
     <!-- =====================================================
@@ -119,14 +125,9 @@
           id="mainContent">
 
 
-        <!-- =================================================
-             TOP NAVBAR
-        ================================================== -->
+        <!-- TOP NAVBAR -->
 
         <header class="top-navbar">
-
-
-            <!-- HAMBURGER -->
 
             <button
                 type="button"
@@ -139,8 +140,6 @@
             </button>
 
 
-            <!-- PAGE TITLE -->
-
             <div class="navbar-title">
 
                 <h2>
@@ -149,8 +148,6 @@
 
             </div>
 
-
-            <!-- ADMIN PROFILE -->
 
             <div class="admin-profile">
 
@@ -171,7 +168,6 @@
         </header>
 
 
-
         <!-- =================================================
              PAGE CONTENT
         ================================================== -->
@@ -179,9 +175,7 @@
         <section class="content">
 
 
-            <!-- =================================================
-                 PAGE HEADING
-            ================================================== -->
+            <!-- PAGE HEADING -->
 
             <div class="page-heading">
 
@@ -190,33 +184,25 @@
                 </h1>
 
                 <p>
-                    Manage all B.Tech branches and connect them
-                    to their respective departments.
+                    Manage all B.Tech branches and connect them to their respective departments.
                 </p>
 
             </div>
 
 
-
             <!-- =================================================
-                 ADD COURSE FORM
+                 ADD COURSE CARD
             ================================================== -->
 
             <div class="course-form-card">
-
 
                 <h2>
                     Add New Course
                 </h2>
 
-
-                <p class="form-description">
-
-                    Add a B.Tech branch and assign it to
-                    the correct department.
-
+                <p>
+                    Add a B.Tech branch and assign it to the correct department.
                 </p>
-
 
 
                 <form id="courseForm">
@@ -225,7 +211,7 @@
                     <div class="course-form-grid">
 
 
-                        <!-- COURSE NAME -->
+                        <!-- Course Name -->
 
                         <div class="form-group">
 
@@ -237,14 +223,12 @@
                                 type="text"
                                 id="courseName"
                                 placeholder="Example: B.Tech Artificial Intelligence"
-                                autocomplete="off"
                                 required>
 
                         </div>
 
 
-
-                        <!-- COURSE CODE -->
+                        <!-- Course Code -->
 
                         <div class="form-group">
 
@@ -256,14 +240,12 @@
                                 type="text"
                                 id="courseCode"
                                 placeholder="Example: BTAI"
-                                autocomplete="off"
                                 required>
 
                         </div>
 
 
-
-                        <!-- DURATION -->
+                        <!-- Duration -->
 
                         <div class="form-group">
 
@@ -274,16 +256,15 @@
                             <input
                                 type="number"
                                 id="durationYears"
-                                min="1"
-                                max="8"
                                 value="4"
+                                min="1"
+                                max="10"
                                 required>
 
                         </div>
 
 
-
-                        <!-- DEPARTMENT -->
+                        <!-- Department -->
 
                         <div class="form-group">
 
@@ -296,7 +277,7 @@
                                 required>
 
                                 <option value="">
-                                    Loading departments...
+                                    Select Department
                                 </option>
 
                             </select>
@@ -307,8 +288,7 @@
                     </div>
 
 
-
-                    <!-- SUBMIT BUTTON -->
+                    <!-- Submit -->
 
                     <div class="course-form-actions">
 
@@ -322,22 +302,17 @@
 
                     </div>
 
-
                 </form>
 
             </div>
 
 
-
-            <!-- =================================================
-                 MESSAGE
-            ================================================== -->
+            <!-- MESSAGE -->
 
             <div
                 id="courseMessage"
-                class="fee-type-message">
+                class="course-message">
             </div>
-
 
 
             <!-- =================================================
@@ -347,10 +322,7 @@
             <div class="course-list-card">
 
 
-                <!-- HEADER -->
-
                 <div class="course-list-header">
-
 
                     <div>
 
@@ -359,17 +331,11 @@
                         </h2>
 
                         <p>
-
-                            All courses currently configured
-                            in the system.
-
+                            All courses currently configured in the system.
                         </p>
 
                     </div>
 
-
-
-                    <!-- REFRESH BUTTON -->
 
                     <button
                         type="button"
@@ -380,57 +346,45 @@
 
                     </button>
 
-
                 </div>
-
 
 
                 <!-- TABLE -->
 
                 <div class="course-table-container">
 
-
                     <table class="course-table">
-
 
                         <thead>
 
                             <tr>
 
-
                                 <th>
                                     ID
                                 </th>
-
 
                                 <th>
                                     Course Name
                                 </th>
 
-
                                 <th>
                                     Course Code
                                 </th>
-
 
                                 <th>
                                     Duration
                                 </th>
 
-
                                 <th>
                                     Department
                                 </th>
-
 
                             </tr>
 
                         </thead>
 
 
-
                         <tbody id="coursesTableBody">
-
 
                             <tr>
 
@@ -444,33 +398,22 @@
 
                             </tr>
 
-
                         </tbody>
-
 
                     </table>
 
-
                 </div>
-
 
             </div>
 
-
         </section>
-
 
     </main>
 
 
-
-    <!-- =====================================================
-         JAVASCRIPT
-    ====================================================== -->
-
     <script src="js/courses.js"></script>
-
 
 </body>
 
 </html>
+
